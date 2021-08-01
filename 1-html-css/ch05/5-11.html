@@ -1,0 +1,115 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1">
+  <style>
+    /* x-small : 모바일 세로 -기본*/
+    nav ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      list-style: none;
+    }
+
+    /* small : 모바일 가로화면, 테블릿(저렴한) 세로화면 -여기서부터 미디어쿼리*/
+    @media(min-width:576px) {
+      nav ul {
+        flex-direction: row;
+        /* 높이값이 없어서 안걸림. justify-content:*/
+        justify-content: space-evenly;
+
+      }
+    }
+
+    /* medium : 테블릿(저렴한) 가로화면, 테블릿 세로화면 이상 */
+    /* 앞에서 margin..등 맞춰놓으면 큰크기 화면에서 많이 고쳐야함 */
+    @media(min-width:768px) {
+      body {
+        width: 700px;
+        margin: 0 auto;
+      }
+
+      header {
+        margin-bottom: 1rem;
+      }
+
+      nav {
+        float: left;
+        width: 200px;
+      }
+
+      article {
+        float: left;
+        width: calc(100% - 200px - 1rem);
+        margin-left: 1rem;
+      }
+    }
+
+    /* ---------------------------------- */
+
+    header {
+      background-color: burlywood;
+    }
+
+    nav {
+      background-color: rgb(201, 160, 106);
+    }
+
+    article {
+      background-color: rgb(171, 134, 87);
+    }
+
+    nav ul {
+      flex-direction: column;
+      position: sticky;
+      top: 3rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>The header</header>
+  <nav>
+    <ul>
+      <li>Menu 1</li>
+      <li>Menu 2</li>
+      <li>Menu 3</li>
+    </ul>
+  </nav>
+  <article>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, repudiandae, perferendis tempora ratione eos
+      dolorum cupiditate reprehenderit nihil quo dolorem dolores, culpa impedit similique eum nostrum quia recusandae
+      assumenda minus!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, repudiandae, perferendis tempora ratione eos
+      dolorum cupiditate reprehenderit nihil quo dolorem dolores, culpa impedit similique eum nostrum quia recusandae
+      assumenda minus!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, repudiandae, perferendis tempora ratione eos
+      dolorum cupiditate reprehenderit nihil quo dolorem dolores, culpa impedit similique eum nostrum quia recusandae
+      assumenda minus!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, repudiandae, perferendis tempora ratione eos
+      dolorum cupiditate reprehenderit nihil quo dolorem dolores, culpa impedit similique eum nostrum quia recusandae
+      assumenda minus!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, repudiandae, perferendis tempora ratione eos
+      dolorum cupiditate reprehenderit nihil quo dolorem dolores, culpa impedit similique eum nostrum quia recusandae
+      assumenda minus!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, repudiandae, perferendis tempora ratione eos
+      dolorum cupiditate reprehenderit nihil quo dolorem dolores, culpa impedit similique eum nostrum quia recusandae
+      assumenda minus!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, repudiandae, perferendis tempora ratione eos
+      dolorum cupiditate reprehenderit nihil quo dolorem dolores, culpa impedit similique eum nostrum quia recusandae
+      assumenda minus!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, repudiandae, perferendis tempora ratione eos
+      dolorum cupiditate reprehenderit nihil quo dolorem dolores, culpa impedit similique eum nostrum quia recusandae
+      assumenda minus!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, repudiandae, perferendis tempora ratione eos
+      dolorum cupiditate reprehenderit nihil quo dolorem dolores, culpa impedit similique eum nostrum quia recusandae
+      assumenda minus!</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, repudiandae, perferendis tempora ratione eos
+      dolorum cupiditate reprehenderit nihil quo dolorem dolores, culpa impedit similique eum nostrum quia recusandae
+      assumenda minus!</p>
+
+  </article>
+</body>
+
+</html>

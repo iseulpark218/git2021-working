@@ -1,0 +1,674 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Noto+Sans+KR:wght@100&display=swap"
+    rel="stylesheet">
+  <style>
+    nav ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      list-style: none;
+    }
+
+    ul {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    /* ----------------------------------  */
+
+    header {
+      grid-area: header;
+    }
+
+    nav {
+      grid-area: nav;
+    }
+
+    .banner {
+      grid-area: banner;
+    }
+
+    article {
+      grid-area: content;
+    }
+
+    aside {
+      grid-area: sidebar;
+    }
+
+    footer {
+      grid-area: footer;
+    }
+
+    /* small */
+    body {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-areas:
+        "header"
+        "nav"
+        "banner"
+        "content"
+        "sidebar"
+        "footer";
+    }
+
+
+    /* medium */
+    @media (min-width:768px) {
+      body {
+        width: 700px;
+        margin: 0 auto;
+        grid-template-columns: 2fr 5fr;
+        grid-template-areas:
+          "header header"
+          "banner banner"
+          "nav nav"
+          "sidebar content"
+          "footer footer";
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      aside {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+      }
+    }
+
+
+    /* large */
+    @media (min-width:1200px) {
+      body {
+        width: 1200px;
+        margin: 0 auto;
+        grid-template-columns: 3fr 7fr 2fr;
+        grid-template-areas:
+          "header header header"
+          "banner banner banner"
+          "nav content sidebar"
+          "footer footer footer";
+      }
+
+      nav {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+      }
+
+      nav ul {
+        flex-direction: column;
+      }
+
+      aside {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+      }
+    }
+
+    /* ----------------------------------  */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 15px;
+    }
+
+    body {
+      background-color: rgb(42, 193, 188);
+      background-size: cover;
+      background-attachment: fixed;
+      font-family: 'Do Hyeon', sans-serif;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    /* header */
+
+    h1 {
+      font-size: 50px;
+      ;
+      font-family: 'Do Hyeon', sans-serif;
+      padding: 10 10 0 10;
+    }
+
+    h5 {
+      font-family: 'Do Hyeon', sans-serif;
+      font-weight: lighter;
+      font-size: medium;
+      padding: 10 10 15 10;
+    }
+
+
+    body>header {
+      text-align: center;
+      color: white;
+      background-color: rgb(64, 63, 65);
+      font-size: xx-large;
+      margin: 0.5rem auto;
+    }
+
+    nav {
+      position: sticky;
+      margin: -1.7rem 0 -1rem 0;
+      z-index: 100;
+      font-size: large;
+      padding: 10 0 10 0;
+    }
+
+    nav>ul>li {
+      border: 1px solid black;
+      border-collapse: separate;
+      text-align: center;
+    }
+
+    ul>li::before {
+      content: "🍚 "
+    }
+
+    ul>li::after {
+      content: " 🍚"
+    }
+
+    ul.primary {
+      background-color: rgba(64, 63, 65);
+    }
+
+    /* 목록 및 요리이름 적용 */
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: whitesmoke;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      background-color: rgb(42, 193, 188);
+    }
+
+    article>section>h3:hover {
+      text-decoration: underline;
+      background-color: rgb(14, 138, 134);
+    }
+
+    /* banner */
+    .banner {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* 본문박스 */
+
+    article {
+      float: left;
+      margin-right: 0.2rem;
+    }
+
+    section {
+      background-color: rgba(64, 63, 65);
+      margin-bottom: 1rem;
+      /* color:#e09f3e; */
+      padding: 0.5rem;
+      padding-top: 0.001rem;
+      border-radius: 10px;
+      /* width: 700px; */
+    }
+
+    section h3 {
+      scroll-margin-top: 3rem;
+    }
+
+    /* 요리이름 */
+    h3 {
+      background-color: rgb(42, 193, 188);
+      font-size: 1.3rem;
+      margin-right: 1rem;
+      padding: 5px;
+      width: 200px;
+      border: 3px solid white;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .img {
+      border-radius: 1rem;
+      box-shadow: 3px 3px 0px white;
+      margin: -7 0 0 -2;
+    }
+
+    /* 사진부제 */
+    p {
+      color: white;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: bold;
+      font-size: 13.5px;
+      text-align: center;
+      margin: 3 0 5 0px;
+    }
+
+    p::before {
+      content: "👩🏻‍🍳"
+    }
+
+    p::after {
+      content: "👨🏻‍🍳"
+    }
+
+    /* 재료목록, 조리순서 */
+    h4 {
+      background-color: rgba(51, 174, 170, 0.68);
+      color: white;
+      border-radius: 20px;
+      border: 3.5px double white;
+      margin: 1rem 1rem 0.5rem 0rem;
+      text-align: center;
+      font-family: 'Noto Sans KR', sans-serif;
+      font: size 50px;
+    }
+
+
+    h4::first-letter {
+      font-size: 1.3rem;
+    }
+
+    div>h4 {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      padding: 90 0 90 0;
+    }
+
+    .container {
+      display: flex;
+      margin: 20px 0px;
+      padding: 10px;
+    }
+
+    .list {
+      text-align: left;
+    }
+
+    /* ------------table------------ */
+
+    table {
+      font-size: 1rem;
+      color: black;
+      text-align: center;
+      line-height: 1.3;
+      border: 3px double rgba(64, 63, 65);
+    }
+
+    section thead {
+      background: white;
+      color: black;
+    }
+
+    section tbody tr:nth-child(2n-1) {
+      background-color: white;
+    }
+
+    section tbody tr:nth-child(2n) {
+      background-color: white;
+    }
+
+    /* 재료,용량 */
+    section th {
+      border-bottom: 0.2rem double rgba(64, 63, 65);
+      font-size: 0.98rem;
+      padding: 0.1rem;
+    }
+
+    /* 재료,용량 내용*/
+    section td {
+      border-bottom: 0.05rem solid rgba(64, 63, 65);
+      font-size: 0.93rem;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    ol>li {
+      list-style: none;
+      margin: 0.1rem;
+      color: white;
+      font-size: 0.9rem;
+      margin-left: -2rem;
+      margin-right: 2rem;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: bold;
+
+    }
+
+    ol>li::before {
+      content: "🍲 "
+    }
+
+    /* ----------aside,footer---------- */
+
+    aside {
+      border-radius: 10px;
+      background-color: rgba(64, 63, 65);
+      padding: 10 10 10 10;
+    }
+
+    aside>img:nth-child(1) {
+      margin: 0 0 10 0;
+    }
+
+    aside>img:nth-child(2) {
+      margin: 0 0 10 0;
+    }
+
+    aside>img:nth-child(3) {
+      margin: 0 0 10 0;
+    }
+
+    aside>img:nth-child(4) {
+      margin: 0 0 10 0;
+    }
+
+    footer {
+      margin-top: 1rem;
+      clear: both;
+      text-align: center;
+    }
+
+    .footer {
+      color: #540B0E;
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <h1 id="top">요리의 민족</h1>
+    <h5>"내가 좋아하는 요리 레시피" 편</h5>
+  </header>
+
+  <nav>
+    <ul class="primary">
+      <li><a href="#menu-1">돼지고기 김치찌개</a></li>
+      <li><a href="#menu-2">차돌박이 된장찌개</a></li>
+      <li><a href="#menu-3">삼계탕</a></li>
+    </ul>
+  </nav>
+
+  <div class="banner"><img src="./banner.png" width=100%;>
+  </div>
+
+  <article>
+
+    <section>
+      <h3 id="menu-1"><a href="https://www.10000recipe.com/recipe/6906217" target="blank">돼지고기 김치찌개</a>
+      </h3>
+      <img class="img" width="100%" alt=돼지고기김치찌개 src="http://image.auction.co.kr/itemimage/1c/12/c7/1c12c7a026.jpg">
+      <p>
+        돼지고기 김치찌개만이 진리다!!
+      </p>
+      <h4>재료목록</h4>
+      <table width="100%">
+        <thead>
+          <th>재료</th>
+          <th>용량</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><strong>익은김치</strong></td>
+            <td><em>1/2포기</em></td>
+          </tr>
+          <tr>
+            <td><strong>두부</strong></td>
+            <td><em>1모</em></td>
+          </tr>
+          <tr>
+            <td><strong>대파</strong></td>
+            <td><em>1단</em></td>
+          </tr>
+          <tr>
+            <td><strong>간장</strong></td>
+            <td><em>2스푼</em></td>
+          </tr>
+          <tr>
+            <td><strong>마늘</strong></td>
+            <td><em>1스푼</em></td>
+          </tr>
+          <tr>
+            <td><strong>삼겹살</strong></td>
+            <td><em>600g</em></td>
+          </tr>
+          <tr>
+            <td><strong>양파</strong></td>
+            <td><em>1개</em></td>
+          </tr>
+          <tr>
+            <td><strong>참기름</strong></td>
+            <td><em>2바퀴</em></td>
+          </tr>
+          <tr>
+            <td><strong>후추</strong></td>
+            <td><em>약간</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="container center">
+        <h4>조리 순서</h4>
+        <ol class="list">
+          <li>냄비에 참기름을 두어 바퀴 돌려준 뒤 삼겹살을 넣는다.</li>
+          <li>후추 약간과 마늘 한 스푼 간장 2스푼을 넣는다.</li>
+          <li>고기 겉면이 골고루 익을 때까지 볶아준다.</li>
+          <li>고기 겉면이 골고루 익었다 싶으면 썰어놓은 김치를 넣는다.</li>
+          <li>김치가 노릇노릇해질 때까지 볶아준다.</li>
+          <li>물을 적당량 부어준 뒤 강물로 한번 확 끓여준다.</li>
+          <li>한번 끓고 나면 두부를 넣어 준다.</li>
+          <li>한 번 더 끓어오른 후에 중불로 30분 정도 끓인다.</li>
+          <li>양파랑 파를 넣고 10분 정도 더 끓인다.</li>
+          <li>맛있는 삼겹살 김치찌개 완성!</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <h3 id="menu-2"><a href="https://www.10000recipe.com/recipe/6922749" target="blank">차돌박이 된장찌개</a></h3>
+      <img class="img" width="100%" alt=차돌박이된장찌개 src="http://image.auction.co.kr/itemimage/21/5b/47/215b4782f6.jpg">
+      <p>
+        맛있는 차돌박이 된장찌개!
+      </p>
+      <h4>재료목록</h4>
+      <table width="100%">
+        <thead>
+          <th>재료</th>
+          <th>용량</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><strong>차돌박이</strong></td>
+            <td><em>120g</em></td>
+          </tr>
+          <tr>
+            <td><strong>두부</strong></td>
+            <td><em>1/2모</em></td>
+          </tr>
+          <tr>
+            <td><strong>애호박</strong></td>
+            <td><em>1/3개</em></td>
+          </tr>
+          <tr>
+            <td><strong>양파</strong></td>
+            <td><em>1/2개</em></td>
+          </tr>
+          <tr>
+            <td><strong>대파</strong></td>
+            <td><em>1/4개</em></td>
+          </tr>
+          <tr>
+            <td><strong>청양고추</strong></td>
+            <td><em>2개</em></td>
+          </tr>
+          <tr>
+            <td><strong>된장</strong></td>
+            <td><em>2큰술</em></td>
+          </tr>
+          <tr>
+            <td><strong>고추장</strong></td>
+            <td><em>1/2큰술</em></td>
+          </tr>
+          <tr>
+            <td><strong>국간장</strong></td>
+            <td><em>1/2큰술</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="container center">
+        <h4>조리 순서</h4>
+        <ol class="list">
+          <li>재료를 준비 한다.</li>
+          <li>양념을 준비 한다. </li>
+          <li>야채를 먹기 좋게 잘라준다.</li>
+          <li>뚝배기나 냄비에 물 500ml를 부어준다.</li>
+          <li>육수가 충분히 우러나면 해물다시팩을 건져낸다.</li>
+          <li>된장 2큰술을 풀어준다.</li>
+          <li>고추장도 1/2큰술 풀어준다.</li>
+          <li>물이 끓어오르면 애호박과 양파를 넣어준다.</li>
+          <li>찌개가 한 번 더 끓어오르면 두부와 차돌박이를 넣어준다.</li>
+          <li>차돌박이가 거의 익었으면, 팽이버섯과 파, 고추를 넣어준다.</li>
+          <li>차돌박이 된장찌개 완성!</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <h3 id="menu-3"><a href="https://www.10000recipe.com/recipe/6914671" target="blank">삼계탕</a></h3>
+      <img class="img" width="100%" alt=삼계탕 src="http://image.auction.co.kr/itemimage/21/b5/28/21b5288d56.jpg">
+      <p>
+        백종원 레시피! 맛있는 삼계탕!
+      </p>
+      <h4>재료목록</h4>
+      <table width="100%">
+        <thead>
+          <th>재료</th>
+          <th>용량</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><strong>영계닭</strong></td>
+            <td><em>1마리</em></td>
+          </tr>
+          <tr>
+            <td><strong>전복</strong></td>
+            <td><em>1개</em></td>
+          </tr>
+          <tr>
+            <td><strong>한방팩</strong></td>
+            <td><em>1팩</em></td>
+          </tr>
+          <tr>
+            <td><strong>불린쌀</strong></td>
+            <td><em>1줌</em></td>
+          </tr>
+          <tr>
+            <td><strong>통마늘</strong></td>
+            <td><em>5알</em></td>
+          </tr>
+          <tr>
+            <td><strong>대추</strong></td>
+            <td><em>2알</em></td>
+          </tr>
+          <tr>
+            <td><strong>닭육수</strong></td>
+            <td><em>1/4컵</em></td>
+          </tr>
+          <tr>
+            <td><strong>고춧가루</strong></td>
+            <td><em>1/4컵</em></td>
+          </tr>
+          <tr>
+            <td><strong>간장</strong></td>
+            <td><em>2T</em></td>
+          </tr>
+          <tr>
+            <td><strong>식초</strong></td>
+            <td><em>2T</em></td>
+          </tr>
+          <tr>
+            <td><strong>설탕</strong></td>
+            <td><em>1/3T</em></td>
+          </tr>
+          <tr>
+            <td><strong>다진마늘</strong></td>
+            <td><em>1T</em></td>
+          </tr>
+          <tr>
+            <td><strong>겨자</strong></td>
+            <td><em>약간</em></td>
+          </tr>
+          <tr>
+            <td><strong>대파</strong></td>
+            <td><em>약간</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="container center">
+        <h4>조리 순서</h4>
+        <ol class="list">
+          <li>먼저 닭을 깨끗이 씻은 후 꽁지부분을 제거해준다.</li>
+          <li>30분정도 미리 불려놓은 쌀을 닭안에 채워준다.</li>
+          <li>다리를 겹치게 꼬아준 후 이쑤시개로 고정시켜 준다.</li>
+          <li>압력밥솥에 물 2000ml와 한방팩, 대추, 마늘, 닭을 넣어준다.</li>
+          <li>뚜껑을 잘 닫은 뒤 센불에서 끓인다.</li>
+          <li>추가 움직이기 시작하면 중불로 낮춰 10분간 삶아준다.</li>
+          <li>전복과 후추, 소금을 넣고 같은방법으로 10분 더 끓여준다.</li>
+          <li>다 끓여지면 대파를 넣어 주고 소금으로 간을 맞춘다.</li>
+          <li>양념장을 만들어 봅시다!</li>
+          <li>닭육수1/4컵+고춧가루1/4컵+겨자조금+간장2T+식초2T</li>
+          <li>설탕1/3T+다진마늘1T+대파 약간을 잘 섞어준다.</li>
+          <li>삼계탕과 양념장 완성!</li>
+
+        </ol>
+      </div>
+
+    </section>
+
+  </article>
+  <aside>
+    <img src="http://image.gmarket.co.kr/service_image/2021/06/30/20210630173323102442_0_0.jpg" style="max-width:100%"
+      height="auto">
+    <img src="http://image.gmarket.co.kr/service_image/2021/06/07/20210607085926238865_0_0.jpg" style="max-width:100%"
+      height="auto">
+    <img src="http://image.gmarket.co.kr/service_image/2021/06/28/20210628112900808917_0_0.jpg" style="max-width:100%"
+      height="auto">
+    <img src="http://image.gmarket.co.kr/service_image/2021/03/21/20210321112341367576_0_0.jpg" style="max-width:100%"
+      height="auto">
+    <img src="http://image.gmarket.co.kr/service_image/2021/05/14/20210514160700685489_0_0.jpg" style="max-width:100%"
+      height="auto">
+  </aside>
+  <footer calss="footer">
+    <address><a href="#top"><strong>👆👆 위로 가기 👆👆</strong></a></address>
+  </footer>
+
+</body>
+
+</html>

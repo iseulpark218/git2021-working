@@ -1,0 +1,258 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  width: 1200px;
+  margin: 0 auto;
+  background-color: #faf0db;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Gothic A1', sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+/* header */
+
+h1 {
+  font-size: 2rem;
+  text-shadow: 2px 2px 2px #c67f15;
+}
+
+body>header {
+  background-color: #f0c977;
+  text-align: center;
+  font-size: 0.95rem;
+  /* background-color: #f0c977; */
+  color: #791b1d;
+  width: 1200px;
+  border-radius: 30px;
+  border: 5px double #540B0E;
+  font-family: 'Gothic A1', sans-serif;
+  font-size: medium;
+}
+
+
+/* nav,ul,li*/
+
+/* 9.html에 사용-nav에있는 ul에 배분 넣기 - container */
+/* nav ul {
+  display: flex;
+  justify-content: space-evenly;
+} */
+
+ul>li::before {
+  content: "🍚 "
+}
+
+ul {
+  position: sticky;
+  z-index: 10;
+  width: 300px;
+  float: left;
+  top: 1rem;
+  position: absolute;
+  margin-left: 0px;
+
+}
+
+ul>li {
+  border-collapse: separate;
+  /* border: 1px solid black; */
+margin-left:-50px;
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+nav {
+  position: sticky;
+  top: 0px;
+  z-index: 10
+}
+
+ul.primary {
+  background-color: #9e2a2b;
+  border: 2px solid black;
+}
+
+
+
+
+/* 목록 및 요리이름 적용 */
+a {
+  color: #fff3b0;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #f2d7b1;
+}
+
+a:hover {
+  text-decoration: underline;
+  background-color: black;
+}
+
+/* 본문박스 */
+
+div {
+  margin: 10 0 10 0;
+}
+
+section {
+  background-color: #f0c977;
+  padding: 0.5rem;
+  padding-top: 0.001rem;
+  margin-left: 21rem;
+  margin-bottom:2rem;
+  border-radius: 10px;
+  width: 670px;
+}
+
+/* 기존style */
+/* section {
+  background-color: #f0c977;
+  padding: 0.5rem;
+  padding-top: 0.001rem;
+  margin: 1px 0px 30px 0px;
+  border-radius: 10px;
+} */
+
+
+section h3 {
+  scroll-margin-top: 3rem;
+}
+
+/* 요리이름 */
+h3 {
+  background-color: #9e2a2b;
+  font-size: 1.3rem;
+  margin-right: 1rem;
+  padding: 5px;
+  width: 200px;
+  border: 3px solid #e09f3e;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.img {
+  border-radius: 1rem;
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.666);
+  margin: -7 0 5 -2;
+  margin-right: 10;
+}
+
+/* 사진부제 */
+p {
+  color: #9e2a2b;
+  font-weight: bold;
+  font-size: 13.5px;
+  margin: 5px;
+}
+
+/* 재료목록, 조리순서 */
+h4 {
+  background-color: #fdf7d9;
+  color: rgb(000, 000, 000);
+  border-radius: 20px;
+  border: 3.5px double #9e2a2b;
+  margin: 1rem 1rem 0.5rem 0rem;
+  /* margin-top: 1rem; */
+  width: 100px;
+  text-align: center;
+}
+
+h4::first-letter {
+  font-size: 1.3rem;
+}
+
+/* ------------table------------ */
+
+table {
+  font-size: 1rem;
+  color: black;
+  text-align: center;
+  line-height: 1.3;
+  border: 0.25rem solid #9e2a2b;
+}
+
+section thead {
+  background: #9e2a2b;
+  color: white;
+}
+
+section tbody tr:nth-child(2n-1) {
+  background-color: #fce9a2;
+}
+
+section tbody tr:nth-child(2n) {
+  background-color: #f8de94
+}
+
+/* 재료,용량 */
+section th {
+  border-bottom: 0.2rem double #9e2a2b;
+  font-size: 0.98rem;
+  padding: 0.1rem;
+}
+
+/* 재료,용량 내용*/
+section td {
+  border-bottom: 0.05rem solid #9e2a2b;
+  font-size: 0.93rem;
+}
+
+ol>li {
+  list-style: none;
+  margin: 0.1rem;
+  color: black;
+  font-size: 0.9rem;
+  margin-left: -2rem;
+  margin-right: 2rem;
+  font-weight: bold;
+
+}
+
+ol>li::before {
+  content: "🍲 "
+
+}
+
+/* ----------aside,footer---------- */
+
+article {
+  /* calc:calculate */
+  /* - 양쪽에 띄어쓰기 꼭!! 붙이면 부호로 인식함 */
+  width: calc(100% - 200px - 1rem);
+  float: left;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+aside>img {
+  padding: 0.2rem;
+}
+
+aside {
+  border: 1px solid #f0c977;
+  border-radius: 10px;
+  background-color: #f0c977;
+  padding:0.3rem;
+  width: 200px;
+  float: left;
+  position: sticky;
+  top: 2rem;
+}
+
+footer {
+  clear: both;
+  text-align: center;
+}

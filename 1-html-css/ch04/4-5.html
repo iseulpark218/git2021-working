@@ -1,0 +1,71 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    p {
+      width: 250px;
+      height: 150px;
+      border: 3px solid black;
+
+    }
+
+    p:nth-child(1) {
+      overflow: hidden;
+
+    }
+
+    p:nth-child(2) {
+      overflow: scroll;
+    }
+
+    p:nth-child(3) {
+      overflow: scroll;
+
+    }
+
+    p:nth-child(4) {
+      overflow: auto;
+
+    }
+
+    p:nth-child(5) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      height: 250px;
+    }
+
+    p:nth-child(6) {
+      overflow: visible;
+    }
+  </style>
+</head>
+
+<body>
+  <p><strong>1.overflow:hidden</strong><br>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium fuga, quae voluptate dolores dicta cumque
+    nobis repellat deleniti esse accusamus voluptatibus rem temporibus maiores porro odio sint fugiat eius eligendi!
+  </p>
+  <p><strong>2.overflow:scroll</strong><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium fuga,
+    quae voluptate dolores dicta cumque
+    nobis repellat deleniti esse accusamus voluptatibus rem temporibus maiores porro odio sint fugiat eius eligendi!</p>
+  <p><strong>3.overflow:hidden</strong><br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium fuga,
+    quae voluptate dolores dicta cumque
+  </p>
+  <p><strong>4.overflow:auto</strong><br>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Accusantium fuga,
+    quae voluptate dolores dicta cumque
+  </p>
+  <p title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium fuga, quae voluptate dolores
+    dicta cumque"><strong>5.text-overflow:ellipsis</strong><br> nobis repellat deleniti esse accusamusvoluptatibus
+    remtemporibus maiores porro odio sintfugiateius eligendi!</p>
+  <p><strong>6.overflow:visible</strong><br>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Accusantium fuga,
+    quae
+    voluptate dolores dicta cumque
+    nobis repellat deleniti esse accusamus voluptatibus rem temporibus maiores porro odio sint fugiat eius eligendi!</p>
+
+</body>
+
+</html>

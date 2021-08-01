@@ -1,0 +1,394 @@
+<!-- 9번 제출시 8번 float/width 다 지우고 오늘 배운거 넣기 -->
+
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="./style-1(10).css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@200&display=swap" rel="stylesheet">
+
+  <style>
+    nav ul {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      list-style: none;
+    }
+
+    ul {
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    /* ----------------------------------  */
+
+    header {
+      grid-area: header;
+    }
+
+    nav {
+      grid-area: nav;
+    }
+
+    .banner {
+      grid-area: banner;
+    }
+
+    article {
+      grid-area: content;
+    }
+
+    aside {
+      grid-area: sidebar;
+    }
+
+    footer {
+      grid-area: footer;
+    }
+
+    /* small */
+    body {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-areas:
+        "header"
+        "nav"
+        "banner"
+        "content"
+        "sidebar"
+        "footer";
+    }
+
+
+    /* medium */
+    @media (min-width:768px) {
+      body {
+        width: 700px;
+        margin: 0 auto;
+        grid-template-columns: 2fr 5fr;
+        grid-template-areas:
+          "header header"
+          "banner banner"
+          "nav nav"
+          "sidebar content"
+          "footer footer";
+      }
+
+      nav ul {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      aside {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+      }
+    }
+
+
+    /* large */
+    @media (min-width:1200px) {
+      body {
+        width: 1200px;
+        margin: 0 auto;
+        grid-template-columns: 3fr 7fr 2fr;
+        grid-template-areas:
+          "header header header"
+          "banner banner banner"
+          "nav content sidebar"
+          "footer footer footer";
+      }
+
+      nav {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+      }
+
+      nav ul {
+        flex-direction: column;
+      }
+
+      aside {
+        position: sticky;
+        top: 1rem;
+        height: fit-content;
+      }
+    }
+
+    /* ----------------------------------  */
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <h1 id="top">내가 좋아하는 요리 레시피</h1>
+  </header>
+
+  <nav>
+    <ul class="primary">
+      <li><a href="#menu-1">돼지고기 김치찌개</a></li>
+      <li><a href="#menu-2">차돌박이 된장찌개</a></li>
+      <li><a href="#menu-3">삼계탕</a></li>
+    </ul>
+  </nav>
+
+  <div class="banner"><img
+      src="https://recipe1.ezmember.co.kr/cache/shop/2021/07/09/e37fdde9e8b1ffae5eb5ce50da1dd720.jpg" width=100%;>
+  </div>
+
+  <article>
+
+    <section>
+      <h3 id="menu-1"><a href="https://www.10000recipe.com/recipe/6906217" target="blank">돼지고기 김치찌개</a>
+      </h3>
+      <img class="img" width="100%" alt=돼지고기김치찌개 src="./image/kimchi-tang.jpg">
+      <p>
+        돼지고기 김치찌개만이 진리다!!
+      </p>
+      <h4>재료목록:</h4>
+      <table width="100%">
+        <thead>
+          <th>재료</th>
+          <th>용량</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><strong>익은김치</strong></td>
+            <td><em>1/2포기</em></td>
+          </tr>
+          <tr>
+            <td><strong>두부</strong></td>
+            <td><em>1모</em></td>
+          </tr>
+          <tr>
+            <td><strong>대파</strong></td>
+            <td><em>1단</em></td>
+          </tr>
+          <tr>
+            <td><strong>간장</strong></td>
+            <td><em>2스푼</em></td>
+          </tr>
+          <tr>
+            <td><strong>마늘</strong></td>
+            <td><em>1스푼</em></td>
+          </tr>
+          <tr>
+            <td><strong>삼겹살</strong></td>
+            <td><em>600g</em></td>
+          </tr>
+          <tr>
+            <td><strong>양파</strong></td>
+            <td><em>1개</em></td>
+          </tr>
+          <tr>
+            <td><strong>참기름</strong></td>
+            <td><em>2바퀴</em></td>
+          </tr>
+          <tr>
+            <td><strong>후추</strong></td>
+            <td><em>약간</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>조리 순서:</h4>
+      <ol>
+        <li>냄비에 참기름을 두어 바퀴 돌려준 뒤 삼겹살을 넣는다.</li>
+        <li>후추 약간과 마늘 한 스푼 간장 2스푼을 넣는다.</li>
+        <li>고기 겉면이 골고루 익을 때까지 볶아준다.</li>
+        <li>고기 겉면이 골고루 익었다 싶으면 썰어놓은 김치를 넣는다.</li>
+        <li>김치가 노릇노릇해질 때까지 볶아준다.</li>
+        <li>물을 적당량 부어준 뒤 강물로 한번 확 끓여준다.</li>
+        <li>한번 끓고 나면 두부를 넣어 준다.</li>
+        <li>한 번 더 끓어오른 후에 중불로 30분 정도 끓인다.</li>
+        <li>양파랑 파를 넣고 10분 정도 더 끓인다.</li>
+        <li>맛있는 삼겹살 김치찌개 완성!</li>
+      </ol>
+    </section>
+
+    <section>
+      <h3 id="menu-2"><a href="https://www.10000recipe.com/recipe/6922749" target="blank">차돌박이 된장찌개</a></h3>
+      <img class="img" width="100%" height="500" alt=차돌박이된장찌개
+        src="https://recipe1.ezmember.co.kr/cache/data/goods/21/07/27/1000020739/1000020739_detail_053.jpg">
+      <p>
+        맛있는 차돌박이 된장찌개!
+      </p>
+      <h4>재료목록:</h4>
+      <table width="100%">
+        <thead>
+          <th>재료</th>
+          <th>용량</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><strong>차돌박이</strong></td>
+            <td><em>120g</em></td>
+          </tr>
+          <tr>
+            <td><strong>두부</strong></td>
+            <td><em>1/2모</em></td>
+          </tr>
+          <tr>
+            <td><strong>애호박</strong></td>
+            <td><em>1/3개</em></td>
+          </tr>
+          <tr>
+            <td><strong>양파</strong></td>
+            <td><em>1/2개</em></td>
+          </tr>
+          <tr>
+            <td><strong>대파</strong></td>
+            <td><em>1/4개</em></td>
+          </tr>
+          <tr>
+            <td><strong>청양고추</strong></td>
+            <td><em>2개</em></td>
+          </tr>
+          <tr>
+            <td><strong>된장</strong></td>
+            <td><em>2큰술</em></td>
+          </tr>
+          <tr>
+            <td><strong>고추장</strong></td>
+            <td><em>1/2큰술</em></td>
+          </tr>
+          <tr>
+            <td><strong>국간장</strong></td>
+            <td><em>1/2큰술</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>조리 순서:</h4>
+      <ol>
+        <li>재료를 준비 한다.</li>
+        <li>양념을 준비 한다. </li>
+        <li>야채를 먹기 좋게 잘라준다.</li>
+        <li>뚝배기나 냄비에 물 500ml를 부어준다.</li>
+        <li>육수가 충분히 우러나면 해물다시팩을 건져낸다.</li>
+        <li>된장 2큰술을 풀어준다.</li>
+        <li>고추장도 1/2큰술 풀어준다.</li>
+        <li>물이 끓어오르면 애호박과 양파를 넣어준다.</li>
+        <li>찌개가 한 번 더 끓어오르면 두부와 차돌박이를 넣어준다.</li>
+        <li>차돌박이가 거의 익었으면, 팽이버섯과 파, 고추를 넣어준다.</li>
+        <li>차돌박이 된장찌개 완성!</li>
+
+      </ol>
+    </section>
+
+    <section>
+      <h3 id="menu-3"><a href="https://www.10000recipe.com/recipe/6914671" target="blank">삼계탕</a></h3>
+      <img class="img" width="100%" height="auto" alt=삼계탕
+        src=" https://recipe1.ezmember.co.kr/cache/recipe/2021/07/07/5d9ec3e00e38730764526ff43dc3ee2e1.jpg">
+      <p>
+        백종원 레시피! 맛있는 삼계탕!
+      </p>
+      <h4>재료목록:</h4>
+      <table width="100%">
+        <thead>
+          <th>재료</th>
+          <th>용량</th>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><strong>영계닭</strong></td>
+            <td><em>1마리</em></td>
+          </tr>
+          <tr>
+            <td><strong>전복</strong></td>
+            <td><em>1개</em></td>
+          </tr>
+          <tr>
+            <td><strong>한방팩</strong></td>
+            <td><em>1팩</em></td>
+          </tr>
+          <tr>
+            <td><strong>불린쌀</strong></td>
+            <td><em>1줌</em></td>
+          </tr>
+          <tr>
+            <td><strong>통마늘</strong></td>
+            <td><em>5알</em></td>
+          </tr>
+          <tr>
+            <td><strong>대추</strong></td>
+            <td><em>2알</em></td>
+          </tr>
+          <tr>
+            <td><strong>닭육수</strong></td>
+            <td><em>1/4컵</em></td>
+          </tr>
+          <tr>
+            <td><strong>고춧가루</strong></td>
+            <td><em>1/4컵</em></td>
+          </tr>
+          <tr>
+            <td><strong>간장</strong></td>
+            <td><em>2T</em></td>
+          </tr>
+          <tr>
+            <td><strong>식초</strong></td>
+            <td><em>2T</em></td>
+          </tr>
+          <tr>
+            <td><strong>설탕</strong></td>
+            <td><em>1/3T</em></td>
+          </tr>
+          <tr>
+            <td><strong>다진마늘</strong></td>
+            <td><em>1T</em></td>
+          </tr>
+          <tr>
+            <td><strong>겨자</strong></td>
+            <td><em>약간</em></td>
+          </tr>
+          <tr>
+            <td><strong>대파</strong></td>
+            <td><em>약간</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>조리 순서:</h4>
+      <ol>
+        <li>먼저 닭을 깨끗이 씻은 후 꽁지부분을 제거해준다.</li>
+        <li>30분정도 미리 불려놓은 쌀을 닭안에 채워준다.</li>
+        <li>다리를 겹치게 꼬아준 후 이쑤시개로 고정시켜 준다.</li>
+        <li>압력밥솥에 물 2000ml와 한방팩, 대추, 마늘, 닭을 넣어준다.</li>
+        <li>뚜껑을 잘 닫은 뒤 센불에서 끓인다.</li>
+        <li>추가 움직이기 시작하면 중불로 낮춰 10분간 삶아준다.</li>
+        <li>전복과 후추, 소금을 넣고 같은방법으로 10분 더 끓여준다.</li>
+        <li>다 끓여지면 대파를 넣어 주고 소금으로 간을 맞춘다.</li>
+        <li>양념장을 만들어 봅시다!</li>
+        <li>닭육수1/4컵+고춧가루1/4컵+겨자조금+간장2T+식초2T+설탕1/3T+다진마늘1T+대파 약간을 잘 섞어준다.</li>
+        <li>삼계탕과 양념장 완성!</li>
+
+      </ol>
+    </section>
+
+  </article>
+  <aside>
+    <img src="https://recipe1.ezmember.co.kr/cache/shop/2021/07/09/f0705fbc1e6c357c8f07817cddfe614e.jpg"
+      style="max-width:100%" height="auto">
+    <img src="	https://recipe1.ezmember.co.kr/cache/shop/2021/07/19/428d563b3b0da9eddcc13af28205e4b7.jpg"
+      style="max-width:100%" height="auto">
+    <img src="https://recipe1.ezmember.co.kr/cache/shop/2021/07/07/4c074510c81037e0b56aced924ac5f6f.jpg"
+      style="max-width:100%" height="auto">
+
+  </aside>
+  <footer calss="footer">
+    <address><a href="#top"><strong>👆👆위로 가기👆👆</strong></a></address>
+  </footer>
+
+</body>
+
+</html>

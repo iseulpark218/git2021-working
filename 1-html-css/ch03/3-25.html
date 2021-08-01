@@ -1,0 +1,46 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* 선택자와 같은 레벨의 요소들 중 첫번째 요소를 선택 */
+    /* CSS : 상위 요소의 스타일보다 하위 요소의 스타일이 우선이다. */
+    /* 광범위 범위보다 좁은 범위가 우선이다. (태그>.클래스>#id) */
+    li:first-child {
+      color: red;
+    }
+
+    li:last-child {
+      color: antiquewhite;
+    }
+
+    /* .item:first-child {
+      color: green;
+    }
+
+    .box:first-child {
+      color: blue;
+
+    } */
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li class="item">First</li>
+    <li class="item">Second</li>
+    <li class="item">Third</li>
+    <li class="item">Forth</li>
+    <li class="item">Fifth</li>
+  </ul>
+  <UL>
+    <div>
+      <li class="box">First</li>
+      <li class="box">Second</li>
+      <li class="box">Third</li>
+      <li class="box">Forth</li>
+      <li class="box">Fifth</li>
+  </ul>
+</body>
+
+</html>

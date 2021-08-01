@@ -1,0 +1,139 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 700px;
+      margin: 0 auto;
+    }
+
+    nav {
+      /* 스크롤박스 외부 원래 문서 배치 */
+      /* 스크롤박스 내부 top/left */
+      position: sticky;
+      top: 0px;
+      z-index: 10;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      /* text-align: center 태그 안에 컨텐츠를 중앙 정렬 */
+      text-align: center;
+
+      /* width: 500px; */
+    }
+
+    nav li {
+      /* 옆으로 나열 */
+      display: inline-block;
+      margin-left: 10rem;
+    }
+
+    /* 첫번째 요소는 마진을 없앰 */
+    nav li:first-child {
+      margin-left: 0;
+    }
+
+    article {
+      /* calc:calculate */
+      /* - 양쪽에 띄어쓰기 꼭!! 붙이면 부호로 인식함 */
+      width: calc(100% - 200px - 1rem);
+      float: left;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    section {
+      /* a태그로 스크롤 이동 시, 상단 마진을 줌 */
+      scroll-margin-top: 8rem;
+    }
+
+    aside {
+      width: 200px;
+      float: left;
+
+      position: sticky;
+      top: 5.5rem;
+    }
+
+    footer {
+      clear: both;
+    }
+
+    header,
+    nav,
+    .banner,
+    article,
+    aside,
+    footer {
+      background-color: burlywood;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Header</h1>
+  </header>
+  <nav>
+    <h1>Nav</h1>
+    <ul>
+      <li><a href="#menu-1">Menu-1</a></li>
+      <li><a href="#menu-2">Menu-2</a></li>
+      <li><a href="#menu-3">Menu-3</a></li>
+    </ul>
+  </nav>
+  <div class="banner">
+    <h1>Banner</h1>
+  </div>
+  <article>
+    <section id="menu-1">
+      <h2>Menu1</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iste suscipit minima aliquam ex, magnam debitis
+        incidunt eligendi maiores cupiditate, minus consequatur perferendis aspernatur atque hic laborum, distinctio
+        sequi dignissimos!</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iste suscipit minima aliquam ex, magnam debitis
+        incidunt eligendi maiores cupiditate, minus consequatur perferendis aspernatur atque hic laborum, distinctio
+        sequi dignissimos!</p>
+    </section>
+    <section id="menu-2">
+      <h2>Menu2</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit corporis vero ad facere assumenda aliquid magni,
+        consequatur, aperiam natus blanditiis similique id omnis. Quo quam, unde voluptas molestiae dolores veniam.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iste suscipit minima aliquam ex, magnam debitis
+        incidunt eligendi maiores cupiditate, minus consequatur perferendis aspernatur atque hic laborum, distinctio
+        sequi dignissimos!</p>
+    </section>
+    <section id="menu-3">
+      <h2>Menu3</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, maiores expedita libero quidem labore
+        architecto minus nostrum, id atque accusamus eius perspiciatis eligendi sequi quam fugit consectetur. Minima,
+        illo eligendi.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos iste suscipit minima aliquam ex, magnam debitis
+        incidunt eligendi maiores cupiditate, minus consequatur perferendis aspernatur atque hic laborum, distinctio
+        sequi dignissimos!</p>
+    </section>
+
+  </article>
+  <aside>
+    <h1>Aside</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga fugit quos, ipsa facilis totam eaque alias
+      laudantium voluptatum ipsam animi quaerat, delectus sint eum quibusdam sequi numquam sapiente dolores minima!
+    </p>
+  </aside>
+  <footer>
+    <h3>footer</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae reprehenderit quo mollitia eligendi
+      perferendis quae odio labore ullam nisi? Odio temporibus perspiciatis suscipit cum eaque quaerat illo, eveniet
+      quidem nisi?</p>
+  </footer>
+</body>
+
+</html>
+<!-- aside와 footer는 article밖에!!! -->

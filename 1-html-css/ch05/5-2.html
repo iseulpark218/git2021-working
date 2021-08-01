@@ -1,0 +1,77 @@
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    .container {
+      display: flex;
+      margin: 20px 0px;
+      padding: 10px;
+      border: 1px solid red;
+    }
+
+    .item {
+      border: 1px solid black;
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+      text-align: center;
+      line-height: 100px;
+    }
+
+    .container.row {
+      flex-direction: row;
+    }
+
+    .container.row-reverse {
+      flex-direction: row-reverse;
+    }
+
+    .container.col {
+      flex-direction: column;
+    }
+
+    .container.col-reverse {
+      flex-direction: column-reverse;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- main axis(주축): flexbox에서 아이템이 배치되는 방향 -->
+
+  <!-- cross axis(교차축):아이템이 배치되는 반대축 -->
+
+  <!-- 기본방향은 row임 -->
+  <div class="container">
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+  </div>
+
+  <div class="container row">
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+  </div>
+
+  <div class="container row-reverse">
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+  </div>
+
+  <div class="container col">
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+  </div>
+
+  <div class="container col-reverse">
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item">6</div>
+  </div>
+</body>
+
+</html>
