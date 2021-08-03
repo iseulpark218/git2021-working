@@ -1,0 +1,29 @@
+<html>
+
+<body>
+  <script>
+    let name = prompt("사용자 이름을 입력해주세요.", '');
+
+    if (name == 'Admin') {
+      let pass = prompt('비밀번호:', '');
+
+      if (pass == 'TheMaster') {
+        alert('환영합니다!');
+      } else if (pass == '') {
+        alert('취소되었습니다.');
+      } else if (pass == null) {
+        alert('인증에 실패하였습니다.');
+      }
+    }
+
+    else if (pass == '') {
+      alert('취소되었습니다.');
+    } else if (pass == null) {
+      alert('인증되지 않은 사용자입니다.');
+    }
+
+    // 어렵다.. 다시확인하기..
+  </script>
+</body>
+
+</html>

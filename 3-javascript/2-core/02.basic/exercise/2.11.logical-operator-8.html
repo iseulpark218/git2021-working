@@ -1,0 +1,16 @@
+<html>
+
+<body>
+  <script>
+    if (-1 || 0) alert('first'); //fist
+    if (-1 && 0) alert('second'); //x
+    if (null || -1 && 1) alert('third'); //third
+
+    // if(-1||0)->-1->first
+    // if(-1&&0)->0->x
+    // if(null&&1)->1->third
+
+  </script>
+</body>
+
+</html>
