@@ -1,0 +1,29 @@
+<html>
+
+<body>
+  <script>
+
+    // while 반복문이 순차적으로 실행될 때마다 얼럿 창에 어떤 값이 출력될지 예상해보세요.
+    // 아래 두 예시는 같은 값을 출력할까요?
+    let i = 0;
+    while (++i < 5) alert(i);
+    // 1 < 5 -> alert(1)
+    // 2 < 5 -> alert(2)
+    // 3 < 5 -> alert(3)
+    // 5 < 5 -> alert(4)
+    // 5 < 5 -> 탈출
+
+
+    let i = 0;
+    while (i++ < 5) alert(i);
+    // 0 < 5 -> alert(1)
+    // 1 < 5 -> alert(2)
+    // 2 < 5 -> alert(3)
+    // 3 < 5 -> alert(4)
+    // 4 < 5 -> alert(5)
+    // 5 < 5 -> 탈출
+
+  </script>
+</body>
+
+</html>
