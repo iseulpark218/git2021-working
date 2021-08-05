@@ -1,0 +1,25 @@
+<html>
+
+<body>
+  <script>
+    let sayHi;
+    let languge = "Korean"
+
+    // 로직에 따라서 함수를 다르게 생성함
+    switch (languge) {
+      case "Korean":
+        sayHi = function () {
+          alert("안녕하세요");
+        };
+        break
+      case "English":
+        sayHi = function () {
+          alert("Hello");
+        };
+        break
+    }
+    sayHi();
+  </script>
+</body>
+
+</html>
