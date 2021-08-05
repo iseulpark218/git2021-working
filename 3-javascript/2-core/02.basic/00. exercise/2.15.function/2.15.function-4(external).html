@@ -1,0 +1,26 @@
+<html>
+
+<body>
+  <script>
+
+    // 역정삼각형 출력하기
+    /*
+     *********(띄어쓰기0개/9)
+      ******* (띄어쓰기1개/7)
+       *****  (띄어쓰기2개/5)
+        ***   (띄어쓰기3개/3)
+         *    (띄어쓰기4개/1)   */
+
+    let star = "";
+    let removeStar = "*";
+    for (let i = 0; i < 5; i++) {
+      for (let j = 0; j < i; j++) star += " ";
+      for (let j = 9 - 2 * i; j > 0; j--) star += "*";
+      star += "\n";
+    }
+    alert(star);
+
+  </script>
+</body>
+
+</html>
