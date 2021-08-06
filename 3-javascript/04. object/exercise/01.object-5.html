@@ -23,13 +23,34 @@
 
     function multiplyNumeric(obj) {
       for (let prop in obj) {
-        if (typeof obj[prop] == 'number') {
+        if (typeof obj[prop] == "number") {
           obj[prop] *= 2;
         }
       }
+      return obj;
     }
 
-    console.log(obj);
+
+    // 쌤 풀이
+    /*
+    //multiplyNumeric 함수만들기
+    // 속성 값이 숫자인 경우 두배로 만들어 변환
+    function multiplyNumeric(obj) {
+      //변환
+      //객체에 모든 속성값을 탐색
+      for (let prop in obj) {
+        // prop -> width, height, title
+        // 속성값이 숫자인지 확인
+        if (typeof obj[prop] == 'number') {
+          // 원래 값에 두배를 해서 대입
+          obj[prop] = obj[prop] * 2;
+        }
+      }
+      return obj;
+    }
+
+    
+    */
 
   </script>
 </body>
