@@ -2,23 +2,38 @@
 
 <body>
   <script>
-    // 함수 호출 전
+    // 이해가 잘 안갑니다...
+    /*문제
+       // 함수 호출 전
+       let menu = {
+         width: 200,
+         height: 300,
+         title: "My menu"
+       };
+   
+       multiplyNumeric(menu);
+   
+       // 함수 호출 후
+       menu = {
+         width: 400,
+         height: 600,
+         title: "My menu"
+       }; */
+
     let menu = {
       width: 200,
       height: 300,
       title: "My menu"
     };
 
-    multiplyNumeric(menu);
-
-    // 함수 호출 후
-    menu = {
-      width: 400,
-      height: 600,
-      title: "My menu"
-    };
-
-    console.log(typeof menu);
+    function multiplyNumeric(menu) {
+      for (let prop in menu) {
+        if (typeof menu[prop] == 'number') {
+          menu[prop] *= 2;
+        }
+      }
+    }
+    console.log(menu[prop]);
 
   </script>
 </body>
