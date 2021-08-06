@@ -11,8 +11,25 @@
      schedule["8:30"] = "get up";
      alert(isEmpty(schedule)); // false */
 
+     function isEmpty(obj) {
+       for (let prop in obj) {
+         return false;
+        }
+        return true;}
 
-
+// 쌤풀이
+    /*
+    function isEmpty(obj){
+    // 속성 개수 만큼
+    // 이 반복문이 실행된다면 속성이 있다는 얘기
+      for(let prop in obj){
+    return false;
+      }
+      return true;
+    }
+    
+    
+    */
 
 
   </script>
