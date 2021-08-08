@@ -1,0 +1,30 @@
+<html>
+
+<body>
+  <script>
+    //컨텍스트 (Context, 문맥) : 실행 범위
+    // 자바스크립트에서 this는 런타임 (실행시점의 컨텍스트)에 결정됩니다.
+    // 메서드가 어디에서 실행 되었는지와 상관없이
+    // this는 '점 앞의'객체가 무엇인가에 따라 '자유롭게' 결정됩니다.
+
+    function makeUser() {
+      return {
+        name: "John",
+        ref: this
+      };
+    };
+
+    let user = makeUser();
+    // user.ref는 window객체 (js최상위 객체)이고
+    // mamkerUser는 window객체에 함수로 생성된 것임
+
+    //따라서 makeUser() -> window.makeUser() 로 실행된 것과 같음
+    // 실행 컨텍스트가 window임
+    console.log(user.ref);
+
+    alert(user.ref.name); // 결과가 어떻게 될까요?
+
+  </script>
+</body>
+
+</html>

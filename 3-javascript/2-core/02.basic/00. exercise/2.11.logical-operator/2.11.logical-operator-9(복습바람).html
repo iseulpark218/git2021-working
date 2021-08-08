@@ -2,24 +2,21 @@
 
 <body>
   <script>
-    let name = prompt("사용자 이름을 입력해주세요.", '');
-
-    if (name == 'Admin') {
-      let pwd = prompt('비밀번호:', '');
-
+    let id = prompt('id를 입력해주세요.', '');
+    if (id == 'Admin') {
+      let pwd = prompt('비밀번호를 입력하세요', '');
       if (pwd == 'TheMaster') {
         alert('환영합니다!');
-      } else if (pwd == null) {
-        alert('취소되었습니다.');
-      } else if (pwd == "") {
+      } else if (pwd == '' || pwd == null) {
         alert('취소되었습니다.');
       } else {
         alert('인증에 실패하였습니다.');
-        ㄴ
       }
     }
 
-    // 어렵다.. 다시확인하기..
+    else {
+      alert('올바른 id를 입력하세요.')
+    }
   </script>
 </body>
 

@@ -1,0 +1,28 @@
+<html>
+
+<body>
+  <script>
+    let calculator = {
+      a: 0,
+      b: 0,
+
+      read() {
+        this.a = +prompt("첫번째 숫자 입력")
+        this.b = +prompt("첫번째 숫자 입력")
+      },
+      sum() {
+        return this.a + this.b;
+      },
+      mull() {
+        return this.a * this.b;
+      },
+    };
+
+    calculator.read();
+    alert(calculator.sum());
+    alert(calculator.mul());
+
+  </script>
+</body>
+
+</html>
