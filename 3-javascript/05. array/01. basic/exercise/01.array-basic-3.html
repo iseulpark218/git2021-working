@@ -5,16 +5,28 @@
     let arr = ["a", "b"];
 
     arr.push(function () {
-      alert(this);
+     alert(this);
     })
 
     arr[2]();
+
     /*
     a,b,function() {
       alert(this);
     }
     */
 
+    /*쌤풀이
+    let arr = ["a", "b", {id : 1, name:"john"},1];
+
+    arr.push(function () {
+      alert(this);
+    })
+
+    arr[2]();
+    
+
+    */
 
   </script>
 </body>
