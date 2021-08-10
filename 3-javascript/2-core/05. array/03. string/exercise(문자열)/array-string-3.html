@@ -1,0 +1,19 @@
+<html>
+  <body>
+    <script>
+      //truncate("What I'd like to tell on this topic is:", 20) = "What I'd like to te…"
+      //truncate("Hi everyone!", 20) = "Hi everyone!"
+
+      let str1 = "What I'd like to tell on this topic is:";
+      let str2 = "Hi everyone!";
+      let n = 13;
+
+      function truncate(str, maxlength) {
+        return str.length > maxlength ? str.slice(0, maxlength - 1) + "…" : str;
+      }
+
+      console.log(truncate(str1, n));
+      console.log(truncate(str2, n));
+    </script>
+  </body>
+</html>

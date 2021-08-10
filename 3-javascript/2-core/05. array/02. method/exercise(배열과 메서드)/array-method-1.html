@@ -1,0 +1,26 @@
+<html>
+  <body>
+    <script>
+      /*
+      camelize("background-color") == 'backgroundColor';
+      camelize("list-style-image") == 'listStyleImage';
+      camelize("-webkit-transition") == 'WebkitTransition';
+      */
+
+      /*
+            const str =
+              ("background-color", "list-style-image", "-webkit-transition");
+            const firstChar = str[0];
+            const firstCharUpper = firstChar.toUpperCase();
+      */
+
+      let str = ["background-color", "list-style-image", "-webkit-transition"];
+
+      function camelize(str) {
+        return str.split("-");
+      }
+
+      console.log(str);
+    </script>
+  </body>
+</html>
