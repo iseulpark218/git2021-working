@@ -1,0 +1,30 @@
+<html>
+
+<body>
+  <script>
+
+    let arr = [
+      { id: 1, name: "hong" },
+      { id: 1, name: "john" },
+      { id: 1, name: "kim" }
+    ];
+
+    // 방법 1.
+    // name 속성 순으로 정렬, 알파벳 사전식
+    /*
+       arr.sort((a, b) => {
+         if (a.name < b.name) return -1;
+         if (a.name == b.name) return -1;
+         if (a.name > b.name) return -1;
+       });
+   */
+
+    // 방법 2. => 훨씬 효율적
+    arr.sort((a, b) => a.name.localeCompare(b.name));
+
+    console.log(arr);
+
+  </script>
+</body>
+
+</html>
