@@ -6,13 +6,33 @@
       let str3 = "innocent rabbit";
 
       function checkSpam(str) {
-        let lowerStr = str.toLowerCase();
-        return lowerStr.includes("viagra") || lowerStr.includes("xxx");
+        let strLower = str.toLowerCase();
+        return strLower.includes("viagra") || strLower.includes("xxx");
       }
 
       console.log(checkSpam(str1));
       console.log(checkSpam(str2));
       console.log(checkSpam(str3));
+
+
+      /*쌤풀이
+                  fucntion console.log(checkSpam(str){
+                    let strLower=str.LowerCase();
+      // 문자열에 키워드가 포함되어 있는지 ('viagra','xxx')
+                    for (let keyword of ['viagra','xxx']){
+                      if (strLower.includes(keyword)){
+                        return true;
+
+                      }
+                    }
+                    return false;
+                  }
+
+            console.log(checkSpam('buy ViAgRA now'));
+            console.log(checkSpam('free xxxxx'));
+            console.log(checkSpam("innocent rabbit"));
+
+                  */
     </script>
   </body>
 </html>

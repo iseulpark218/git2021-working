@@ -2,25 +2,26 @@
   <body>
     <script>
       /*
-      camelize("background-color") == 'backgroundColor';
-      camelize("list-style-image") == 'listStyleImage';
-      camelize("-webkit-transition") == 'WebkitTransition';
-      */
-
-      /*
-            const str =
-              ("background-color", "list-style-image", "-webkit-transition");
-            const firstChar = str[0];
-            const firstCharUpper = firstChar.toUpperCase();
-      */
-
-      let str = ["background-color", "list-style-image", "-webkit-transition"];
+            camelize("background-color") == 'backgroundColor';
+            camelize("list-style-image") == 'listStyleImage';
+            camelize("-webkit-transition") == 'WebkitTransition';
+            */
+      let str1 = "background-color";
+      let str2 = "list-style-image";
+      let str3 = "-webkit-transition";
 
       function camelize(str) {
-        return str.split("-");
+        return str
+          .split("-")
+          .map((word, index) =>
+            index == 0 ? word : word[0].toUpperCase() + word.slice(1)
+          )
+          .join("");
       }
 
-      console.log(str);
+      console.log(str1[0].toUpperCase() + str1.slice(1));
+      console.log(str2[0].toUpperCase() + str2.slice(1));
+      console.log(str3[0].toUpperCase() + str3.slice(1));
     </script>
   </body>
 </html>
