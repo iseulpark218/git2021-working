@@ -44,14 +44,26 @@
 </table>
 
 <script>
-      const table = document.body.children[0];{
-      for (let i=0, i<5 , i++){
-        if (let i=i){
-      let td = table.rows[i].cells[i];
-      td.style.backgroundColor = "red";
-        }
+const table = document.body.children[0].children[0];
+
+for (let i=0; i<5; i++) { // 0부터 4까지 변수 i에 순차적으로 값을 할당
+  for (let j=0; j<5; j++){ // 0부터 4까지 변수 j에 순차적으로 값을 할당
+    if (i===j) { // i와 j가 동일한 값일 때 실행되게
+
+      let td = table.rows[i].cells[j];
+          td.style.backgroundColor = "red";
+          break
+      }
     }
-  }
+}
+      /* 쌤풀이-다시확인바람
+      const tbody = document.body.children[0].children[0];
+//      console.log(tbody);
+      
+      let td = tbody.rows[0].cells[0];
+
+      td.style.backgroundColor = "red";
+    */
     </script>
 
 </body>

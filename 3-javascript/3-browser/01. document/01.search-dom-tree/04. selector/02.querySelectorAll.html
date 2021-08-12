@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+<div>영역1</div>
+<div>영역2</div>
+
+<ul id="list">
+    <li>1-1</li>
+    <li>1-2</li>
+  </ul>
+  <ul>
+    <li class="item">2-1</li>
+    <li class="item">2-2</li>
+  </ul>
+  <ol>
+    <li>3-1</li>
+    <li>3-2</li>
+  </ol>
+  
+  <input type="text"> <!--입력박스-->
+  <input type="checkbox"> <!--체크박스-->
+
+
+
+  <script>
+    // 상위 요소.querySelector("CSS선택자"); // 첫번째만 선택
+   // 상위 요소.querySelectorAll("CSS선택자"); // 여러개 선택
+    
+    // docutment에 하위 요소 중 태그가 'div'인 요소를 선택
+    // 해당 요소중 첫번째 요소를 선택
+    const div = document.querySelector("div");
+   // console.log(div);
+
+
+    // docutment에 하위 요소 중 태그가 'div'인 요소를 선택
+    // 해당 요소중 첫번째 요소를 선택
+    const divList = document.querySelector("div");
+   // console.log(divList);
+
+    // id 선택자
+    const ul = document.querySelector("#list");
+   // console.log(ul);
+   
+   // ----------------------- 같은 요소들을 선택함 -----------------------
+   // **id 가 list인 요소의 li태그 자식들
+    const liList1 = document.querySelectorAll("#list>li");
+  //  console.log(liList1);
+    // **간편한 방법
+    const liList2 = ul.querySelectorAll("li");
+  //  console.log(liList2);
+
+    // class선택자
+    const liList = document.querySelectorAll(".item");
+   // console.log(liList);
+
+    // 후손/자손 선택자
+    const olLiList = document.querySelectorAll("ol>li");
+   // console.log(olLiList);
+   
+   // pseudo class(의사클래스)
+   const liFirst = document.querySelector("ol>li:first-child");
+   // console.log(liFirst); //3-1
+
+    const liLast = document.querySelector("ol>li:last-child");
+   // console.log(liLast); //3-2
+
+
+      // pseudo element(의사요소)
+      const before = liFirst.querySelector("::before")
+    //  console.log(before);
+
+
+    // 속성 선택자 (attribute selector)
+    // 태그[속성명=속성값]
+    const text = document.querySelector('input[type="text"]'); //입력박스,체크박스 같은 것들만 선택할때
+    const chk = document.querySelector('input[type="checkbox"]'); //입력박스,체크박스 같은 것들만 선택할때
+    console.log(text);
+    console.log(chk);
+
+  </script>
+
+</body>
+
+</html>
