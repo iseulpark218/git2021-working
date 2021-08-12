@@ -1,0 +1,15 @@
+<html>
+  <body>
+    <div id="elem">Hello <b>World</b></div>
+
+    <script>
+      const elem = document.querySelector("#elem");
+      // innerHTML, 태그영역 제외하고 안쪽 컨텐츠만
+      console.log(elem.innerHTML);
+
+      // outHTML, 태그영역 포함해서 안쪽 영역까지
+      // <div id="elem">Hello <b>World</b></div>
+      console.log(elem.outerHTML);
+    </script>
+  </body>
+</html>

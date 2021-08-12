@@ -1,0 +1,21 @@
+<html>
+  <body>
+    <div>아래 두 div를 숨겨봅시다.</div>
+
+    <!--<div hidden> => hiddin 속성값은 true-->
+    <!--<div> => hiddin 속성값은 false-->
+
+    <div hidden>HTML의 hidden 속성 사용하기</div>
+
+    <div id="elem">자바스크립트의 hidden 프로퍼티 사용하기</div>
+
+    <script>
+      const elem = document.querySelector("#elem");
+      // css의 display:none과 같음
+      // elem.style.display = "none";
+      setTimeout(() => {
+        elem.hidden = true;
+      }, 2000); // -> 2000 후에 elem.hidden = true; 이면 숨겨짐
+    </script>
+  </body>
+</html>
