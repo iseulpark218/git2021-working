@@ -47,17 +47,28 @@
 
       <script>
         // id="age-table"인 테이블
-        const div = document.querySelector("id");
+        const id = document.querySelector("table:first-child");
+        console.log(id);
 
         // 테이블 내의 label 요소 모두(총 3개)
+        const label = document.querySelectorAll("td>label");
+        console.log(label);
 
         // 테이블 내의 첫 번째 td(Age가 적힌 곳)
+        const td = document.querySelector("tr>td:first-child");
+        console.log(td);
 
         // name="search"인 form
+        const nameSearch = document.querySelectorAll("body>form");
+        console.log(nameSearch);
 
         // 폼의 첫 번째 input
+        const formFirst = document.querySelector("body>form:first-child");
+        console.log(formFirst);
 
         // 폼의 마지막 input
+        const formLast = document.querySelector("body>form:last-child");
+        console.log(formLast);
       </script>
     </form>
   </body>
