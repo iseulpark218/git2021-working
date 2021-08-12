@@ -1,0 +1,32 @@
+<html>
+  <body>
+    <div>시작</div>
+    <ul>
+      <li>
+        <b>항목</b>
+      </li>
+    </ul>
+    <div>끝</div>
+
+    <script>
+      // script 태그를 가장 하단에!
+
+      /*
+      // body 밑에 있는 하위 노드들을 탐색
+      for (let node of document.body.childNodes) {
+        console.log(node);
+      }
+
+      // body를 객체화 해놨고, 이걸 자바스크립트로 실행하려면
+      // 첫번째 자식노드, 마지막 자식노드
+      console.log(document.body.firstChild);
+      console.log(document.body.lastChild);
+      */
+
+      // body밑에 있는 하위 요소(element)들을 탐색
+      for (let elem of document.body.childNodes) {
+        console.log(elem); //DIV, UL, DIV, SCRIPT
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+  <body>
+    <table id="table">
+      <tr>
+        <!--0번째 row-->
+        <td>일</td>
+        <!--!0번째 cell-->
+        <td>이</td>
+        <!--1번째 cell-->
+      </tr>
+      <tr>
+        // 1번째 row
+        <td>삼</td>
+        <td>사</td>
+      </tr>
+    </table>
+
+    <script>
+      // 테이블을 가져옴
+      const table = document.body.children[0];
+      let td = table.rows[0].cells[1];
+      td.style.backgroundColor = "red"; // 강조
+    </script>
+  </body>
+</html>
