@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <!--문서에서 data-widget-name이라는 속성을 가진 요소를 찾고,
+    해당 요소의 값을 읽는 코드를 작성해 보세요.-->
+  <body>
+    <div data-widget-name="menu">Choose the genre</div>
+
+    <script>
+      const elem = document.querySelector("[data-widget-name]");
+      console.log(elem.getAttribute("data-widget-name"));
+    </script>
+  </body>
+</html>
