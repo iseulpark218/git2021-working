@@ -1,0 +1,47 @@
+<html>
+  <body>
+    <style>
+      .alert {
+        padding: 15px;
+        border: 1px solid #d6e9c6;
+        border-radius: 4px;
+        color: #3c763d;
+        background-color: #dff0d8;
+      }
+      </style>
+
+
+<!--beforebegin : 태그시작 이전에-->
+      <div id="container">
+        <!--afterbegin : 태그시작 다음에(첫번째 자식요소)-->
+        <div>annother 태그</div>
+        <!--beforeend : 끝-->
+      </div>
+        <!--afterend : 끝태그 다음에-->
+
+<script>
+//  setTiemout(()=> {
+//    container.inserAdjacentHTML('beforebegin', '<p>안녕하세요.</p>');
+//    container.inserAdjacentHTML('beforebegin', '<p>안녕히 가세요.</p>');
+//  },2000)
+
+    // 1. 추가할 요소 문자열을 생성 (UI가 복잡할 때 사용)
+    // back-quote(`), template-literal(조각UI 표기법)
+    const alert = `
+    <strong>안녕하세요!</strong> 중요 메시지를 확인하셨습니다.
+  </div>`;
+
+// 2. 삽입할 위치에 맞게 추가
+const container = document.querySelector("#container");
+
+setTimeout(()=>{
+container.insertAdjacentHTML('afterbegin', alert)
+container.insertAdjacentHTML('beforebegin', alert)
+
+},2000)
+
+</script>
+
+    </script>
+  </body>
+</html>

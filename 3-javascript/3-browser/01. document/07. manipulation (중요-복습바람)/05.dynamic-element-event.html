@@ -1,0 +1,69 @@
+<html>
+  <body>
+    <style>
+      .alert {
+        padding: 15px;
+        border: 1px solid #d6e9c6;
+        border-radius: 4px;
+        color: #3c763d;
+        background-color: #dff0d8;
+      }
+      </style>
+
+
+<!--beforebegin : 태그시작 이전에-->
+      <div id="container">
+        <!--afterbegin : 태그시작 다음에(첫번째 자식요소)-->
+        <div>annother 태그</div>
+        <!--beforeend : 끝-->
+      </div>
+        <!--afterend : 끝태그 다음에-->
+
+<script>
+
+// 동적으로 생성된 요소의 이벤트 부착을 어떻게 할 것인가
+// 1. 이미 태그가 작성되어 있는 최상위 요소를 선택한다
+
+const container = document.querySelector("#container");
+container.addEventListener("click",(event)=>{
+  console.log(event.target); // 실제 이벤트를 발생시킨 요소
+  console.log(event.currentTarget); // 이벤트 리스너가 동작하는 요소
+  console.log(event.target.tagName);
+
+  // 2. 해당 요소가 맞는 확인하는 작업
+  // 클릭 이벤트를 발생시킨 요소가 strong 태그면
+  if (event.target.tagName == "STRONG"){
+    this.alert("안녕하세요! 부모요소에 붙임")
+  }
+});
+
+//  setTiemout(()=> {
+//    container.inserAdjacentHTML('beforebegin', '<p>안녕하세요.</p>');
+//    container.inserAdjacentHTML('beforebegin', '<p>안녕히 가세요.</p>');
+//  },2000)
+
+    // 1. 추가할 요소 문자열을 생성 (UI가 복잡할 때 사용)
+    // back-quote(`), template-literal(조각UI 표기법)
+    const alert = `
+    <strong>안녕하세요!</strong> 중요 메시지를 확인하셨습니다.
+  </div>`;
+
+// 2. 삽입할 위치에 맞게 추가
+setTimeout(()=>{
+container.insertAdjacentHTML('afterbegin', alert)
+container.insertAdjacentHTML('beforebegin', alert)
+
+
+// 동적으로 생성된 요소의 이벤트 부착을 어떻게 할 것인가
+// 1. 만들어진 다음에 요소를 선택하고 이벤트 리스너를 추가한다.
+const strong = document.querySelector(".alert>strong")
+strong.addEventListener("click",(event) => {
+  this.alert("안녕하세요! 생성된 후 붙임")
+})
+},2000)
+
+</script>
+
+    </script>
+  </body>
+</html>

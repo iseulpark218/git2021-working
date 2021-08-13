@@ -1,0 +1,31 @@
+<html>
+  <body>
+    <input type="button" id="hider" value="Click to hide the text" />
+    <div id="text" hidden="">Text</div>
+  </body>
+
+  <script>
+    function click(event) {
+      console.log(this);
+    }
+
+    document.getElementById("hider").onclick = function () {
+      document.getElementById("text").hidden = true;
+    };
+
+    //      elem.addEventListener("click", click); //callback
+
+    /*
+    // 1. 제어하려는 요소 선택
+    const brn = document.querySelector("#hider");
+    const brn = document.querySelector("#text");
+
+    // 2. 이벤트 리스너를 부착
+    brn.addEventListener({"click", hide})
+
+    // 3. 이벤트를 처리할 코드를 함수
+    function
+
+*/
+  </script>
+</html>
