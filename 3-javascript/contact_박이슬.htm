@@ -2,7 +2,6 @@
 
 <html lang="ko">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -11,6 +10,11 @@
       rel="stylesheet"
       integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
       crossorigin="anonymous">
+
+     <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
   </head>
 
   <body style="width:700px;" class="mx-auto">
@@ -21,14 +25,14 @@
       integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
       crossorigin="anonymous"></script>
 
-    <form id="form-input" class="flexBox">
+    <form id="form-input" class="flex">
       <input id=txt-name" type="text" class="form-name me-1" placeholder="이름" style="width:200px;">
       <input id=txt-contact" type="text" class="form-cotact me-1" placeholder="전화번호" style="width:200px;">
       <input id=txt-email" type="text" class="form-email me-2" placeholder="이메일" style="width:200px;">
 
       <button id=btn-add" type="button" class="btn btn-secondary text-nowrap btn-sm">추가</button>
   
-      <table class="table table-striped" border:"1">
+      <table class="table table-striped mt-5">
         <tbody>
           <thead>
             <tr>
@@ -40,7 +44,10 @@
               <th>작업</th>
             </tr>
             <tr>
-              <td></td>
+              <td>?</td>
+              <td>텍스트</td>
+              <td>정렬</td>
+              <td>확인중</td>
             </tr>
           </thead>
         </tbody>
