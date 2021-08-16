@@ -15,6 +15,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
     />
+    <title>연락처 관리</title>
   </head>
 
   <body style="width: 700px" class="mx-auto">
@@ -26,22 +27,21 @@
       crossorigin="anonymous"
     ></script>
 
-    <form id="form-input" class="flex">
-      <input id="txt-name" type="text" class="form me-1" placeholder="이름" style="width:205px">
-      <input id="txt-contact" type="tel" class="form me-1" placeholder="전화번호" style="width:205px;">
-      <input id="txt-email" type="email" class="form me-2" placeholder="이메일" style="width:205px;">
+    <form id="form-input" class="flex" onsubmit="return false">
+      <input id="txt-name" type="text" class="form-group me-1" placeholder="이름" style="width:205px">
+      <input id="txt-contact" type="tel" class="form-group me-1" placeholder="전화번호" style="width:205px;">
+      <input id="txt-email" type="email" class="form-group me-2" placeholder="이메일" style="width:205px;">
 
       <button
-        id="btn-add"
-        type="button"
+        id="btn-add" type="button"
         class="btn btn-outline-primary text-nowrap btn-sm"
-        onclick="addRow();">추가
+        onClick="addRow()">추가 <!-- return false;-->
       </button>
+    </form>
 
-      <table id="tableList-add" class="table table-striped mt-5">
-        <tbody>
+      <table id="table" class="table table-striped mt-5">
           <thead>
-            <tr>
+            <tr class="head-title">
               <th>#</th>
               <th>이름</th>
               <th>전화번호</th>
@@ -49,177 +49,130 @@
               <th>작업</th>
             </tr>
           </thead>
-          <tbody id="my-tbody">
+          <tbody id="tbody" class="tbody">
+         <!--   <tr id="tbodyList"></tr> -->
           </tbody>
-      </table>
-    </form>
-    
+<!--
+          <tfoot id="tfoot">
+            <tr id="data-empty" class="text-center">
+              <td colspan="5">데이터가 없습니다.</td>
+            </tr>
+          </tfoot>
+-->
+        </table>
+
+  
 
     <script>
+/*
+function addRow(){
+    let ths = $(ths);
+      ths.parents("form").remove();
+}
+*/
+
+// 
       function addRow(){
 
       const txtName = document.getElementById("txt-name").value;
       const txtContact = document.getElementById("txt-contact").value;
       const txtEmail = document.getElementById("txt-email").value;
-
-     // const tableBtnAdd = document.getElementById("tableBtn-add").value;
-
-       const tableBtnAdd = /*html*/ `
-          <button class="btn btn-outline-primary text-nowrap btn-sm remove">삭제</button>          
-
-        `;
-
-      //-----------------------new 2 ,       function addRow(){
-      const table = document.getElementsByTagName('table')[0];
-      const newRow = table.insertRow(table.rows.length/2+1);
-
-        let cell1 = newRow.insertCell(0); //순번
-        let cell2 = newRow.insertCell(1);
-        let cell3 = newRow.insertCell(2);
-        let cell4 = newRow.insertCell(3);
-        let cell5 = newRow.insertCell(4);
-
-
- for (let i=0; i<10000; i++){
-        cell1.innerHTML = txtName;
-        cell2.innerHTML = txtName;
-        cell3.innerHTML = txtContact;
-        cell4.innerHTML = txtEmail;
-        cell5.innerHTML = tableBtnAdd;
-}
-}
-
-/*
-function removeRow(i) {
-  $("tbody").find(`tr[data-index='${i}']`).remove();
-}
-*/
-
-//-----------------------new 2
-
-
-      const tableList = document.querySelector("#tableList-add");
-      const tbodyList = document.querySelector("#my-tbody");
-
       const formInput = document.querySelector("#form-input");
+          formInput.reset();
+//      const btnAdd = document.querySelector("#btn-add");
+      const newRow = tbody.insertRow(tbody.rows.length -2/0);
 
+  //    const deleteRow = tbody.deleteRow(tbody.rows.length);
+    //  const newRow = table.insertRow(table.rows.length);
 
+      //      const tfoot = document.querySelector("#data-empty").value;
 
+      /*
+      //-----------------------------
+      const table = document.getElementById('tbody');
+      let newRow = table.insertRow(0)
+      //-----------------------------
+*/
+//let newRow = table.insertRow(rowlen-1);
+//        let cell1 = row.insertCell(1);
+
+//        let rowCount = table.rows.length; 
+        let cell1 = newRow.insertCell(0); //순번
+        cell1.innerHTML = "❤"; //newRow + 1
+
+        let cell2 = newRow.insertCell(1);
+        cell2.innerHTML = txtName;
+
+        let cell3 = newRow.insertCell(2);
+        cell3.innerHTML = txtContact;
+
+        let cell4 = newRow.insertCell(3);
+        cell4.innerHTML = txtEmail;
+
+        let cell5 = newRow.insertCell(4);
+        cell5.innerHTML = BtnDelete;
+
+        return;
+      }
+
+    const BtnDelete = /*html*/ `
+     <button
+      type = "button"
+      class="btn_delete btn-outline-secondary text-nowrap btn-sm remove"
+      onClick = "btn_del()">
+      삭제
+     </button>
+    `;
 
 /*
-      txtName.addEventListener("keyup", (event)=>{
-        if (event.keycode == 13) {
-          txtName.blur();
-          add(event);
-      }
-    });
+function btn_del() {
+//  let newRow = document.getElementById("table");
+ // newRow.deleteCell();
+//document.tbody.appendChild(btn_del);
 
-      txtContact.addEventListener("keyup", (event)=>{
-        if (event.keycode == 13) {
-          txtContact.blur();
-          add(event);
-      }
-    });
-
-      txtEmail.addEventListener("keyup", (event)=>{
-        if (event.keycode == 13) {
-          txtEmail.blur();
-          add(event);
-      }
-    });    
-*/
-
-// 입력값을 하나라도 입력 안했을 때
-/* 
-function add(event) {
-   console.log(txtName.value);
-        if (!txtName.value) {
-          const alertDiv = /*html* ----> 괄호없애기(/) `
-          <div class="alert alert-danger alert-dismissible my-2" role="alert" id="liveAlert">
-            입력값을 입력해주세요.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>    
-          `;
-          formInput.insertAdjacentHTML("afterend", alertDiv);
-
-          return;
-        }
-      }
-*/
-
-
-        /*
-// -----------------------------------New
-// tobdy 추가
-  let i = 0;
-
-function rowTemplate(i) {
-  return `<tr data-index=${i}>
-      <td>${i}</td>
-      <td><input type="text" name="name-${i}"></td>
-      <td><input type="tel" name="phone-${i}"></td>
-      <td><input type="email" name="Email-${i}"></td>
-      <td><button type="button class="btn btn-outline-primary text-nowrap btn-sm" onclick="removeRow(${i})">삭제</button></td>
-    </tr>`
-}
-
-      <button
-        id="btn-add"
-        type="button"
-        class="btn btn-outline-primary text-nowrap btn-sm"
-        onclick="addrow()"
-        >
-        추가
-      </button>
-
-
-// tbody 삭제
-function removeRow(i) {
-  $("tbody").find(`tr[data-index='${i}']`).remove();
-}
-
-function addrow() {
-  $('tbody').append(rowTemplate(i));
-  i++;
-}
-
-// -----------------------------------New
-
-*/
-
-        /*
-// table에 입력값 추가하기
-function addrow() {
-  let my_tbody = document.querySelector('my-tbody');
-  let row = my_tbody.insertRow(my_tbody.rows.length);
-  let cell1 = row.insertCell(0);
-  let cell2 = row.insertCell(1);
-  let cell3 = row.insertCell(2);
-  let cell4 = row.insertCell(3);
-  let cell5 = row.insertCell(4);
-  cell1.innerHTML = 'Num'
-  cell2.innerHTML = 'Name'
-  cell3.innerHTML = 'Contact'
-  cell4.innerHTML = 'Email'
-  cell5.innerHTML = 'delete button'
-}
-
-
-// table에 입력값 삭제하기
-function delete_row() {
-  let my_tbody = document.querySelector('my-tbody');
-  if (my_tbody.rows.length < 1) return;
-  my_tbody.deleteRow(my_tbody.rows.length -1);
+return;
 }
 */
 
+    function btn_del(){
 
-//      btnAdd.addEventListener("click", add);
-//      tbodyList.addEventListener("click", remove);
+    let eventTarget = document.getElementsByClassName('btn_delete')
 
-//      tbodyList.insertAdjacentHTML("afterbegin", tr);
-      formInput.reset();
- 
+//    /* https://im-developer.tistory.com/46
+    for (let i=0; i<eventTarget.length; i++) {
+    eventTarget[i].addEventListener('click', function() {
+    console.log('event잘작동?')
+    })
+    }
+
+
+    for (let i=0; i<eventTarget.length; i++) {
+    eventTarget[i].addEventListener('click', function() {
+    let parent = document.querySelector('#table tbody')
+    parent.removeChild(this.parentElement.parentElement)
+    i --
+    })
+    }
+    
+    }
+  /*
+  function remove(event){
+    if(event.target.className.includes("remove")) {
+      const btnRemove = event.target;
+      const tableBtnAdd = btnRemove.parentNode;
+      tableBtnAdd.remove();
+    }
+  }
+*/
+
+    
+//        newRow.addEventListener("click", remove);
+//        newRow.insertAdjacentHTML("afterbegin", tbodyList);
+
+    //   let eventTarget = document.getElementsByClassName('remove')
+        
+
+
 
     </script>
   </body>
