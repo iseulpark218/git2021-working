@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <title>연락처 관리</title>
+  </head>
+
+  <body style="width: 700px" class="mx-auto">
+    <h2 class="text-center my-3">연락처 관리✏</h2>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+
+    <form id="form-input" class="flex" onsubmit="return false">
+      <input id="txt-name" type="text" class="form-group me-1" placeholder="이름" style="width:205px">
+      <input id="txt-contact" type="tel" class="form-group me-1" placeholder="전화번호" style="width:205px;">
+      <input id="txt-email" type="email" class="form-group me-2" placeholder="이메일" style="width:205px;">
+
+      <button
+        id="btn-add" type="button"
+        class="btn btn-outline-primary text-nowrap btn-sm"
+        onClick="addRow()"> 추가
+      </button>
+
+    </form>
+
+      <table id="table" class="table table-striped mt-5">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>이름</th>
+              <th>전화번호</th>
+              <th>이메일</th>
+              <th>작업</th>
+            </tr>
+          </thead>
+          <tbody id="tbody" class="tbody">
+         <!--   <tr id="tbodyList"></tr> -->
+          </tbody>
+<!--
+          <tfoot id="tfoot">
+            <tr id="data-empty" class="text-center">
+              <td colspan="5">데이터가 없습니다.</td>
+            </tr>
+          </tfoot>
+-->
+        </table>
+
+      <script>
+
+    /*Row 추가*/
+      function addRow(){
+
+      const txtName = document.getElementById("txt-name").value;
+      const txtContact = document.getElementById("txt-contact").value;
+      const txtEmail = document.getElementById("txt-email").value;
+      const formInput = document.querySelector("#form-input");
+          formInput.reset();
+      const newRow = tbody.insertRow(tbody.rows.length -2/0);
+
+       if (!txtName || !txtContact || !txtEmail) {
+          const alertDiv = /*html*/ `
+          <div class="alert alert-danger alert-dismissible my-2" role="alert" id="liveAlert">
+            <b>이름/전화번호/이메일</b>을 <u>전부</u> 입력해주세요.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>  
+          `;
+//          setTimeout(alertDiv,1);
+          formInput.insertAdjacentHTML("afterend", alertDiv);
+          
+       } else {
+        let cell1 = newRow.insertCell(0); //순번
+        cell1.innerHTML = "❤"; //newRow + 1
+
+        let cell2 = newRow.insertCell(1);
+        cell2.innerHTML = txtName;
+
+        let cell3 = newRow.insertCell(2);
+        cell3.innerHTML = txtContact;
+
+        let cell4 = newRow.insertCell(3);
+        cell4.innerHTML = txtEmail;
+
+        let cell5 = newRow.insertCell(4);
+        cell5.innerHTML = BtnDelete;
+        }
+        return;
+        
+      }
+
+      /*삭제 이벤트*/
+    const BtnDelete = /*html*/ `
+     <button
+      type = "button"
+      id="btn-del"
+      class="btn_delete btn-outline-secondary text-nowrap btn-sm remove"
+      onClick = "delRow()">
+      삭제
+     </button>
+    `;
+
+    function delRow(){
+    let event = document.getElementsByClassName('btn_delete')
+    for (let i=0; i<event.length; i++) {
+    event[i].addEventListener('click', function() {
+    let parent = document.querySelector('#table tbody')
+    parent.removeChild(this.parentElement.parentElement)
+    i --
+    })
+    }
+    }
+
+    </script>
+  </body>
+</html>

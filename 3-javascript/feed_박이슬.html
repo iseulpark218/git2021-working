@@ -1,0 +1,73 @@
+<html>
+
+<body>
+
+
+  <textarea placeholder="Write here"></textarea>
+    <input type="file" accept="image/png, image/jpg, video/mp4">
+    <button id="btn-file">File</button>
+    <button id="btn-del">Dlete</button>
+
+  <!--카드(부트스트랩)
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+-->
+
+<div>
+
+  </div>
+
+  <script>
+    const fileInput = document.querySelector("input[type='file']");
+    const btnFile = document.querySelector("#btn-file");
+    const btnDelete = document.querySelector("#btn-del");
+    
+    const div = document.querySelector("div");
+
+//btnDelete.addEventListener("click",() => {
+//  remove.})
+
+    btnFile.addEventListener("click", () => {
+      // 파일입력요소.files -> 선택한 파일 목록
+      // 여러개 선택 가능하기 때문에 하나만 선택할 때는 0
+      console.log(fileInput.files[0]);
+      const file = fileInput.files[0];
+
+      if (!file) return;
+
+      // 파일을 base64 문자열 -> data url로 변환
+      // FileReader를 이용하여 처리
+
+      // FileReader 객체 생성
+      const reader = new FileReader();
+
+      // file객체를 data url로 읽기
+      reader.readAsDataURL(file);
+
+      // FileReader 객체가 파일 읽기를 완료하면 함수가 실행됨
+      reader.onload = () => {
+        console.log(reader.result);
+        const dataUrl = reader.result;
+
+        // 이미지일 때와 비디오일 때 나눠서 처리
+        let elm = "";
+        if (file.type.includes("image")) {
+          elm = /*html*/`<img src=${dataUrl} width="500">`;
+        } else {
+          elm = /*html*/`<video src=${dataUrlt} width="500" controls>` //controls를 사용해야 영상재생가능
+        }
+
+        div.innerHTML = elm;
+      }
+
+    })
+
+  </script>
+</body>
+
+</html>

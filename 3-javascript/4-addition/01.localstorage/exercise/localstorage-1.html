@@ -1,0 +1,27 @@
+<!doctype html>
+<head>
+  <meta charset="uft-8">
+</head>
+
+<body>
+<textarea placeholder="Write here"></textarea>
+  <button>Clear</button>
+    <script>
+      const txt = document.querySelector("textarea");
+      const btn = document.querySelector("button");
+      const storageKey="memo";
+
+      txt.addEventListener("ketup",() => {
+        localStorage.setItem(storageKey,txt.value);
+      })
+      
+      btn.adEventListener("click",()=> {
+        txt.value = "";
+        localStorage.removeItem(storageKey);
+      })
+
+      txt.value = localStorage.getItem(storageKey);
+
+    </script>
+  </body>
+</html>
