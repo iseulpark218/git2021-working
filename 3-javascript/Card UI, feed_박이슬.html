@@ -1,76 +1,123 @@
-<html>
-  <body center;>
-    <div class="form-floating" class="flex">
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
+    <title>Card UI, feed_박이슬</title>
+  </head>
+
+  <body class="mx-auto" style="width: 500px">
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+
+    <form id="form-input" class="mt-5" onsubmit="return false;">
       <textarea
-        class="form-control"
+        id="txt-post"
+        class="form-control mb-1"
         placeholder="Leave a post here"
-        rows="4"
-        cols="50"
-        id="floatingTextarea2"
-        style="height: 100px"
       ></textarea>
-      <label for="floatingTextarea2"></label>
-    </div>
-
-    <br />
-    <input type="file" accept="image/png, image/jpg, video/mp4" />
-    <button id="btn-file">File</button>
-    <button id="btn-del">Dlete</button>
-
-    <!--카드(부트스트랩)
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
--->
-
-    <div></div>
-
+      <div class="d-flex">
+        <input
+          type="file"
+          class="form-control me-1"
+          accept="image/png, image/jpeg, video/mp4"
+        />
+        <button id="btn-add" class="btn btn-primary text-nowrap" type="button">
+          입력
+        </button>
+      </div>
+    </form>
+    <div id="div-list" class="mt-3"></div>
     <script>
+      const formInput = document.querySelector("#form-input");
+      const txtPost = document.querySelector("#txt-post");
       const fileInput = document.querySelector("input[type='file']");
-      const btnFile = document.querySelector("#btn-file");
-      const btnDelete = document.querySelector("#btn-del");
+      const btnAdd = document.querySelector("#btn-add");
+      const divList = document.querySelector("#div-list");
 
-      const div = document.querySelector("div");
+      btnAdd.addEventListener("click", () => {
+        let isEmpty;
 
-      //btnDelete.addEventListener("click",() => {
-      //  remove.})
+        if (txtPost.value == "" && fileInput.files.length == 0) {
+          isEmpty = true;
+        }
 
-      btnFile.addEventListener("click", () => {
-        // 파일입력요소.files -> 선택한 파일 목록
-        // 여러개 선택 가능하기 때문에 하나만 선택할 때는 0
+        if (isEmpty) {
+          const alertDiv = /*html*/ `
+          <div class="alert alert-danger alert-dismissible my-2" role="alert">
+            입력값을 입력해주세요.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>    
+          `;
+          formInput.insertAdjacentHTML("afterend", alertDiv);
+
+          return;
+        }
+
+        // 빈 값이 아니면 alert창 지움
+        document.querySelectorAll(".alert").forEach((item) => item.remove());
+
+        let media = "";
+
         console.log(fileInput.files[0]);
         const file = fileInput.files[0];
 
-        if (!file) return;
+        if (file) {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
 
-        // 파일을 base64 문자열 -> data url로 변환
-        // FileReader를 이용하여 처리
+          reader.onload = () => {
+            // console.log(reader.result);
+            const dataUrl = reader.result;
 
-        // FileReader 객체 생성
-        const reader = new FileReader();
+            // 이미지일 때와 비디오일 때 나눠서 처리
+            if (file.type.includes("image")) {
+              media = /*html*/ `<img src=${dataUrl} class="card-img-top">`;
+            } else {
+              media = /*html*/ `<video src=${dataUrl} class="card-img-top" controls></video>`;
+            }
 
-        // file객체를 data url로 읽기
-        reader.readAsDataURL(file);
+            add();
+          };
+        } else {
+          add();
+        }
 
-        // FileReader 객체가 파일 읽기를 완료하면 함수가 실행됨
-        reader.onload = () => {
-          console.log(reader.result);
-          const dataUrl = reader.result;
+        function add() {
+          const card = `
+          <div class="card mt-1">
+            ${media}
+            <div class="card-body">
+              <p class="card-text">${txtPost.value}</p>
+              <a href="#" class="link-secondary fs-6 float-end remove">REMOVE</a>
+            </div>
+          </div>      
+          `;
 
-          // 이미지일 때와 비디오일 때 나눠서 처리
-          let elm = "";
-          if (file.type.includes("image")) {
-            elm = /*html*/ `<img src=${dataUrl} width="500">`;
-          } else {
-            elm = /*html*/ `<video src=${dataUrlt} width="500" controls>`; //controls를 사용해야 영상재생가능
-          }
+          divList.insertAdjacentHTML("afterbegin", card);
 
-          div.innerHTML = elm;
-        };
+          formInput.reset();
+        }
+      });
+
+      divList.addEventListener("click", (event) => {
+        if (event.target.className.includes("remove")) {
+          const card = event.target.closest(".card");
+          card.remove();
+        }
       });
     </script>
   </body>
