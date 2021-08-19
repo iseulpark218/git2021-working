@@ -3,8 +3,8 @@
 let str: string;
 let num: number;
 
-str = "john";
+str = "John";
 // str = 1; // type error
 
-
 num = 1;
+// num = "John"; // type error
