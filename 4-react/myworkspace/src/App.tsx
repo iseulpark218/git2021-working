@@ -28,6 +28,8 @@ function App() {
       <Button variant={"warning"} text={"Delete"} />
 
       <Counter />
+      <Calculator />
+      <Generator />
     </div>
   );
 }
