@@ -6,23 +6,15 @@ const Navigation = () => {
       <li>
         <Link to="/">Home</Link>
       </li>
+
       <li>
-        <Link to="/components">Components</Link>
+        <Link to="/todo">Todo</Link>
       </li>
       <li>
-        <Link to="/counter">Counter</Link>
+        <Link to="/feeds">Feeds</Link>
       </li>
-      <li>
-        <Link to="/calculator">Calculator</Link>
-      </li>
-      <li>
-        <Link to="/generator">Generator</Link>
-      </li>
-      <li>
-        <Link to="/account-manager">AccountManager</Link>
-      </li>
-      <li>
-        <Link to="/bootstrap">BootStrap</Link>
+            <li>
+        <Link to="/feeds2">Feeds2</Link>
       </li>
     </ul>
   );
