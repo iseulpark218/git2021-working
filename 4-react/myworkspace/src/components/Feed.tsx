@@ -1,163 +1,105 @@
 import { useRef, useState } from "react";
+import { isTemplateExpression } from "typescript";
 import Alert from "./base/Alert";
 
 interface FeedState {
-  id : number;
-  content : string | undefined;
+  id : number,
+  content? : string | undefined;
+  dataUrl? : string | undefined;
   createTime : number;
-  modifyTime?: number;
-  isEdit?: boolean;
 }
 
-const getTimeString = (unixtime: number) => {
-  const dateTime = new Date(unixtime);
+
+const getTimeString = (unixtime : number) => {
+   const dateTime = new Date(unixtime);
   return `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
-};
+}
 
 const Feed = () => {
-  const [feedContent, setFeedContent] = useState<FeedState[]>([
-    { id: 2, content: "11", createTime: new Date().getTime() },
-    { id: 1, content: "22", createTime: new Date().getTime() },
+
+  const [feedList, setFeedList] = useState<FeedState[]>([
+   { id: 3, dataUrl:"http://tourimage.interpark.com/BBS/Tour/FckUpload/201404/6353433153042271822.jpg", content: "content3", createTime: new Date().getTime() },
+    { id: 2,dataUrl:"http://tourimage.interpark.com/BBS/Tour/FckUpload/201404/6353433155487351312.jpg", content: "content2", createTime: new Date().getTime() },
+    { id: 1,dataUrl:"http://tourimage.interpark.com/BBS/Tour/FckUpload/201404/6353433155488913823.jpg", content: "content1", createTime: new Date().getTime() },
   ]);
 
-/*------------------------------------------------------------------------*/
 
-  // 빈 값 여부 state
-  const [isError, setIsError] = useState(false);
+const [isError, setIsError] = useState(false);
 
-  const formRef = useRef<HTMLFormElement>(null);
-  const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
-  const btnAddRef = useRef<HTMLButtonElement>(null);
-  const ulRef = useRef<HTMLUListElement>(null);
-  const content = useRef<HTMLDivElement>(null);
-
-  //const contentRef = useRef<HTMLContentElement>(null);
-
- // 게시 버튼 event 작동
-  const add = (e: React.KeyboardEvent<HTMLInputElement> | null) => {
-
-    if (e) {
-      if (e.code !== "Enter") return;
-    }
-
- {/*
-    if (!fileRef.current?.files?.length) {
-      const file = fileRef.current?.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        post(reader.result?.toString(),file.type);
-      }
-       return;
-    }
-*/}
-    if (!textAreaRef || !inputRef.current?.value) {
-      setIsError(true);
-      return;
-    }
+const formRef = useRef<HTMLFormElement>(null);
+const textAreaRef = useRef<HTMLTextAreaElement>(null);
+const fileRef = useRef<HTMLInputElement>(null);
 
 
+//(재점검) add에 e:React 넣고, 게시 Alert 추가
 
 
-    const feed: FeedState = {
-      id: feedContent.length > 0 ? feedContent[0].id + 1 : 1,
-      content: textAreaRef.current?.value,
-      createTime: new Date().getTime(),
+const add = () => {
+
+if(fileRef.current?.files?.length){
+  const file = fileRef.current?.files[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+
+  reader.onload = () => {
+const DataUrl = reader.result;
+
+  };
+}
+
+  const feed : FeedState = {
+    id:feedList.length >0 ? feedList[0].id +1 : 1,
+    content : textAreaRef.current?.value,
+    dataUrl : fileRef.current?.value,
+    createTime: new Date().getTime(),
     };
 
-    setFeedContent([feed, ...feedContent]);
+    setFeedList([feed, ...feedList]);
 
-    // 입력값 초기화
-    formRef.current?.reset();
-    // 에러 메시지 제거
+    //(검토중) textarea or 파일선택 시, 게시Alert나오게 수정하기..
+   formRef.current?.reset();
+
+   //(검토중) 에러 메시지 제거
     setIsError(false);
-  };
+  }
 
-  const del = (id: number) => {
-    // 불변성 때문에 splice를 사용할 수 없음
-    // 주로 filter 함수를 사용
-    // filter 함수로 해당 id를 제외하고 새로운 배열로 리턴함.
-    setFeedContent(feedContent.filter((item) => item.id !== id));
-  };
-
-  const edit = (id: number, mod: boolean) => {
-    // 해당 id에 해당하는 item만 edit 모드로 변경함
-    // 해당 item의 속성을 변경한 후 변경된 item을 반환
-    // map 함수는 새로운 배열을 반환하는 함수, 배열길이는 기존 배열 길이와 같음
-    setFeedContent(
-      feedContent.map((item) => {
-        if (item.id === id) {
-          item.isEdit = mod;
-        }
-
-        return item;
-      })
-    );
+ const del = (id: number) => {
+    setFeedList(feedList.filter((item) => item.id !== id));
   };
 
 
-  const save = (id: number, index: number) => {
-    console.log(ulRef.current);
+  return (<>
+      <h1 className="text-center mt-4">Feed</h1>
+    <form className="d-flex flex-column mt-5"
+        ref={formRef}
+        onSubmit={(e) => e.preventDefault()}>
 
-    // ul 밑에 있는 입력박스중에서 index번째 입력박스만 선택
-    const input = ulRef.current?.querySelectorAll("input")[index];
-   setFeedContent(
-     feedContent.map((item) => {
-        // 해당 id의 item의 값을 변경
-        if (item.id === id) {
-          item.content = input?.value;
-          item.modifyTime = new Date().getTime();
-          item.isEdit = false;
-        }
+      <textarea
+        className="form-control mb-1"
+        placeholder="👉🏻 Leave a post here 👈🏻"
+        ref={textAreaRef}      
+      ></textarea>
 
-        return item;
-      })
-    );
-  };
+      <div className="d-flex mt-1" > 
+        <input
+          type="file"
+          className="form-control me-1 pb-1"
+          accept="image/png, image/jpeg, video/mp4"
+          ref={fileRef} 
+        />
+        <button
+          className="btn btn-dark text-nowrap btn-sm"
+          type="button"
+          onClick={() => {
+            add();
+          }}
+        >
+          입력
+        </button>
+      </div>
 
-
-/*------------------------------------------------------------------------*/
-
-  return (
-<>
-   {/* <h1 className="text-center mt-4">FEED</h1> */}
-          <form
-        id="form-input" 
-        className="mt-5"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <textarea
-          id="txt"
-          //rows="5"
-          className="form-control mb-1 pb-5" //w-100
-          placeholder="👉🏻 Leave a post here 👈🏻"
-          ></textarea>
-        <div className="d-flex mt-2">
-          <input
-            type="file"
-            className="form-control me-1 pb-1"
-            accept="image/png, image/jpeg, video/mp4"
-            ref={inputRef}
-            onKeyPress={(e) => {
-              add(e);
-            }}
-          // style="background-color: rgb(253, 167, 181, 0.7)"
-                    />
-          <button id="btn-add"
-            className="btn btn-primary text-nowrap btn-sm"
-            type="button"
-            onClick={() => {
-            add(null);
-          }}>
-            입력
-          </button>
-        </div>
-      </form>
+    </form>
+{/*Alert*/}
       {isError && (
         <Alert
           message={"게시글을 입력하거나, 파일을 선택 해 주세요."}
@@ -167,25 +109,45 @@ const Feed = () => {
           }}
         />
       )}
-    <div id="content" className="mt-3">
-      
+
+    <div id="content" className="mt-3" >
+
+{/*하나의 feed Div*/}
+    {feedList.map((item, index) => (
+      <div className="card my-3" key={item.id}>
+        <img className="card-img-top" src={item.dataUrl}/>
+
+{/*text,시간,삭제버튼을 감싼 feed Div*/}
+
+    <div className="card-body border border-4"> {/*border로 div 임시표시*/}
+
+<p className="card-text mt-3">
+  
+      <span className="me-1">{item.content}</span><br></br><br></br>
+
+ {/*시간표시map*/}
+      <span
+      // style={{fontSize:0.75}}
+      className="fs-6 text-decoration-underline text-muted">
+        {getTimeString(item.createTime)}
+      </span>
+    
+      <a href="#"
+      className="link-secondary fs-6 float-end remove"
+      onClick={() => {
+                  del(item.id);
+                }}>삭제</a>
+</p>
+
+    </div>
+    </div>
+    
+    ))}
+
     </div>
 
-
-
- </>
- );
- };     
-export default Feed;
-
- {/*   
-<div id="content" className="mt-3" key={item.id}>
-       {feedContent.map((item, index) => (
-      {!item.isEdit && <span className="me-1">{item.content}</span>}
-   
-  
-  );
-);
+  </>
+  )
 };
-  </div>
-  */} 
+
+export default Feed;

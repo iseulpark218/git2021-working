@@ -13,9 +13,7 @@ const Navigation = () => {
       <li>
         <Link to="/feeds">Feeds</Link>
       </li>
-            <li>
-        <Link to="/feeds2">Feeds2</Link>
-      </li>
+
     </ul>
   );
 };

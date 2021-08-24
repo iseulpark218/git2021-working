@@ -6,7 +6,6 @@ import Home from "./components/Home";
 
 const Todo = lazy(() => import("./components/Todo"));
 const Feed = lazy(() => import("./components/Feed"));
-const Feed2 = lazy(() => import("./components/Feed2"));
 
 function App() {
   return (
@@ -27,9 +26,7 @@ function App() {
             <li>
               <Link to="/feeds">Feeds</Link>
             </li>
-            <li>
-              <Link to="/feeds2">Feeds2</Link>
-            </li>
+ 
           </ul>
         </nav>
         <main style={{ marginLeft: "200px", marginTop: "20px" }}>
@@ -39,7 +36,6 @@ function App() {
               <Route path="/" component={Home} exact />
               <Route path="/todo" component={Todo} />
               <Route path="/feeds" component={Feed} />
-              <Route path="/feeds2" component={Feed2} />
 
             </Switch>
           </Suspense>
