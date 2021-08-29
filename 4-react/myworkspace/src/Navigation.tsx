@@ -13,7 +13,12 @@ const Navigation = () => {
       <li>
         <Link to="/feeds">Feeds</Link>
       </li>
-
+      <li>
+        <Link to="/contact">Contact</Link>
+      </li>
+      <li>
+        <Link to="/TodoInlineEdit">TodoInlineEdit</Link>
+      </li>
     </ul>
   );
 };
