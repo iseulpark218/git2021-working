@@ -164,7 +164,7 @@ const Todo = () => {
 
   return (
     <>
-      <h2 className="text-center my-5">할 일 관리</h2>
+      <h2 className="text-center my-5">할 일 관리(수정-복습중)</h2>
       <form
         className="d-flex"
         ref={formRef}

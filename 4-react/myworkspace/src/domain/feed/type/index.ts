@@ -6,5 +6,7 @@ interface FeedState {
   createTime: number;
   modifyTime?: number;
   isEdit?: boolean;
+  username?: string | undefined;
+  image?: string | undefined;
 }
 export type { FeedState };

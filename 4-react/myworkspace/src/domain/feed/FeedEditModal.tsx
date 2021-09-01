@@ -2,26 +2,31 @@ import React, { useRef, useState } from "react";
 import { FeedState } from "./type";
 import produce from "immer";
 
-
 interface ModalProp {
   item: FeedState;
-  onClose: () => void; // 콜백함수
-  onSave: (editItem: FeedState) => void; // 콜백함수
+  onClose: () => void;
+  onSave: (editItem: FeedState) => void;
 }
 
+const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
+    const [feedList, setFeedList] = useState<FeedState[]>([]);
+    const [newImageUrl, setNewImageUrl] = useState(null);
+  
+  const inputSaveRef = useRef<HTMLInputElement>(null);
+
+// ------------------------------
 
 // onChange={handleChangeFile}
 //1 const onChange = (e : React.ChangeEvent<HTMLInputElement>) => {
 //1  const {}
 //1 }
 
-const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
-  const fileRef = useRef<HTMLInputElement>(null);
-
   const save = () => {
     const feed: FeedState = {
       id: item.id,
-      content: fileRef.current?.value, // 수정된 입력값
+      content: inputSaveRef.current?.value,
+      //dataUrl : dataUrl,
+      //fileType: fileType,
       createTime: item.createTime,
     };
 
@@ -47,57 +52,41 @@ const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
             ></button>
       </div>
 
-      {/*
-            <div className="d-flex mt-1" > 
-        <input
-          type="file"
-          className="form-control me-1 pb-1"
-          accept="image/png, image/jpeg, video/mp4"
-          ref={fileRef} 
-        />
-        <button
-          className="btn btn-primary text-nowrap btn-sm"
-          type="button"
-          onClick={() => {
-            add(null);
-          }}
-        >
-          입력
-        </button>
-      </div>
-      */}
-
       <div className="modal-body">
          <div className="d-flex mb-2">
         <input
           type="file"
           className="form-control me-1 pb-1"
           accept="image/png, image/jpeg, video/mp4"
-          ref={fileRef}
+          ref={inputSaveRef}
 
         />
         <button
           className="btn btn-primary text-nowrap btn-sm"
-          type="button"
-          /*
-          onClick={() => {
-            add();
-          }}
-        */
+          type="button" 
         >
-          입력
+          미리보기
         </button>
-</div>
+      </div>
+      <div
+      className="mb-3"
+      style={{backgroundColor: "#efefef", width:"auto", height:"auto"}}
+      ref={inputSaveRef}
+      defaultValue={item.image}>
+        <p>미리보기 파일자리👀</p>
+        <img></img>
+      </div>
 
-
+        <div className="d-flex">
         <input
           type="text"
-/*defaultValue={item.content}*/
           className="w-100"
-          ref={fileRef}
+          ref={inputSaveRef}
           defaultValue={item.content}
-        // placeholder="수정 내용을 입력하세요 😉"
+          placeholder="수정 내용을 입력하고 저장을 누르세요 😉"
             />
+
+        </div>
       </div>
       <div className="modal-footer">
         <button

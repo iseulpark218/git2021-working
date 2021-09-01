@@ -1,12 +1,13 @@
-// 내꺼-파일첨부하는거
 import { useRef, useState } from "react";
 import { isTemplateExpression } from "typescript";
-import Alert from "../../components/base/Alert";
 import produce from "immer";
 
-import FeedEditModal from "./FeedEditModal";
 import { FeedState } from "./type";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
+import FeedEditModal from "./FeedEditModal";
+import style from "./Feed.module.scss";
 
 const getTimeString = (unixtime : number) => {
    const dateTime = new Date(unixtime);
@@ -15,32 +16,22 @@ const getTimeString = (unixtime : number) => {
 
 const Feed = () => {
 
-  const [feedList, setFeedList] = useState<FeedState[]>([
-     { id: 3, dataUrl:"http://tourimage.interpark.com/BBS/Tour/FckUpload/201404/6353433153042271822.jpg", content: "memo3", createTime: new Date().getTime() },
-     { id: 2, dataUrl:"http://tourimage.interpark.com/BBS/Tour/FckUpload/201404/6353433155487351312.jpg", content: "memo2", createTime: new Date().getTime() },
-    { id: 1, dataUrl:"http://tourimage.interpark.com/BBS/Tour/FckUpload/201404/6353433155488913823.jpg", content: "memo1", createTime: new Date().getTime() },
-    
-  ]);
+  const profile = useSelector((state: RootState) => state.profile);
+  const [feedList, setFeedList] = useState<FeedState[]>([]);
+  const [isEdit, setIsEdit] = useState(false);
+  const [isError, setIsError] = useState(false);
 
+  const formRef = useRef<HTMLFormElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
-const [isEdit, setIsEdit] = useState(false);
+  const add = (e: React.KeyboardEvent<HTMLInputElement> | null) => {
 
-const [isError, setIsError] = useState(false);
-
-const formRef = useRef<HTMLFormElement>(null);
-const textAreaRef = useRef<HTMLTextAreaElement>(null);
-const fileRef = useRef<HTMLInputElement>(null);
-
-const add = (e: React.KeyboardEvent<HTMLInputElement> | null) => {
-    if (e) {
-      if (e.code !== "Enter") return;}
-
-
-if(fileRef.current?.files?.length){
+  if(fileRef.current?.files?.length){
   const file = fileRef.current?.files[0];
   const reader = new FileReader();
+  
   reader.readAsDataURL(file);
-
   reader.onload = () => {
         post(reader.result?.toString(), file.type);
       };
@@ -56,6 +47,8 @@ if(fileRef.current?.files?.length){
     content : textAreaRef.current?.value,
     dataUrl : dataUrl,
     fileType: fileType,
+    username: profile.username,
+    image: profile.image,
     createTime: new Date().getTime(),
     };
 
@@ -69,17 +62,19 @@ if(fileRef.current?.files?.length){
     setFeedList(feedList.filter((item) => item.id !== id));
   };
 
-const editItem = useRef<FeedState>({ id: 0, content: "", createTime: 0 });
+const editItem = useRef<FeedState>({
+  id: 0, 
+  content: "", 
+  username: profile.username,
+  image: profile.image,
+  createTime: 0 });
 
 const edit = (item: FeedState) => {
-    // 수정할 todo객체
     editItem.current = item;
-    // 모달 팝업을 보여주기
     setIsEdit(true);
   };
 
   const save = (editItem: FeedState) => {
-    console.log(editItem);
     setFeedList(
       produce((state) => {
         const item = state.find((item) => item.id === editItem.id);
@@ -89,18 +84,17 @@ const edit = (item: FeedState) => {
       })
     );
 
-    // 모달창 닫기
     setIsEdit(false);
   };
 
 
   return (
-    <div style={{width:"40vw"}}>
+    <div style={{width:"40vw"}} className="mx-auto">
 
       <h1 className="text-center mt-4">Feed</h1>
        {isEdit && (
         <FeedEditModal
-          item={editItem.current}
+        item={editItem.current}
           onClose={() => {
             setIsEdit(false);
           }}
@@ -141,27 +135,30 @@ const edit = (item: FeedState) => {
     </form>
 
     <div id="content" className="mt-3" >
-
     {feedList.map((item) => (
+      
       <div className="card my-3" key={item.id}>
-        {item.fileType &&
-              (item.fileType?.includes("image") ? (
+      <div className="d-flex card-header p-1">
+        <img
+          src={item.image}
+          className={`${style.thumb} m-2`}
+          ></img>
+        <span className="mt-2">{item.username}</span>
+      </div>
+              {item.fileType && (item.fileType?.includes("image") ? (
                 <img
                   src={item.dataUrl}
                   className="card-img-top"
                   alt={item.content}
-                />
-              ) : (
+                /> ): (
                 <video className="card-img-top" controls src={item.dataUrl} />
               ))}
-    <div className="card-body"> {/*border로 div 임시표시*/}
+    <div className="card-body">
 
 <p className="card-text mt-3">
   
       <span className="me-1">{item.content}</span><br></br><br></br>
-
       <span
-      // style={{fontSize:0.75}}
       className="fs-6 text-decoration-underline text-muted">
         {getTimeString(item.createTime)}
       </span>

@@ -51,7 +51,7 @@ setContactTable(
  
   return (
         <div style={{width:"70vw"}}>
-     <h2 className="text-center my-4">연락처 관리😃</h2>
+     <h2 className="text-center my-4">연락처 관리😃 (inline수정 작업중)</h2>
      <form
       id="form-input"
       className="form-control d-flex border border-0"
@@ -91,8 +91,8 @@ setContactTable(
           <th>이름</th>
           <th>전화번호</th>
           <th>이메일</th>
-          <th>수정</th>
-          <th>삭제</th>
+          <th>수정/저장</th>
+          <th>삭제/취소</th>
         </tr>
       </thead>
 
