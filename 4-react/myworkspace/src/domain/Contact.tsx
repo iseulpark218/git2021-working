@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import produce from "immer";
+import { isTemplateTail } from "typescript";
 
 interface ContactState {
   id: number;
@@ -9,7 +11,9 @@ interface ContactState {
 }
 
 const Contact = () => {
-  const [ContactTable, setContactTable] = useState<ContactState[]>([]);
+  const [ContactTable, setContactTable] = useState<ContactState[]>([
+    {id:1, txtName:"ex)박이슬",txtContact:"010-3191-6946",txtEmail:"angela@gmail.com"}
+  ]);
 
 const inputRef = useRef<HTMLInputElement>(null);
 const inputRef1 = useRef<HTMLInputElement>(null);
@@ -31,14 +35,12 @@ const add = () => {
     formRef.current?.reset(); 
   }
 
-  const del = (id:number, index:number ) => {
+  const del = (id:number, index?:number ) => {
 
     setContactTable(ContactTable.filter((item) => item.id !== id));
 }
 
   const edit = (id:number, mod:boolean ) => {
-    const input = tableRef.current?.querySelectorAll("input")[0];
-
 setContactTable(
        ContactTable.map((item) => {
          if (item.id === id) {
@@ -48,31 +50,66 @@ setContactTable(
        })
      );
 }
- 
+  
+  const save = (id:number, index?:number) => {
+    const input = tableRef.current?.querySelectorAll("input")[0];
+//    const inputRef1 = tableRef.current?.querySelectorAll("input")[0];
+
+     setContactTable(
+       ContactTable.map((item) => {
+         if (item.id === id) {
+          item.txtName = inputRef1.current?.value;
+          item.txtContact = inputRef2.current?.value;
+          item.txtEmail = inputRef3.current?.value;
+          item.isEdit = false;
+         }
+
+         return item;
+       })
+     );
+
+     {/*immer사용
+         setContactTable(
+       produce((state) => {
+         const item = state.find((item) => item.id === id);
+         if (item) {
+          item.txtName = inputRef1.current?.value;
+          item.txtContact = inputRef2.current?.value;
+          item.txtEmail = inputRef3.current?.value;
+          item.isEdit = false;
+         }
+       })
+     )
+    
+    */}
+
+    };
+
+
   return (
-        <div style={{width:"70vw"}}>
+        <div style={{width:"70vw"}} className="mx-auto">
      <h2 className="text-center my-4">연락처 관리😃 (inline수정 작업중)</h2>
      <form
       id="form-input"
-      className="form-control d-flex border border-0"
+      className="form-control d-flex border border-0 mx-auto"
       ref={formRef}>
       <input
         type="text"
-        className="d-flex me-1"
+        className="me-1"
         placeholder="이름"
-        style={{width: '140px'}}
+        //style={{width: '140px'}}
           ref={inputRef1}/>
       <input
         type="tel"
-        className="d-flex me-1"
+        className="me-1"
         placeholder="전화번호"
-        style={{width: '140px'}}
+        //style={{width: '140px'}}
           ref={inputRef2}/>
       <input
         type="email"
-        className="d-flex me-2"
+        className="me-2"
         placeholder="이메일"
-        style={{width: '140px'}}
+        //style={{width: '140px'}}
           ref={inputRef3}/>
       <button
         type="button"
@@ -100,23 +137,47 @@ setContactTable(
 {ContactTable.map((item, index) => (
  <tr key={item.id} className="display-flex">
           <td className="text-center">👨🏻‍💼</td>
-          <td>{item.txtName}</td>
-          <td>{item.txtContact}</td>
-          <td>{item.txtEmail}</td>
-          <td className="text-center">
+           {!item.isEdit && (<td>{item.txtName}</td>)}
+            {item.isEdit && (<td>
+              <input type="text" defaultValue={item.txtName} /></td>)}
+          {!item.isEdit && (<td>{item.txtContact}</td>)}
+            {item.isEdit && (<td>
+              <input type="text" defaultValue={item.txtContact} /></td>)}       
+          {!item.isEdit && (<td>{item.txtEmail}</td>)}
+            {item.isEdit && (<td>
+              <input type="text" defaultValue={item.txtEmail} /></td>)}          
+          
+          {!item.isEdit && (<td className="text-center">
             <button className="p-1"
           style={{margin: 'auto'}}
           onClick={() => {
                   edit(item.id, true);
                 }}>수정</button>
-          </td>
-          <td className="text-center">
+          </td>)}
+          {!item.isEdit && (<td className="text-center">
             <button className="p-1"
           style={{margin: 'auto'}}
           onClick={() => {
                   del(item.id, index);
                 }}>삭제</button>
-          </td>
+          </td>)}
+          {item.isEdit && (<td className="text-center">
+            <button className="p-1"
+          style={{margin: 'auto'}}
+          onClick={() => {
+                  save(item.id, index);
+                }}>저장</button>
+          </td>)}
+          {item.isEdit && (<td className="text-center">
+            <button className="p-1"
+          style={{margin: 'auto'}}
+          onClick={() => {
+                  edit(item.id, false);
+                }}>취소</button>
+          </td>)}
+
+
+
         </tr>
 ))}
       </tbody>
