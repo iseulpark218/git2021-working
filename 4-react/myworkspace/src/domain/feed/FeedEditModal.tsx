@@ -11,15 +11,25 @@ interface ModalProp {
 const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
     const [feedList, setFeedList] = useState<FeedState[]>([]);
     const [newImageUrl, setNewImageUrl] = useState(null);
-  
+   const [imgBase64, setImgBase64] = useState(""); // 파일 base64
+  const [imgFile, setImgFile] = useState(null);	//파일	
+    
+
   const inputSaveRef = useRef<HTMLInputElement>(null);
 
 // ------------------------------
 
-// onChange={handleChangeFile}
-//1 const onChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-//1  const {}
-//1 }
+const handleChangeFile = () => {
+  console.log(1);
+
+  const reader = new FileReader();
+const base64 = reader.result;
+if(base64){
+  setImgBase64(base64.toString());
+}
+}
+
+
 
   const save = () => {
     const feed: FeedState = {
@@ -27,7 +37,7 @@ const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
       content: inputSaveRef.current?.value,
       //dataUrl : dataUrl,
       //fileType: fileType,
-      createTime: item.createTime,
+      createTime: new Date().getTime(),
     };
 
     onSave(feed);
@@ -59,15 +69,28 @@ const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
           className="form-control me-1 pb-1"
           accept="image/png, image/jpeg, video/mp4"
           ref={inputSaveRef}
-
+          onChange={handleChangeFile}
         />
         <button
           className="btn btn-primary text-nowrap btn-sm"
-          type="button" 
+          type="button"
+          onClick={() => console.log(2)}
         >
           미리보기
         </button>
       </div>
+
+      <div>
+          {item.fileType && (item.fileType?.includes("image") ? (
+                <img
+                  src={item.dataUrl}
+                  className="card-img-top mb-3"
+                  //alt={item.content}
+                /> ): (
+                <video className="card-img-top" controls src={item.dataUrl} />
+              ))}
+      </div>
+{/*
       <div
       className="mb-3"
       style={{backgroundColor: "#efefef", width:"auto", height:"auto"}}
@@ -76,7 +99,7 @@ const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
         <p>미리보기 파일자리👀</p>
         <img></img>
       </div>
-
+*/}
         <div className="d-flex">
         <input
           type="text"

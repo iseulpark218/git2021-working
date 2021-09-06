@@ -7,6 +7,16 @@
 /* ------------------------------------------------------ */
 // bootstrap 변수를 수정해야한다면 이 위치에(bootstrap variables 위에)
 // https://coolors.co/306b34-1c5253-f3ffc6-c3eb78-b6174b
+
+h2,
+h3 {
+  font-family: "Helvetica Nene", Helvetica, Arial, sans-serif;
+}
+
+ul > li {
+  font-family: "Helvetica Nene", Helvetica, Arial, sans-serif;
+}
+
 $primary: #2c3e50;
 $secondary: #95a5a6;
 $success: #18bc9c;
@@ -42,9 +52,14 @@ $border-radius-sm: 0;
 @import "~bootstrap/scss/modal";
 @import "~bootstrap/scss/dropdown";
 @import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/root";
 
 /* ---------------------------------------------- */
 @import "~bootstrap/scss/helpers";
 
 // 5. Optionally include utilities API last to generate classes based on the Sass map in `_utililies.scss`
 @import "~bootstrap/scss/utilities/api";
+
+// Icon
+@import "~bootstrap-icons/font/bootstrap-icons.css";

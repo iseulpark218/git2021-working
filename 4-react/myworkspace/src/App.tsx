@@ -1,4 +1,3 @@
-
 // https://react.vlpt.us/styling/02-css-module.html
 // css module
 // 파일명.module.css
@@ -7,14 +6,14 @@
 import "./App.scss";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Suspense, lazy } from "react";
-import { Provider } from "react-redux"; //react 앱에 redux store를 제공해줌
-import { store} from "./store"; //redux store변수
+import { Provider } from "react-redux"; // react 앱에 redux store를 제공해줌
+import { store } from "./store"; // redux store
 
 import Home from "./domain/Home";
 import Profile from "./domain/profile/Profile";
 
 // SPA(Single Page Application)
-// : 페이지 파일이 1개, index.html+
+// : 페이지 파일이 1개, index.html
 // : 특정 영역(Switch)에 컴포넌트(js)를 로딩함
 // : 애플리케이션이 컴파일될 때 import한 컴포넌트가 같이 컴파일됨
 //   -> 컴파일됐을 때 파일크기가 커짐, 초기 로딩할 때 시간 걸림
@@ -23,64 +22,98 @@ import Profile from "./domain/profile/Profile";
 // 컴포넌트를 방문하는 시점에 로딩함
 const Todo = lazy(() => import("./domain/todo/Todo"));
 const Feed = lazy(() => import("./domain/feed/Feed"));
-const Contact = lazy(() => import("./domain/Contact"));
+const Photo = lazy(() => import("./domain/photo/Photo"));
+const PhotoCreate = lazy(() => import("./domain/photo/PhotoCreate"));
+const PhotoDetail = lazy(() => import("./domain/photo/PhotoDetail"));
+const PhotoEdit = lazy(() => import("./domain/photo/PhotoEdit"));
+
+const Contact = lazy(() => import("./domain/contact/Contact"));
+const ContactCreate = lazy(() => import("./domain/contact/ContactCreate"));
+const ContactDetail = lazy(() => import("./domain/contact/ContactDetail"));
+const ContactEdit = lazy(() => import("./domain/contact/ContactEdit"));
+
+   //나보려고 추가
+const ContactInlineEdit = lazy(() => import("./domain/ContactInlineEdit"));
 const TodoInlineEdit = lazy(() => import("./domain/TodoInlineEdit"));
-const Photo = lazy(() => import("./domain/Photo"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
   return (
     <Provider store={store}>
-    <Router>
-      {/* main container */}
-      <div className="mx-auto">
-        <header className="app-bar d-flex justify-content-end bg-primary shadow">
-          <Profile />
-        </header>
-        <nav className="drawer-menu position-fixed bg-light shadow-sm">
-          <h3 className="ms-2">MY WORKSPACE</h3>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/todo">Todo</Link>
-            </li>
-            <li>
-              <Link to="/feeds">Feeds</Link>
-            </li>
+      <Router>
+        {/* main container */}
+        <div className="mx-auto">
+          <header className="app-bar position-fixed d-flex justify-content-end bg-danger bg-opacity-50 shadow">
+            <Profile />
+          </header>
+          <nav className="drawer-menu position-fixed bg-light shadow-sm">
+            <h3 className="m-2">MY WORKSPACE</h3>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+
+              <li>
+                <Link to="/feeds">Feeds</Link>
+              </li>
+
             <li>
               <Link to="/contact">Contact</Link>
             </li>
+            -------------------
+              {/*//나보려고 추가*/}
+            <li>
+              <Link to="/ContactInlineEdit">ContactInlineEdit</Link>
+            </li>
+
+              <li>
+                <Link to="/todo">Todo</Link>
+              </li>
+            {/*----쌤꺼참고용----
+
+              <li>
+                <Link to="/photos">Photos</Link>
+              </li>
             <li>
               <Link to="/TodoInlineEdit">TodoInlineEdit</Link>
             </li>
-            <li>
-              <Link to="/photos">Photos</Link>
-            </li>
+              */}
 
-          </ul>
-        </nav>
-        <main className="content-container">
-          {/* Suspense 컴포넌트로 로딩중에 보여줄 화면을 처리하는 것 */}
-          {/* fallback={로딩중에 보여줄 컴포넌트} */}
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              {/* Switch 영역에 컴포넌트가 로딩됨 */}
+            </ul>
+          </nav>
+          <main className="content-container">
+            {/* Suspense 컴포넌트로 로딩중에 보여줄 화면을 처리하는 것 */}
+            {/* fallback={로딩중에 보여줄 컴포넌트} */}
+            <Suspense fallback={<div>Loading...</div>}>
+              <Switch>
+                {/* Switch 영역에 컴포넌트가 로딩됨 */}
 
-              {/* 해당 경로에 대해서 로딩할 컴포넌트 목록을 작성 */}
-              <Route path="/" component={Home} exact />
-              <Route path="/todo" component={Todo} />
-              <Route path="/feeds" component={Feed} />
-              <Route path="/contact" component={Contact} />
+                {/* 해당 경로에 대해서 로딩할 컴포넌트 목록을 작성 */}
+                {/* exact: 속성은 true/false, 경로가 정확히 일치할때만 */}
+                <Route path="/" component={Home} exact />
+                <Route path="/todo" component={Todo} />
+                <Route path="/feeds" component={Feed} />
+
+
+                <Route path="/photos" component={Photo} exact />
+                <Route path="/photos/create" component={PhotoCreate} />
+                <Route path="/photos/detail/:id" component={PhotoDetail}/>
+                <Route path="/photos/edit/:id" component={PhotoEdit} />
+                {/* id라는 매개변수를 url 경로에 넘김, path parameter */}
+
+              <Route path="/contact" component={Contact} exact/>
+              <Route path="/contact/create" component={ContactCreate} />
+              <Route path="/contact/detail/:id" component={ContactDetail}/>
+              <Route path="/contact/edit/:id" component={ContactEdit} />
+
+                {/*나보려고추가*/}
+              <Route path="/ContactInlineEdit" component={ContactInlineEdit} />
               <Route path="/TodoInlineEdit" component={TodoInlineEdit} />
-              <Route path="/photos" component={Photo} />
-
-            </Switch>
-          </Suspense>
-        </main>
-      </div>
-    </Router>
+              </Switch>
+            </Suspense>
+          </main>
+        </div>
+      </Router>
     </Provider>
   );
 }

@@ -19,6 +19,12 @@ const Navigation = () => {
       <li>
         <Link to="/TodoInlineEdit">TodoInlineEdit</Link>
       </li>
+      <li>
+        <Link to="/photos">Photos</Link>
+      </li>
+      <li>
+        <Link to="/ContactInlineEdit">ContactInlineEdit</Link>
+      </li>
     </ul>
   );
 };
