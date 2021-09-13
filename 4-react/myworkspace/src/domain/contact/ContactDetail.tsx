@@ -10,8 +10,6 @@ import { removeContact } from "./contactSlice";
 const ContactDetail = () => {
   const { id } = useParams<{ id : string } >();
 
-  //create->const contactData = useSelector((state: RootState) => state.contact.data);
-
   const ContactItem = useSelector((state: RootState) =>
     state.contact.data.find((item) => item.id === +id)
   );
@@ -54,15 +52,7 @@ const ContactDetail = () => {
         <tr>
             <th>메모</th>
      <td>{ContactItem.memo}</td>
-        {/*
-        <td
-                dangerouslySetInnerHTML={{
-                  __html: contactItem.memo
-                    ? contactItem.memo.replaceAll("\n", "<br>")
-                    : "",
-                }}
-              ></td>        
-        */}
+
         </tr>
 
       </tbody>

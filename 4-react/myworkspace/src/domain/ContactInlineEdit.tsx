@@ -52,11 +52,12 @@ setContactTable(
          return item;
        })
      );
+// 수정하고나서 추가 시 내용나오게... 수정은 되는데...
+// 여기에 한줄 써주면 될거같은데..하..몇일째냐..
 }
   
   const save = (id:number, index?:number) => {
     const input = tableRef.current?.querySelectorAll("input")[0];
-//    const inputRef1 = tableRef.current?.querySelectorAll("input")[0];
 
      setContactTable(
        ContactTable.map((item) => {
@@ -77,7 +78,6 @@ setContactTable(
   return (
         <div style={{width:"70vw"}} className="mx-auto">
      <h2 className="text-center mx-5 my-4">연락처 관리😋</h2>
-     <h4 className="text-center mx-5 my-4">수정+저장ok-이후추가안됨(수정중)</h4>
      
      <form
       id="form-input"

@@ -16,32 +16,7 @@ interface contactState {
 }
 
 const initialState: contactState = {
-  data: [
-    {
-      id:3,
-      select:"👩🏻‍💼",
-      txtName:"박이슬3",
-      txtContact:"333-3333-3333",
-      txtEmail:"angela3@gmail.com",
-      createTime: new Date().getTime(),
-    },
-    {
-      id:2,
-      select:"👩🏻‍💼",
-      txtName:"박이슬2",
-      txtContact:"222-2222-2222",
-      txtEmail:"angela2@gmail.com",
-      createTime: new Date().getTime(),
-    },
-    {
-      id:1,
-      select:"👩🏻‍💼",
-      txtName:"박이슬1",
-      txtContact:"111-1111-1111",
-      txtEmail:"angela1@gmail.com",
-      createTime: new Date().getTime(),
-    }
-  ],
+  data: [],
   isFetched: false,
 };
 

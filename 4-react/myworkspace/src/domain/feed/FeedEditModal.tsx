@@ -11,8 +11,8 @@ interface ModalProp {
 const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
     const [feedList, setFeedList] = useState<FeedState[]>([]);
     const [newImageUrl, setNewImageUrl] = useState(null);
-   const [imgBase64, setImgBase64] = useState(""); // 파일 base64
-  const [imgFile, setImgFile] = useState(null);	//파일	
+    const [imgBase64, setImgBase64] = useState(""); // 파일 base64
+    const [imgFile, setImgFile] = useState(null);	//파일	
     
 
   const inputSaveRef = useRef<HTMLInputElement>(null);
@@ -28,8 +28,6 @@ if(base64){
   setImgBase64(base64.toString());
 }
 }
-
-
 
   const save = () => {
     const feed: FeedState = {

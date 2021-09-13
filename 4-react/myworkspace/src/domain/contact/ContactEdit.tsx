@@ -8,13 +8,10 @@ import { modifyContact } from "./contactSlice";
 
 const ContactEdit = () => {
 
-//    const inputRef = useRef<HTMLInputElement>(null);
     const selectRef = useRef<HTMLSelectElement>(null);
     const inputRef1 = useRef<HTMLInputElement>(null);
     const inputRef2 = useRef<HTMLInputElement>(null);
     const inputRef3 = useRef<HTMLInputElement>(null);
-//    const formRef = useRef<HTMLFormElement>(null);
-//    const tableRef = useRef<HTMLTableElement>(null);
     const memo = useRef<HTMLTextAreaElement>(null);
 
   const { id } = useParams<{ id : string } >();
