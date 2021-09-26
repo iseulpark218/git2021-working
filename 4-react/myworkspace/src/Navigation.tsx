@@ -14,7 +14,7 @@ const Navigation = () => {
         <Link to="/feeds">Feeds</Link>
       </li>
       <li>
-        <Link to="/contact">Contact</Link>
+        <Link to="/contacts">Contact</Link>
       </li>
       <li>
         <Link to="/TodoInlineEdit">TodoInlineEdit</Link>
@@ -23,7 +23,7 @@ const Navigation = () => {
         <Link to="/photos">Photos</Link>
       </li>
       <li>
-        <Link to="/ContactInlineEdit">ContactInlineEdit</Link>
+        <Link to="/contactinline">ContactInlineEdit</Link>
       </li>
     </ul>
   );

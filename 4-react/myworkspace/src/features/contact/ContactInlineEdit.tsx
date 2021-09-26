@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import produce from "immer";
-import { isTemplateTail } from "typescript";
+import api from "./contactApi";
 
 interface ContactItemState {
   id: number;
@@ -10,14 +9,23 @@ interface ContactItemState {
   txtEmail?: string | undefined;
   isEdit?: boolean;
 }
-
+/*
+interface ContactItemResponse {
+  id: number;
+  select: string | undefined;
+  txtName: string | undefined;
+  txtContact?: number | string ;
+  txtEmail?: string | undefined;
+  isEdit?: boolean;
+}
+*/
 
 const ContactInlineEdit = () => {
   const [ContactTable, setContactTable] = useState<ContactItemState[]>([
     //{id:1, txtName:"ex)박이슬",txtContact:"010-3191-6946",txtEmail:"angela@gmail.com"}
   ]);
 
-const inputRef = useRef<HTMLInputElement>(null);
+//const inputRef = useRef<HTMLInputElement>(null);
 const inputRef1 = useRef<HTMLInputElement>(null);
 const inputRef2 = useRef<HTMLInputElement>(null);
 const inputRef3 = useRef<HTMLInputElement>(null);
@@ -25,19 +33,26 @@ const formRef = useRef<HTMLFormElement>(null);
 const tableRef = useRef<HTMLTableElement>(null);
 const selectRef = useRef<HTMLSelectElement>(null);
 
+const fetchData = async () => {
+//  const url = `${process.env.REACT_APP_API_BASE}/contacts`;
+  const res = await api.fetch();
+
+const contacts = res.data.map((item) => ({
+  id: item.id,
+  txtName: item.txtName,
+  txtContact: item.txtContact,
+  txtEmail: item.txtEmail,
+})) as ContactItemState[];
+
+setContactTable(contacts);
+  console.log("--2. await axios.get completed--");
+
+};
 
 useEffect(() => {
   console.log("--1. mounted--");
-
-  fetch("http://localhost:8080/contacts")
-  .then((res) => res.json())
-  .then((data) => {
-    const contacts = data as ContactItemState[];
-    console.log("--2. fetch completed--");
-    console.log(data);
-    setContactTable(data);
-  });
-     console.log("--3. completed--");
+fetchData();
+  console.log("--3. completed--");
 }, []);
 
 
@@ -72,9 +87,10 @@ setContactTable(
 // 수정하고나서 추가 시 내용나오게... 수정은 되는데...
 // 여기에 한줄 써주면 될거같은데..하..몇일째냐..
 }
+
   
   const save = (id:number, index?:number) => {
-    const input = tableRef.current?.querySelectorAll("input")[0];
+//    const inputRef1 = tableRef.current?.querySelectorAll("input")[0];
 
      setContactTable(
        ContactTable.map((item) => {
@@ -89,7 +105,23 @@ setContactTable(
          return item;
        })
      );
+     
     };
+
+    //-----------------------
+/*
+  const empty = (id:number, mod:boolean ) => {
+setContactTable(
+       ContactTable.map((item) => {
+         if (tbody.rows.length > 0) {
+           하다말음
+        }
+         return item;
+       })
+     );
+}
+*/
+//-----------------------
 
 
   return (
@@ -97,7 +129,7 @@ setContactTable(
      <h2 className="text-center mx-5 my-4">연락처 관리😋</h2>
      
      <form
-      id="form-input"
+//      id="form-input"
       className="form-control d-flex border border-0 mx-auto"
       ref={formRef}>
               {/*method="POST"*/}
@@ -195,7 +227,14 @@ setContactTable(
         </tr>
 ))}
       </tbody>
-    </table>  
+{/* 하다 말음
+      <tfoot>
+        <tr>
+        <td className="text-center" colSpan={6}>데이터가 없습니다.</td>
+        </tr>
+      </tfoot>
+      */}
+    </table>
     </div>
   );
 };

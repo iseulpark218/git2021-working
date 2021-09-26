@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;hashMap_example.Account.java&apos; to &apos;Account20.java&apos;&#x0D;&#x0A;- Original project: &apos;hashMap_example&apos;&#x0D;&#x0A;- Original element: &apos;hashMap_example.Account.java&apos;&#x0D;&#x0A;- Renamed element: &apos;hashMap_example.Account20.java&apos;" description="Rename compilation unit &apos;Account.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;hashMap_example{Account.java" name="Account20.java" references="false" stamp="1631242074202" version="1.0"/>
+</session>

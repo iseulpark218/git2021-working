@@ -1,0 +1,15 @@
+package todo;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.builder;
+
+@Data
+@builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Todo {
+	private String memo;
+	private long createdTime;
+}

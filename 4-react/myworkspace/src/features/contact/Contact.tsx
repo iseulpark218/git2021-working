@@ -1,6 +1,8 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { RootState } from "../../store";
+import { AppDispatch, RootState } from "../../store";
+import { requestFetchContacts } from "./contactSaga";
 
 const getTimeString = (unixtime : number) => {
    const dateTime = new Date(unixtime);
@@ -10,8 +12,17 @@ const getTimeString = (unixtime : number) => {
 // 하루 안지나면 시간만 표시하게
 
 const Contact = () => {
+
   const contact = useSelector((state: RootState) => state.contact);
   const history = useHistory();
+  const dispatch = useDispatch<AppDispatch>();
+
+    useEffect(() => {
+   // console.log(dispatch);
+    if (!contact.isFetched) {
+      dispatch(requestFetchContacts());
+   }
+  }, [dispatch, contact.isFetched]);
 
   return (
         <div style={{width:"70vw"}} className="mx-auto">
@@ -22,7 +33,7 @@ const Contact = () => {
             type="button"
             className="btn btn-dark text-nowrap btn-sm p-2"
             onClick={() => {
-              history.push("/contact/create");
+            history.push("/contacts/create");
             }}
           >
             <i className="bi bi-person-plus-fill me-2"></i>
@@ -48,7 +59,7 @@ const Contact = () => {
             <td 
             style={{ cursor: "pointer" }}
              onClick={()=> {
-              history.push(`/contact/detail/${item.id}`);
+              history.push(`/contacts/detail/${item.id}`);
             }}
             >{item.txtName}</td>
              <td>{item.txtContact}</td>       

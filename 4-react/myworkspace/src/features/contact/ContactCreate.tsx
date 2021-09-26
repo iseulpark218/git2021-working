@@ -1,11 +1,15 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
-import { addContact, ContactItem } from "./contactSlice";
+import { ContactItem } from "./contactSlice";
+import { addContact } from "./contactSlice";
+
+import { requestAddContact } from "./contactSaga";
 
 const ContactCreate = () => {
     const selectRef = useRef<HTMLSelectElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const inputRef1 = useRef<HTMLInputElement>(null);
     const inputRef2 = useRef<HTMLInputElement>(null);
     const inputRef3 = useRef<HTMLInputElement>(null);
@@ -14,8 +18,18 @@ const ContactCreate = () => {
 
   const contactData = useSelector((state: RootState) => state.contact.data);
     
+  const isAddCompleted = useSelector(
+    (state: RootState) => state.contact.isAddCompleted
+  );
+
   const dispatch = useDispatch<AppDispatch>();
   const history = useHistory();
+
+useEffect(() => {
+    console.log("--isAddCompleted 변경: " + isAddCompleted);
+    // true이면 화면이동
+    isAddCompleted && history.push("/contacts/create");
+  }, [isAddCompleted, history, dispatch]);
 
   const handleSaveClick = () => {
 
@@ -29,10 +43,15 @@ const ContactCreate = () => {
       createTime: new Date().getTime(),
 
     };
-
-        dispatch(addContact(item));
-        history.push("/contact");
-
+   //     dispatch(requestAddContact(item));
+dispatch(addContact(item));
+        history.push("/contacts");
+       
+/* 윗줄 추가하고 잠깐 임시로
+// ----- 기존 redux action -----
+dispatch(addContact(item));
+        history.push("/contacts");
+*/
     // formRef.current?.reset(); 
   }
 
@@ -100,7 +119,7 @@ return (
         <button
           className="btn btn-light border border-2 btn-sm p-2 float-start"
           onClick={() => {
-            history.push("/contact");
+            history.push("/contacts");
           }}
         >
           <i className="bi bi-list me-1"></i>

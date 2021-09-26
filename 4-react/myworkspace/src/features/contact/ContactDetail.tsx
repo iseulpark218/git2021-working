@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 
-import { useRef } from "react";
+//import { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
@@ -20,7 +20,7 @@ const ContactDetail = () => {
 
   const handleAddClick = () => {
         dispatch(removeContact(+id));
-        history.push("/contact");
+        history.push("/contacts");
   };
 
   return (
@@ -64,7 +64,7 @@ const ContactDetail = () => {
         <button
           className="btn btn-light border border-2 btn-sm p-2 float-start"
           onClick={() => {
-            history.push("/contact");
+            history.push("/contacts");
           }}
         >
           <i className="bi bi-list me-1"></i>
@@ -83,7 +83,7 @@ const ContactDetail = () => {
         <button
           className="btn btn-warning btn-sm p-2 float-end me-1"
             onClick={() => {
-              history.push(`/contact/edit/${id}`);
+              history.push(`/contacts/edit/${id}`);
             }}
        >
          <i className="bi bi-pencil-square me-1"></i>

@@ -1,0 +1,10 @@
+package com.git.controller.todo;
+
+import lombok.Data;
+
+@Data
+public class Todo {
+	private String memo;
+	private String username;
+	private long createTime;
+}

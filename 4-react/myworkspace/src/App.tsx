@@ -9,8 +9,10 @@ import { Suspense, lazy } from "react";
 import { Provider } from "react-redux"; // react 앱에 redux store를 제공해줌
 import { store } from "./store"; // redux store
 
-import Home from "./domain/Home";
-import Profile from "./domain/profile/Profile";
+import Home from "./features/Home";
+import Profile from "./features/profile/Profile";
+import Progress from "./components/progress/Progress";
+import AlertStack from "./components/alert/AlertStack";
 
 // SPA(Single Page Application)
 // : 페이지 파일이 1개, index.html
@@ -20,21 +22,23 @@ import Profile from "./domain/profile/Profile";
 
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
-const Todo = lazy(() => import("./domain/todo/Todo"));
-const Feed = lazy(() => import("./domain/feed/Feed"));
-const Photo = lazy(() => import("./domain/photo/Photo"));
-const PhotoCreate = lazy(() => import("./domain/photo/PhotoCreate"));
-const PhotoDetail = lazy(() => import("./domain/photo/PhotoDetail"));
-const PhotoEdit = lazy(() => import("./domain/photo/PhotoEdit"));
+const Todo = lazy(() => import("./features/todo/TodoInlineEdit"));
+//const Feed = lazy(() => import("./features/feed/Feed"));
+const Photo = lazy(() => import("./features/photo/Photo"));
+const PhotoCreate = lazy(() => import("./features/photo/PhotoCreate"));
+const PhotoDetail = lazy(() => import("./features/photo/PhotoDetail"));
+const PhotoEdit = lazy(() => import("./features/photo/PhotoEdit"));
 
-const Contact = lazy(() => import("./domain/contact/Contact"));
-const ContactCreate = lazy(() => import("./domain/contact/ContactCreate"));
-const ContactDetail = lazy(() => import("./domain/contact/ContactDetail"));
-const ContactEdit = lazy(() => import("./domain/contact/ContactEdit"));
 
-   //나보려고 추가
-const ContactInlineEdit = lazy(() => import("./domain/ContactInlineEdit"));
-const TodoInlineEdit = lazy(() => import("./domain/TodoInlineEdit"));
+const Contact = lazy(() => import("./features/contact/Contact"));
+const ContactCreate = lazy(() => import("./features/contact/ContactCreate"));
+const ContactDetail = lazy(() => import("./features/contact/ContactDetail"));
+const ContactEdit = lazy(() => import("./features/contact/ContactEdit"));
+
+//나보려고 추가
+const ContactInlineEdit = lazy(() => import("./features/contact/ContactInlineEdit"));
+//const TodoInlineEdit = lazy(() => import("./features/todo/TodoInlineEdit"));
+
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
@@ -43,42 +47,44 @@ function App() {
       <Router>
         {/* main container */}
         <div className="mx-auto">
-          <header className="app-bar position-fixed d-flex justify-content-end bg-danger bg-opacity-50 shadow">
+          <header className="app-bar position-fixed d-flex justify-content-end bg-primary shadow">
             <Profile />
           </header>
           <nav className="drawer-menu position-fixed bg-light shadow-sm">
-            <h3 className="m-2">MY WORKSPACE</h3>
+            <h4 className="ms-2 my-2">MY WORKSPACE</h4>
             <ul>
               <li>
                 <Link to="/">Home</Link>
               </li>
+              <li>
+                <Link to="/todo">Todo</Link>
+              </li>
+              <li>
+                <Link to="/photos">Photos</Link>
+              </li>
+            -------------------
+              {/*//나보려고 추가*/}
+            <li>
+              <Link to="/contactinline">ContactInlineEdit(contactinline)</Link>
+            </li>
 
+            <li>
+              <Link to="/contacts">Contact</Link>
+            </li>
+                        <li>
+              <Link to="/contacts/create">Contactcreate</Link>
+            </li>
+
+            {/*
               <li>
                 <Link to="/feeds">Feeds</Link>
               </li>
 
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-            -------------------
-              {/*//나보려고 추가*/}
-            <li>
-              <Link to="/ContactInlineEdit">ContactInlineEdit</Link>
-            </li>
 
               <li>
-                <Link to="/todo">Todo</Link>
-              </li>
-            {/*----쌤꺼참고용----
-
-              <li>
-                <Link to="/photos">Photos</Link>
-              </li>
-            <li>
-              <Link to="/TodoInlineEdit">TodoInlineEdit</Link>
+              <Link to="/todoInlineEdit">TodoInlineEdit(todos)</Link>
             </li>
-              */}
-
+            */}
             </ul>
           </nav>
           <main className="content-container">
@@ -92,25 +98,30 @@ function App() {
                 {/* exact: 속성은 true/false, 경로가 정확히 일치할때만 */}
                 <Route path="/" component={Home} exact />
                 <Route path="/todo" component={Todo} />
-                <Route path="/feeds" component={Feed} />
-
-
                 <Route path="/photos" component={Photo} exact />
                 <Route path="/photos/create" component={PhotoCreate} />
-                <Route path="/photos/detail/:id" component={PhotoDetail}/>
+                <Route path="/photos/detail/:id" component={PhotoDetail} />
                 <Route path="/photos/edit/:id" component={PhotoEdit} />
-                {/* id라는 매개변수를 url 경로에 넘김, path parameter */}
 
-              <Route path="/contact" component={Contact} exact/>
-              <Route path="/contact/create" component={ContactCreate} />
-              <Route path="/contact/detail/:id" component={ContactDetail}/>
-              <Route path="/contact/edit/:id" component={ContactEdit} />
+              <Route path="/contacts" component={Contact} exact/>
+              <Route path="/contacts/create" component={ContactCreate} />
+              <Route path="/contacts/detail/:id" component={ContactDetail}/>
+              <Route path="/contacts/edit/:id" component={ContactEdit} />
 
                 {/*나보려고추가*/}
-              <Route path="/ContactInlineEdit" component={ContactInlineEdit} />
-              <Route path="/TodoInlineEdit" component={TodoInlineEdit} />
+              <Route path="/contactinline" component={ContactInlineEdit} />
+
+
+   {/*
+                <Route path="/feeds" component={Feed} />
+
+                {* id라는 매개변수를 url 경로에 넘김, path parameter *}
+              <Route path="/todoInlineEdit" component={TodoInlineEdit} />
+      */}        
               </Switch>
             </Suspense>
+            <Progress />
+            <AlertStack />
           </main>
         </div>
       </Router>

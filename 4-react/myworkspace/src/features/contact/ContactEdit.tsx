@@ -6,7 +6,9 @@ import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
 import { modifyContact } from "./contactSlice";
 
+
 const ContactEdit = () => {
+
 
     const selectRef = useRef<HTMLSelectElement>(null);
     const inputRef1 = useRef<HTMLInputElement>(null);
@@ -32,7 +34,7 @@ if (ContactItem){
         item.memo = memo.current?.value;
        
         dispatch(modifyContact(item));
-        history.push("/contact");
+        history.push("/contacts");
   }
   };
  
@@ -112,7 +114,7 @@ if (ContactItem){
         <button
           className="btn btn-light border border-2 btn-sm p-2  float-start"
           onClick={() => {
-            history.push("/contact");
+            history.push("/contacts");
           }}
         >
           <i className="bi bi-list me-1"></i>

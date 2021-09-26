@@ -1,0 +1,9 @@
+package todo;
+
+import lombok.Data;
+
+@Data
+public class Todo {
+	private String memo;
+	private long createdTime;
+}
