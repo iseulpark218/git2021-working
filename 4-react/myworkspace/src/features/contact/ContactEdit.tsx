@@ -1,11 +1,14 @@
-import { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
+import { useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
+import { ContactItem } from "./contactSlice";
 import { modifyContact } from "./contactSlice";
 
+
+import { requestModifyContact } from "./contactSaga";
 
 const ContactEdit = () => {
 
@@ -18,11 +21,25 @@ const ContactEdit = () => {
 
   const { id } = useParams<{ id : string } >();
 
-  const ContactItem = useSelector((state: RootState) => state.contact.data.find((item) => item.id === +id));
+  const ContactItem = useSelector((state: RootState) =>
+  state.contact.data.find((item) => item.id === +id));
+
+ const isModifyCompleted = useSelector(
+    (state: RootState) => state.photo.isModifyCompleted
+  );
 
   const dispatch = useDispatch<AppDispatch>();
   const history = useHistory();
 
+  useEffect(() => {
+    console.log("--isEditcompleted 변경: ");
+
+    //------------여기 경로 다시확인15:42
+    isModifyCompleted && history.push("/contacts");
+  }, [isModifyCompleted, history]);
+
+
+  // ------ 이벤트에 대해서 처리하는 부분 --------
   const handleSaveClick = () => {
 
 if (ContactItem){
@@ -33,7 +50,8 @@ if (ContactItem){
         item.txtEmail = inputRef3.current?.value;
         item.memo = memo.current?.value;
        
-        dispatch(modifyContact(item));
+       dispatch(requestModifyContact(item));
+        //dispatch(modifyContact(item));
         history.push("/contacts");
   }
   };

@@ -88,19 +88,20 @@ function* addData(action: PayloadAction<ContactItem>) {
  
     const contactItem: ContactItem = {
       id: result.data.id,
-      select: "-",
-      txtName: "10",
-      txtContact: "10",
-      txtEmail: "10",
-      createTime: 0,
-      /*
+      select: "",
+      txtName: "⏳",
+      txtContact: "⏳",
+      txtEmail: "⏳",
+      createdTime: result.data.createdTime,
+
+/*
       id: result.data.id,
 //      select: result.data.select,
       txtName: result.data.txtName,
       txtContact: result.data.txtContact,
       txtEmail: result.data.txtEmail,
       createdTime: result.data.createdTime,
-      */
+  */
     };
 
     // dispatcher(액션)과 동일함
@@ -155,6 +156,7 @@ function* fetchData() {
       txtName: item.txtName,
       txtContact: item.txtContact,
       txtEmail: item.txtEmail,
+      createdTime: item.createdTime,
       } as ContactItem)
   );
 
@@ -215,16 +217,19 @@ function* modifyData(action: PayloadAction<ContactItem>) {
 */
   // 백엔드에서 처리한 데이터 객체로 state를 변경할 payload 객체를 생성
   const contactItem: ContactItem = {
-    id: result.data.id,
-    select: undefined,
-    txtName: undefined,
-    txtContact: undefined,
-    txtEmail: undefined,
-    createTime: 0
+      id: result.data.id,
+      select: "",
+      txtName: "⏳",
+      txtContact: "⏳",
+      txtEmail: "⏳",
+      createdTime: result.data.createdTime,
           /*
+       id: result.data.id,
+//      select: result.data.select,
       txtName: result.data.txtName,
       txtContact: result.data.txtContact,
       txtEmail: result.data.txtEmail,
+      createdTime: result.data.createdTime,
 */
   };
 

@@ -1,25 +1,33 @@
 import {useParams} from "react-router-dom";
 
-//import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
-import { removeContact } from "./contactSlice";
+import { requestRemoveContact } from "./contactSaga";
 
+//import { useRef } from "react";
 
 const ContactDetail = () => {
   const { id } = useParams<{ id : string } >();
 
-  const ContactItem = useSelector((state: RootState) =>
+  const contactItem = useSelector((state: RootState) =>
     state.contact.data.find((item) => item.id === +id)
   );
 
+    const isRemoveCompleted = useSelector(
+    (state: RootState) => state.contact.isRemoveCompleted
+  );
 
   const dispatch = useDispatch<AppDispatch>();
   const history = useHistory();
 
+  useEffect(() => {
+    isRemoveCompleted && history.push("/contacts");
+  }, [isRemoveCompleted, history]);
+
   const handleAddClick = () => {
-        dispatch(removeContact(+id));
+        dispatch(requestRemoveContact(+id));
         history.push("/contacts");
   };
 
@@ -27,31 +35,31 @@ const ContactDetail = () => {
     <div style={{width:"40vw"}} className="mx-auto">
      <h2 className="text-center my-4 mb-5">Contact Detail 📃</h2>
      <form className="mx-auto">
-    {ContactItem && (
+    {contactItem && (
     <table className="table">
 <tbody>
          <tr>
           <th>성별</th>
-          <td>{ContactItem.select}</td>
+          <td>{contactItem.select}</td>
       </tr>
        <tr>
           <th>이름</th>
-      <td>{ContactItem.txtName}</td>
+      <td>{contactItem.txtName}</td>
       </tr>
 
       <tr>
           <th>전화번호</th>
-     <td>{ContactItem.txtContact}</td>
+     <td>{contactItem.txtContact}</td>
       </tr>
 
       <tr>
             <th>이메일</th>
-     <td>{ContactItem.txtEmail}</td>
+     <td>{contactItem.txtEmail}</td>
         </tr>
 
         <tr>
             <th>메모</th>
-     <td>{ContactItem.memo}</td>
+     <td>{contactItem.memo}</td>
 
         </tr>
 

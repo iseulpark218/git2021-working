@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export interface ContactItemResponse {
+  select: string;
   id: number;
   txtName :  String | undefined;
   txtContact :  String | number | undefined;

@@ -8,7 +8,7 @@ export interface ContactItem {
   txtEmail: string | undefined;
   memo?: string | undefined;
   isEdit?: boolean;
-  createTime: number;
+  createdTime: number;
 }
 interface contactState {
   data: ContactItem[];

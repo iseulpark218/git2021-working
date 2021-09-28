@@ -28,7 +28,9 @@ const ContactCreate = () => {
 useEffect(() => {
     console.log("--isAddCompleted 변경: " + isAddCompleted);
     // true이면 화면이동
-    isAddCompleted && history.push("/contacts/create");
+
+    //------------여기 경로 다시확인15:42
+    isAddCompleted && history.push("/contacts");
   }, [isAddCompleted, history, dispatch]);
 
   const handleSaveClick = () => {
@@ -40,11 +42,11 @@ useEffect(() => {
       txtContact : inputRef2.current?.value,
       txtEmail : inputRef3.current?.value,
       memo : memo.current?.value,
-      createTime: new Date().getTime(),
+      createdTime: new Date().getTime(),
 
     };
-   //     dispatch(requestAddContact(item));
-dispatch(addContact(item));
+       dispatch(requestAddContact(item));
+// dispatch(addContact(item));
         history.push("/contacts");
        
 /* 윗줄 추가하고 잠깐 임시로
