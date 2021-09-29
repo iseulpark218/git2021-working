@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver   #postgresql
+#    driver-class-name: com.mysql.cj.jdbc.Driver #mysql
+    url: jdbc:postgresql://database-1.cmu99dhdrulc.ap-northeast-2.rds.amazonaws.com:5432/postgres?currentSchema=myworkspace
+    username: postgres
+    password: password123!
+  jpa:
+    show-sql: true
+    generate-ddl: true

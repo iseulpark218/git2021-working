@@ -29,13 +29,13 @@ public class ContactController {
 
 	@GetMapping(value = "/contacts")
 	public List<Contact> getContacts() throws InterruptedException {
-		Thread.sleep(1000); // 임시적으로 2초 정지
+		// Thread.sleep(1000); // 임시적으로 1초 정지
 		return new ArrayList<Contact>(contacts.values());
 	}
 
 	@PostMapping(value = "/contacts")
 	public Contact addContact(@RequestBody Contact contact, HttpServletResponse res) throws InterruptedException {
-		Thread.sleep(1000); // 임시
+		// Thread.sleep(1000); // 임시
 
 		// 타이틀이 빈값
 		if (TextProcesser.isEmpyText(contact.getTxtName())) {
@@ -54,8 +54,8 @@ public class ContactController {
 
 		// 객체 생성
 		Contact contactItem = Contact.builder().id(currentId).txtName(contact.getTxtName())
-				.txtEmail(TextProcesser.getPlainText(contact.getTxtEmail())).txtContact(contact.getTxtContact())
-				.createdTime(new Date().getTime()).build();
+				.txtEmail(contact.getTxtEmail()).txtContact(contact.getTxtContact()).createdTime(new Date().getTime())
+				.build();
 
 		contacts.put(currentId, contactItem);
 
@@ -109,7 +109,7 @@ public class ContactController {
 		}
 
 		contactItem.setTxtName(contact.getTxtName());
-		contactItem.setTxtEmail(TextProcesser.getPlainText(contact.getTxtEmail()));
+		contactItem.setTxtEmail(contact.getTxtEmail());
 		contactItem.setTxtContact(contact.getTxtContact());
 
 		return contactItem;

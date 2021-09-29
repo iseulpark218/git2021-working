@@ -1,20 +1,28 @@
 import contactReducer, {
   addContact,
   initialCompleted,
+  initialPagedContact,
   initialContact,
   modifyContact,
+  ContactPage,
   removeContact,
 } from "./contactSlice";
 import { createAction, nanoid, PayloadAction } from "@reduxjs/toolkit";
 import { ContactItem } from "./contactSlice";
 import { call, put, takeEvery, takeLatest } from "@redux-saga/core/effects";
-import api, { ContactItemRequest, ContactItemResponse } from "./contactApi";
+import api, { ContactItemRequest, ContactItemResponse, ContactPagingResponse,} from "./contactApi";
 import { AxiosResponse } from "axios";
 import {
 //  endProgress,
 //  startProgress,
 } from "../../components/progress/progressSlice";
 import { addAlert } from "../../components/alert/alertSlice";
+
+/* ========= saga action Payload 타입 =============== */
+export interface PageRequest {
+  page: number;
+  size: number;
+}
 
 /* ========= saga action을 생성하는 부분 =============== */
 
@@ -30,7 +38,12 @@ export const requestAddContact = createAction<ContactItem>(
 
 // contact를 가져오는 action
 export const requestFetchContacts = createAction(
-  `${contactReducer.name}/requestFetchContact`
+  `${contactReducer.name}/requestFetchContacts`
+);
+
+// contact를 페이징으로 가져오는 action
+export const requestFetchPagingContacts = createAction<PageRequest>(
+  `${contactReducer.name}/requestFetchPagingContacts`
 );
 
 // contact를 삭제하는 action
@@ -114,7 +127,7 @@ function* addData(action: PayloadAction<ContactItem>) {
 
     // alert박스를 추가해줌
     yield put(
-      addAlert({ id: nanoid(), variant: "success", message: "저장되었습니다." })
+      addAlert({ id: nanoid(), variant: "success", message: "저장중입니다☺" })
     );
   } catch (e: any) {
     // 에러발생
@@ -148,7 +161,7 @@ function* fetchData() {
   yield put(endProgress());
 */
   // 응답데이터배열을 액션페이로드배열로 변환
-  // ContactItemReponse[] => ContactItem[]
+  // ContactItemResponse[] => ContactItem[]
   const contacts = result.data.map(
     (item) =>
       ({
@@ -162,6 +175,51 @@ function* fetchData() {
 
   // state 초기화 reducer 실행
   yield put(initialContact(contacts));
+}
+
+function* fetchPagingData(action: PayloadAction<PageRequest>) {
+  yield console.log("--fetchPagingData--");
+
+  const page = action.payload.page;
+  const size = action.payload.size;
+/*
+  // spinner 보여주기
+  yield put(startProgress());
+*/
+
+  // 백엔드에서 데이터 받아오기
+  const result: AxiosResponse<ContactPagingResponse> = yield call(
+    api.fetchPaging,
+    page,
+    size
+  );
+/*
+  // spinner 사라지게 하기
+  yield put(endProgress());
+*/
+  // 받아온 페이지 데이터를 Payload 변수로 변환
+  const contactPage: ContactPage = {
+    // 응답데이터배열을 액션페이로드배열로 변환
+    // ContactItemResponse[] => ContactItem[]
+    data: result.data.content.map(
+      (item) =>
+        ({
+      id: item.id,
+      txtName: item.txtName,
+      txtContact: item.txtContact,
+      txtEmail: item.txtEmail,
+      createdTime: item.createdTime,
+        } as ContactItem)
+    ),
+    totalElements: result.data.totalElements,
+    totalPages: result.data.totalPages,
+    page: result.data.number,
+    pageSize: result.data.size,
+    isLast: result.data.last,
+  };
+
+  // state 초기화 reducer 실행
+  yield put(initialPagedContact(contactPage));
 }
 
 function* removeData(action: PayloadAction<number>) {
@@ -251,6 +309,7 @@ export default function* contactSaga() {
   // takeLatest(처리할액션, 액션을처리할함수)
   // 동일한 타입의 액션중에서 가장 마지막 액션만 처리, 이전 액션은 취소
   yield takeLatest(requestFetchContacts, fetchData);
+  yield takeLatest(requestFetchPagingContacts, fetchPagingData);
 
   // 삭제처리
   yield takeEvery(requestRemoveContact, removeData);

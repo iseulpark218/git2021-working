@@ -1,5 +1,14 @@
 import axios from "axios";
 
+export interface ContactPagingResponse {
+  content: ContactItemResponse[];
+  last: boolean;
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+}
+
 export interface ContactItemResponse {
   select: string;
   id: number;
@@ -20,6 +29,11 @@ const contactApi = {
   fetch: () =>
   axios.get<ContactItemResponse[]>(`http://localhost:8080/contacts`),
   //axios.get<ContactItemResponse[]>(`${process.env.REACT_APP_API_BASE}/contacts`),
+
+  fetchPaging: (page: number, size: number) =>
+    axios.get<ContactPagingResponse>(
+      `http://localhost:8080/contacts/paging?page=${page}&size=${size}`
+    ),
 
   // axios.post<응답타입>(요청URL, 요청객체(JSON바디));
   // POST 요청URL HTTP/1.1  {...}

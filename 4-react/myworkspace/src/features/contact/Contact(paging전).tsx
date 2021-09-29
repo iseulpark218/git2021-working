@@ -2,9 +2,8 @@ import { render } from "@testing-library/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Pagination from "../../components/PaginationContact";
 import { AppDispatch, RootState } from "../../store";
-import { requestFetchContacts, requestFetchPagingContacts } from "./contactSaga";
+import { requestFetchContacts } from "./contactSaga";
 
 const getTimeString = (unixtime: number) => {
      const dateTime = new Date(unixtime);
@@ -18,44 +17,15 @@ const Contact = () => {
   const history = useHistory();
   const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    // console.log(dispatch);
-    // console.log(contact.isFetched);
-    // 데이터 fetch가 안되었으면 데이터를 받아옴
+    useEffect(() => {
+   // console.log(dispatch);
     if (!contact.isFetched) {
-      // 서버에서 데이터를 받아오는 action을 디스패치함
-      // dispatch(requestFetchContacts());
-      dispatch(
-        requestFetchPagingContacts({
-          page: 0,
-          size: contact.pageSize,
-        })
-      );
-    }
-  }, [dispatch, contact.isFetched, contact.pageSize]);
+      dispatch(requestFetchContacts());
+   }
+  }, [dispatch, contact.isFetched]);
 
-  const handlePageChanged = (page: number) => {
-    console.log("--page: " + page);
-    // setCurrentPage(page);
-    dispatch(
-      requestFetchPagingContacts({
-        page,
-        size: contact.pageSize,
-      })
-    );
-  };
 
-  const handlePageSizeChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.currentTarget.value);
-    dispatch(
-      requestFetchPagingContacts({
-        page: contact.page,
-        size: +e.currentTarget.value,
-      })
-    );
-  };
-
-  const onEvent = (e : any) => {
+const onEvent = (e : any) => {
   console.log(e.type,"", e);
 };
 
@@ -63,8 +33,7 @@ const Contact = () => {
         <div style={{width:"70vw"}} className="mx-auto">
      <h2 className="text-center my-4"><b>Contacts</b>📞</h2>
 {/* 버튼    <div className="d-flex justify-content-start">*/}
-  <div>
-   <div className="d-flex justify-content-start">
+   <div className="d-flex justify-content-end">
          <div>
             <button
             type="button"
@@ -73,11 +42,11 @@ const Contact = () => {
             <i className="bi bi-person-dash-fill me-2"></i>
             삭제
           </button>
-         </div>
+   </div>
     <div>
             <button
             type="button"
-            className="btn btn-dark text-nowrap btn-sm mx-2"
+            className="btn btn-dark text-nowrap btn-sm  mx-2"
             onClick={() => {
             history.push("/contacts/create");
             }}
@@ -86,33 +55,7 @@ const Contact = () => {
             추가
           </button>
           </div>
-     </div>
-          
          <div className="d-flex justify-content-end">
-{/*-----------------*/}
-        <button
-          className="btn btn-secondary btn-sm me-2"
-          onClick={() => {
-            dispatch(requestFetchContacts());
-          }}
-        >
-          <i className="bi bi-arrow-clockwise"></i>
-        </button>
-        <select
-          className="form-select form-select-sm me-2 p-1"
-          style={{ width: "55px", height:"30px"}}
-          onChange={(e) => {
-            handlePageSizeChanged(e);
-          }}
-        >
-          {[3, 5, 10, 20].map((size) => (
-            <option value={size} selected={contact.pageSize === size}>
-              {size}
-            </option>
-          ))}
-        </select>
-{/*-----------------*/}
-{/*
          <select
           className="form-select form-select-sm"
           style={{ width: "60px" }}
@@ -121,8 +64,21 @@ const Contact = () => {
             <option>5</option>
             <option>10</option>
         </select>
-*/}
-</div>
+{/*
+        <select
+          className="form-select form-select-sm me-2"
+          style={{ width: "60px" }}
+          onChange={(e) => {
+            handlePageSizeChanged(e);
+          }}
+        >
+          {[2, 3, 6].map((size) => (
+            <option value={size} selected={photo.pageSize === size}>
+              {size}
+            </option>
+          ))}
+        </select>
+*/}</div>
     </div>
     <table className="table table-striped table table-hover">
       <thead className="display-flex;">
@@ -154,7 +110,7 @@ const Contact = () => {
              onClick={()=> {
               history.push(`/contacts/detail/${item.id}`);
             }}
-            >({item.id}) {item.txtName}</td>
+            >{item.txtName}</td>
              <td>{item.txtContact}</td>       
             <td>{item.txtEmail}</td>
             <td>{getTimeString(item.createdTime)}</td>
@@ -163,22 +119,21 @@ const Contact = () => {
       </tbody>
     </table>
           {/* 페이지네이션 */}
-    <div className="d-flex justify-content-center mt-4">
-          <Pagination
-          blockSize={5} // 고정값
-          totalPages={contact.totalPages}
-          currentPage={contact.page}
+      <div className="d-flex justify-content-center mt-4">
+          <ul className="pagination">
+    <li className="page-item"><a className="page-link" href="#">Previous</a></li>
+    <li className="page-item"><a className="page-link" href="#">1</a></li>
+    <li className="page-item"><a className="page-link" href="#">2</a></li>
+    <li className="page-item"><a className="page-link" href="#">3</a></li>
+    <li className="page-item"><a className="page-link" href="#">Next</a></li>
+  </ul>
+ {/*
+        <Pagination
+          blockSize={2} // 고정값
+          totalPages={photo.totalPages}
+          currentPage={photo.page}
           onPageChanged={handlePageChanged}
          />
-
- {/*
-          <ul className="pagination">
-            <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-            <li className="page-item"><a className="page-link" href="#">1</a></li>
-            <li className="page-item"><a className="page-link" href="#">2</a></li>
-            <li className="page-item"><a className="page-link" href="#">3</a></li>
-            <li className="page-item"><a className="page-link" href="#">Next</a></li>
-          </ul>
 */}
       </div>
     </div>
