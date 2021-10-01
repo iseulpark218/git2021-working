@@ -1,7 +1,19 @@
 serviceKey=IfcuH7lGQKchQgb97KnrXaH73w3PuD6Rwg295YWGvEmkvYlEfw7xdCtU%2FFnPZ0ju0BamQKp2YjoxiIzV96MXSw%3D%3D
 
-최종
-http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=IfcuH7lGQKchQgb97KnrXaH73w3PuD6Rwg295YWGvEmkvYlEfw7xdCtU%2FFnPZ0ju0BamQKp2YjoxiIzV96MXSw%3D%3D
-
+쌤꺼----
+8x9EEMlvpXLrqor89PreIVvrNAtT2rkM%2Be6FOns1GkNS6aQdSlFL0BpFU4e%2F5GoeKa9t1Y1ztK6wfP90DIO%2Ftw%3D%3D
 
 ========
+
+AirSiGunGuHour
+CovidHour
+
+====
+	private String updateDt; // 수정일시분초 
+	private String gubun; // 시도명(한글)
+	private int defCnt; // 확진자 수
+	private int incDec; // 전일대비 증감 수
+	private int isolIngCnt; // 격리중 환자수
+	private int isolClearCnt; // 격리 해제 수
+	private int overFlowCnt; // 해외유입 수
+	private int deathCnt; // 사망자 수

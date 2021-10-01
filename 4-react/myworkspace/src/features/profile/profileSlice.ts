@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { penguin } from "../../common/data";
+import { penguin, iseul} from "../../common/data";
 
 // redux store(리덕스 저장소)에 하나의 state 관리하고 처리할 수는 모듈
 // slice에는 state와 reducer가 있음

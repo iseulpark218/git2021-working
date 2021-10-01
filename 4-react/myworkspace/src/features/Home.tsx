@@ -11,12 +11,14 @@ const Home = () => {
   return (
     <div>
       This is Home Component
+     {/*
       <Pagination
         blockSize={10}
         totalPages={25}
         currentPage={currentPage}
-        onPageChanged={handlePageChanged}
+//        onPageChanged={handlePageChanged}
       />
+      */}
     </div>
   );
 };

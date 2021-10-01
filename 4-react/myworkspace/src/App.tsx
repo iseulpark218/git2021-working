@@ -47,45 +47,40 @@ function App() {
       <Router>
         {/* main container */}
         <div className="mx-auto">
-          <header className="app-bar position-fixed d-flex justify-content-end bg-primary shadow">
+          <header className="app-bar position-fixed d-flex justify-content-end bg-light shadow">
             <Profile />
           </header>
-          <nav className="drawer-menu position-fixed bg-light shadow-sm">
-            <h4 className="ms-2 my-2">MY WORKSPACE</h4>
-            <ul>
-              <li>
+          <nav className="drawer-menu position-fixed bg-dark shadow-sm">
+            <h4 className="ms-2 my-2 text-success"><b>MY WORKSPACE</b></h4>
+            <ul className="text-light">
+              <li className="fw-bold">
                 <Link to="/">Home</Link>
               </li>
-              <li>
+              <li className="fw-bold">
                 <Link to="/todo">Todo</Link>
               </li>
-              <li>
+              <li className="fw-bold">
                 <Link to="/photos">Photos</Link>
               </li>
-            -------------------
+            ===========
               {/*//나보려고 추가*/}
-            <li>
-              <Link to="/contactinline">ContactInlineEdit(contactinline)</Link>
+            <li className="fw-bold">
+              <Link to="/contactinline">ContactInlineEdit</Link> {/*(contactinline)*/}
             </li>
 
-            <li>
+            <li className="fw-bold">
               <Link to="/contacts">Contact</Link>
             </li>
-                        <li>
-              <Link to="/contacts/create">Contactcreate</Link>
-            </li>
-
             {/*
               <li>
                 <Link to="/feeds">Feeds</Link>
               </li>
-
-
               <li>
               <Link to="/todoInlineEdit">TodoInlineEdit(todos)</Link>
             </li>
             */}
             </ul>
+
           </nav>
           <main className="content-container">
             {/* Suspense 컴포넌트로 로딩중에 보여줄 화면을 처리하는 것 */}

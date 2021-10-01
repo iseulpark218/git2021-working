@@ -95,8 +95,8 @@ const Profile = () => {
             className={`${style.thumb} me-1`}
             style={{ backgroundImage: `url(${profile.image})` }}
           ></div>
-          <span className={`${style.username} text-light`}>
-            {profile.username}
+          <span className={`${style.username} text-dark`}>
+           {profile.username}
           </span>
         </div>
         {/* 프로필 상세보기 */}
