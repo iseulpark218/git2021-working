@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -60,8 +59,10 @@ const Contact = () => {
 };
 
   return (
-        <div style={{width:"70vw"}} className="mx-auto">
-     <h2 className="text-center my-4"><b>Contacts</b>📞</h2>
+        <div>
+     <div style={{ width: "40vw" }} className="mx-auto">
+      <h2 className="text-center my-5"><u>Contact</u></h2>
+          </div>
 {/* 버튼    <div className="d-flex justify-content-start">*/}
   <div>
    <div className="d-flex justify-content-start">

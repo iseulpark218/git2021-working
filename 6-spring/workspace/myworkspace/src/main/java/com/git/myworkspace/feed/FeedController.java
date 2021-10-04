@@ -1,4 +1,4 @@
-package com.git.myworkspace.photo;
+package com.git.myworkspace.feed;
 
 import java.util.Date;
 import java.util.List;
@@ -22,22 +22,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.git.myworkspace.lib.TextProcesser;
 
 @RestController
-public class PhotoController {
+public class FeedController {
 
-	private PhotoRepository repo;
+	private FeedRepository repo;
 
 	// Autowired 어노테이션은 매개변수나 필드 타입에 맞는 객체를
 	// Spring에서 생성하여 주입하여줌(의존성 주입, 의존객체주입, DI, Dependency Injection)
 	// Repository 인터페이스 구조에 맞는 객체를 Spring에 생성하여 넣어줌
 	@Autowired
-	public PhotoController(PhotoRepository repo) {
+	public FeedController(FeedRepository repo) {
 		this.repo = repo;
 	}
 
-	@GetMapping(value = "/photos")
-	public List<Photo> getPhotos() throws InterruptedException {
+	@GetMapping(value = "/feeds")
+	public List<Feed> getFeeds() throws InterruptedException {
 		// repository.findAll();
-		// SELECT * FROM photo;
+		// SELECT * FROM feed;
 		// 기본적으로 PK 순정렬(asc, ascending)되고 있는 상황
 		// 1 2 3 .....
 //		return repo.findAll();
@@ -49,104 +49,102 @@ public class PhotoController {
 	}
 
 	// 예) 한페이지 2개, 1번째 페이지
-	// 예) GET /photos/paging?page=0&size=2
-	@GetMapping("/photos/paging")
-	public Page<Photo> getPhotosPaging(@RequestParam int page, @RequestParam int size) {
+	// 예) GET /feeds/paging?page=0&size=2
+	@GetMapping("/feeds/paging")
+	public Page<Feed> getFeedsPaging(@RequestParam int page, @RequestParam int size) {
 		// findAll(Pageable page)
 		// findAll(PageRequest.of(page, size, Sort sort));
 		return repo.findAll(PageRequest.of(page, size, Sort.by("id").descending()));
 	}
 
-	@PostMapping(value = "/photos")
-	public Photo addPhoto(@RequestBody Photo photo, HttpServletResponse res) throws InterruptedException {
+	@PostMapping(value = "/feeds")
+	public Feed addFeed(@RequestBody Feed feed, HttpServletResponse res) throws InterruptedException {
 		// 타이틀이 빈값
-		if (TextProcesser.isEmpyText(photo.getTitle())) {
+		if (TextProcesser.isEmpyText(feed.getContent())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 
 		// 파일URL이 빈값
-		if (TextProcesser.isEmpyText(photo.getPhotoUrl())) {
+		if (TextProcesser.isEmpyText(feed.getDataUrl())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 
 		// 객체 생성
-		Photo photoItem = Photo.builder().title(photo.getTitle())
-				.description(TextProcesser.getPlainText(photo.getDescription())).photoUrl(photo.getPhotoUrl())
-				.fileType(photo.getFileType()).fileName(photo.getFileType()).createdTime(new Date().getTime()).build();
+		Feed feedItem = Feed.builder().content(feed.getContent()).dataUrl(feed.getDataUrl())
+				.fileType(feed.getFileType()).fileName(feed.getFileType()).createdTime(new Date().getTime()).build();
 
 		// repository.save(entity)
-		// insert into photo(...) values(...)
-		Photo photoSaved = repo.save(photoItem);
+		// insert into feed(...) values(...)
+		Feed feedSaved = repo.save(feedItem);
 
 		// 리소스 생성됨
 		res.setStatus(HttpServletResponse.SC_CREATED);
 
 		// 추가된 객체를 반환
-		return photoSaved;
+		return feedSaved;
 	}
 
-	@DeleteMapping(value = "/photos/{id}")
-	public boolean removePhoto(@PathVariable long id, HttpServletResponse res) throws InterruptedException {
+	@DeleteMapping(value = "/feeds/{id}")
+	public boolean removeFeed(@PathVariable long id, HttpServletResponse res) throws InterruptedException {
 //		Thread.sleep(5000);
 
 		// id에 해당하는 객체가 없으면
 		// Optional null-safe, 자바 1.8 나온 방식
 		// repository.findBy(id)
-		// select * from photo where id = ?;
-		Optional<Photo> photo = repo.findById(id);
-		if (photo.isEmpty()) {
+		// select * from feed where id = ?;
+		Optional<Feed> feed = repo.findById(id);
+		if (feed.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return false;
 		}
 
 		// 삭제 수행
 		// repository.deletebyId(id)
-		// delete from photo where id = ?
+		// delete from feed where id = ?
 		repo.deleteById(id);
 
 		return true;
 	}
 
-	@PutMapping(value = "/photos/{id}")
-	public Photo modifyPhoto(@PathVariable long id, @RequestBody Photo photo, HttpServletResponse res)
+	@PutMapping(value = "/feeds/{id}")
+	public Feed modifyFeed(@PathVariable long id, @RequestBody Feed feed, HttpServletResponse res)
 			throws InterruptedException {
 
 		// id에 해당하는 객체가 없으면
-		Optional<Photo> photoItem = repo.findById(id);
-		if (photoItem.isEmpty()) {
+		Optional<Feed> feedItem = repo.findById(id);
+		if (feedItem.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 
 		// 타이틀이 빈값
-		if (TextProcesser.isEmpyText(photo.getTitle())) {
+		if (TextProcesser.isEmpyText(feed.getContent())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 
 		// 파일URL이 빈값
-		if (TextProcesser.isEmpyText(photo.getPhotoUrl())) {
+		if (TextProcesser.isEmpyText(feed.getDataUrl())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 
-		Photo photoToSave = photoItem.get();
+		Feed feedToSave = feedItem.get();
 
-		photoToSave.setTitle(photo.getTitle());
-		photoToSave.setDescription(TextProcesser.getPlainText(photo.getDescription()));
-		photoToSave.setPhotoUrl(photo.getPhotoUrl());
-		photoToSave.setFileType(photo.getFileType());
-		photoToSave.setFileName(photo.getFileName());
+		feedToSave.setContent(feed.getContent());
+		feedToSave.setDataUrl(feed.getDataUrl());
+		feedToSave.setFileType(feed.getFileType());
+		feedToSave.setFileName(feed.getFileName());
 
 		// repository.save(entity)
 		// id가 있으면 UPDATE, 없으면 INSERT
 		// UPDATE
-		// SET title=?, descript=?,......
+		// SET content=?, descript=?,......
 		// WHERE id = ?
-		Photo photoSaved = repo.save(photoToSave);
+		Feed feedSaved = repo.save(feedToSave);
 
-		return photoSaved;
+		return feedSaved;
 	}
 }

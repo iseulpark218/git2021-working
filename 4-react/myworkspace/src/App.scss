@@ -11,8 +11,23 @@
 
 .drawer-menu {
   width: $drawer-menu-width;
-  height: 100vh;
+  height: 200vh;
   top: $app-bar-height;
+  //width: 241px;
+  line-height: 50px; //index % 4 === 0 ? "0" : "1rem"
+  background: lightgrey;
+  background: url("https://i.pinimg.com/564x/f7/99/cf/f799cf7f116b0a9e3231d1c6cdc958cb.jpg");
+}
+
+h4 {
+  font-family: "trana", sans-serif;
+  font-size: 40px;
+}
+
+.ul-list {
+  list-style: none;
+  padding-left: 0px;
+  text-align: center;
 }
 
 .content-container {

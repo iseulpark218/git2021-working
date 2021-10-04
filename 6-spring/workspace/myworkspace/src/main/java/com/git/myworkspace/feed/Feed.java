@@ -1,6 +1,5 @@
-package com.git.myworkspace.photo;
+package com.git.myworkspace.feed;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,20 +25,20 @@ import lombok.NoArgsConstructor;
 //  2. 특정 DB에 종속되지 않게함
 
 // @Entity: 테이블과 클래스를 맵핑함
-// 기본방법은 Photo(pascal-case) -> photo(snake-case)
+// 기본방법은 Feed(pascal-case) -> feed(snake-case)
 
 @Entity
-public class Photo {
+public class Feed {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String title;
+	private String content;
 	// BLOB: binary large object
-	@Column(columnDefinition = "VARCHAR(1000)")
-	private String description;
+//	@Column(columnDefinition = "VARCHAR(1000)")
+
 	// BLOB: binary large object
-	@Column(columnDefinition = "TEXT")
-	private String photoUrl;
+//	@Column(columnDefinition = "TEXT")
+	private String dataUrl;
 	private String fileType;
 	private String fileName;
 	private long createdTime;

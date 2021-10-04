@@ -13,6 +13,7 @@ import Home from "./features/Home";
 import Profile from "./features/profile/Profile";
 import Progress from "./components/progress/Progress";
 import AlertStack from "./components/alert/AlertStack";
+import { isWhiteSpaceLike } from "typescript";
 
 // SPA(Single Page Application)
 // : 페이지 파일이 1개, index.html
@@ -23,7 +24,7 @@ import AlertStack from "./components/alert/AlertStack";
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
 const Todo = lazy(() => import("./features/todo/TodoInlineEdit"));
-//const Feed = lazy(() => import("./features/feed/Feed"));
+const Feed = lazy(() => import("./features/feed/Feed"));
 const Photo = lazy(() => import("./features/photo/Photo"));
 const PhotoCreate = lazy(() => import("./features/photo/PhotoCreate"));
 const PhotoDetail = lazy(() => import("./features/photo/PhotoDetail"));
@@ -47,40 +48,48 @@ function App() {
       <Router>
         {/* main container */}
         <div className="mx-auto">
-          <header className="app-bar position-fixed d-flex justify-content-end bg-light shadow">
+          <header className="app-bar position-fixed d-flex justify-content-end">
             <Profile />
           </header>
-          <nav className="drawer-menu position-fixed bg-dark shadow-sm">
-            <h4 className="ms-2 my-2 text-success"><b>MY WORKSPACE</b></h4>
-            <ul className="text-light">
-              <li className="fw-bold">
-                <Link to="/">Home</Link>
+          <nav className="drawer-menu position-fixed shadow-sm">
+            <h4 className="ms-2 my-2 mt-3 text-light"><b>PARKISEUL</b></h4>
+          <div
+            style={{
+              margin:" 100px 0px 0px 0px"
+              //width: "calc((100% - 3rem) / 4)",
+              //marginLeft: index % 4 === 0 ? "0" : "1rem",
+              //marginTop: index > 3 ? "1rem" : "0",
+            }}>
+            <ul
+            className="ul-list text-light fw-bold"
+            >
+              <li>
+                <Link to="/">HOME</Link>
               </li>
-              <li className="fw-bold">
-                <Link to="/todo">Todo</Link>
+              <li>
+                <Link to="/todo">TODO LIST</Link>
               </li>
-              <li className="fw-bold">
-                <Link to="/photos">Photos</Link>
+              <li>
+                <Link to="/photos">PHOTOS</Link>
               </li>
-            ===========
+              <li>
+                <Link to="/feeds">FEED</Link>
+              </li>
               {/*//나보려고 추가*/}
-            <li className="fw-bold">
-              <Link to="/contactinline">ContactInlineEdit</Link> {/*(contactinline)*/}
+            <li>
+              <Link to="/contactinline">(수정중)</Link> {/*(contactinline)*/}
             </li>
 
-            <li className="fw-bold">
-              <Link to="/contacts">Contact</Link>
+            <li>
+              <Link to="/contacts">CONTACT</Link>
             </li>
             {/*
-              <li>
-                <Link to="/feeds">Feeds</Link>
-              </li>
               <li>
               <Link to="/todoInlineEdit">TodoInlineEdit(todos)</Link>
             </li>
             */}
             </ul>
-
+</div>
           </nav>
           <main className="content-container">
             {/* Suspense 컴포넌트로 로딩중에 보여줄 화면을 처리하는 것 */}
@@ -97,6 +106,8 @@ function App() {
                 <Route path="/photos/create" component={PhotoCreate} />
                 <Route path="/photos/detail/:id" component={PhotoDetail} />
                 <Route path="/photos/edit/:id" component={PhotoEdit} />
+                <Route path="/feeds" component={Feed} />
+
 
               <Route path="/contacts" component={Contact} exact/>
               <Route path="/contacts/create" component={ContactCreate} />
@@ -105,11 +116,7 @@ function App() {
 
                 {/*나보려고추가*/}
               <Route path="/contactinline" component={ContactInlineEdit} />
-
-
    {/*
-                <Route path="/feeds" component={Feed} />
-
                 {* id라는 매개변수를 url 경로에 넘김, path parameter *}
               <Route path="/todoInlineEdit" component={TodoInlineEdit} />
       */}        

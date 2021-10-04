@@ -26,9 +26,9 @@ public class ContactController {
 
 	private ContactRepository repo;
 
-	// Autowired ¾î³ëÅ×ÀÌ¼ÇÀº ¸Å°³º¯¼ö³ª ÇÊµå Å¸ÀÔ¿¡ ¸Â´Â °´Ã¼¸¦
-	// Spring¿¡¼­ »ı¼ºÇÏ¿© ÁÖÀÔÇÏ¿©ÁÜ(ÀÇÁ¸¼º ÁÖÀÔ, ÀÇÁ¸°´Ã¼ÁÖÀÔ, DI, Dependency Injection)
-	// Repository ÀÎÅÍÆäÀÌ½º ±¸Á¶¿¡ ¸Â´Â °´Ã¼¸¦ Spring¿¡ »ı¼ºÇÏ¿© ³Ö¾îÁÜ
+	// Autowired ì–´ë…¸í…Œì´ì…˜ì€ ë§¤ê°œë³€ìˆ˜ë‚˜ í•„ë“œ íƒ€ì…ì— ë§ëŠ” ê°ì²´ë¥¼
+	// Springì—ì„œ ìƒì„±í•˜ì—¬ ì£¼ì…í•˜ì—¬ì¤Œ(ì˜ì¡´ì„± ì£¼ì…, ì˜ì¡´ê°ì²´ì£¼ì…, DI, Dependency Injection)
+	// Repository ì¸í„°í˜ì´ìŠ¤ êµ¬ì¡°ì— ë§ëŠ” ê°ì²´ë¥¼ Springì— ìƒì„±í•˜ì—¬ ë„£ì–´ì¤Œ
 	@Autowired
 	public ContactController(ContactRepository repo) {
 		this.repo = repo;
@@ -38,18 +38,18 @@ public class ContactController {
 	public List<Contact> getContacts() throws InterruptedException {
 		// repository.findAll();
 		// SELECT * FROM contact;
-		// ±âº»ÀûÀ¸·Î PK ¼øÁ¤·Ä(asc, ascending)µÇ°í ÀÖ´Â »óÈ²
+		// ê¸°ë³¸ì ìœ¼ë¡œ PK ìˆœì •ë ¬(asc, ascending)ë˜ê³  ìˆëŠ” ìƒí™©
 		// 1 2 3 .....
 //		return repo.findAll();
 
-		// idÄÃ·³ ¿ªÁ¤·Ä(clusted index)
-		// Sort.by("Á¤·ÄÄÃ·³").desceding() ¿ªÁ¤·Ä
-		// Sort.by("Á¤·ÄÄÃ·³").ascending() ¼øÁ¤·Ä
+		// idì»¬ëŸ¼ ì—­ì •ë ¬(clusted index)
+		// Sort.by("ì •ë ¬ì»¬ëŸ¼").desceding() ì—­ì •ë ¬
+		// Sort.by("ì •ë ¬ì»¬ëŸ¼").ascending() ìˆœì •ë ¬
 		return repo.findAll(Sort.by("id").descending());
 	}
 
-	// ¿¹) ÇÑÆäÀÌÁö 2°³, 1¹øÂ° ÆäÀÌÁö
-	// ¿¹) GET /contacts/paging?page=0&size=2
+	// ì˜ˆ) í•œí˜ì´ì§€ 2ê°œ, 1ë²ˆì§¸ í˜ì´ì§€
+	// ì˜ˆ) GET /contacts/paging?page=0&size=2
 	@GetMapping("/contacts/paging")
 	public Page<Contact> getContactsPaging(@RequestParam int page, @RequestParam int size) {
 		// findAll(Pageable page)
@@ -59,19 +59,19 @@ public class ContactController {
 
 	@PostMapping(value = "/contacts")
 	public Contact addContact(@RequestBody Contact contact, HttpServletResponse res) throws InterruptedException {
-		// Å¸ÀÌÆ²ÀÌ ºó°ª
+		// íƒ€ì´í‹€ì´ ë¹ˆê°’
 		if (TextProcesser.isEmpyText(contact.getTxtName())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 
-		// ÆÄÀÏURLÀÌ ºó°ª
+		// íŒŒì¼URLì´ ë¹ˆê°’
 		if (TextProcesser.isEmpyText(contact.getTxtContact())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 
-		// °´Ã¼ »ı¼º
+		// ê°ì²´ ìƒì„±
 		Contact contactItem = Contact.builder().txtName(contact.getTxtName()).txtContact(contact.getTxtContact())
 				.txtEmail(contact.getTxtEmail()).createdTime(new Date().getTime()).build();
 
@@ -79,10 +79,10 @@ public class ContactController {
 		// insert into contact(...) values(...)
 		Contact contactSaved = repo.save(contactItem);
 
-		// ¸®¼Ò½º »ı¼ºµÊ
+		// ë¦¬ì†ŒìŠ¤ ìƒì„±ë¨
 		res.setStatus(HttpServletResponse.SC_CREATED);
 
-		// Ãß°¡µÈ °´Ã¼¸¦ ¹İÈ¯
+		// ì¶”ê°€ëœ ê°ì²´ë¥¼ ë°˜í™˜
 		return contactSaved;
 	}
 
@@ -90,8 +90,8 @@ public class ContactController {
 	public boolean removeContacts(@PathVariable long id, HttpServletResponse res) throws InterruptedException {
 //		Thread.sleep(5000);
 
-		// id¿¡ ÇØ´çÇÏ´Â °´Ã¼°¡ ¾øÀ¸¸é
-		// Optional null-safe, ÀÚ¹Ù 1.8 ³ª¿Â ¹æ½Ä
+		// idì— í•´ë‹¹í•˜ëŠ” ê°ì²´ê°€ ì—†ìœ¼ë©´
+		// Optional null-safe, ìë°” 1.8 ë‚˜ì˜¨ ë°©ì‹
 		// repository.findBy(id)
 		// select * from contact where id = ?;
 		Optional<Contact> contact = repo.findById(id);
@@ -100,7 +100,7 @@ public class ContactController {
 			return false;
 		}
 
-		// »èÁ¦ ¼öÇà
+		// ì‚­ì œ ìˆ˜í–‰
 		// repository.deletebyId(id)
 		// delete from contact where id = ?
 		repo.deleteById(id);
@@ -112,20 +112,20 @@ public class ContactController {
 	public Contact modifyContacts(@PathVariable long id, @RequestBody Contact contact, HttpServletResponse res)
 			throws InterruptedException {
 
-		// id¿¡ ÇØ´çÇÏ´Â °´Ã¼°¡ ¾øÀ¸¸é
+		// idì— í•´ë‹¹í•˜ëŠ” ê°ì²´ê°€ ì—†ìœ¼ë©´
 		Optional<Contact> contactItem = repo.findById(id);
 		if (contactItem.isEmpty()) {
 			res.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return null;
 		}
 
-		// Å¸ÀÌÆ²ÀÌ ºó°ª
+		// íƒ€ì´í‹€ì´ ë¹ˆê°’
 		if (TextProcesser.isEmpyText(contact.getTxtName())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 
-		// ÆÄÀÏURLÀÌ ºó°ª
+		// íŒŒì¼URLì´ ë¹ˆê°’
 		if (TextProcesser.isEmpyText(contact.getTxtContact())) {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
@@ -138,7 +138,7 @@ public class ContactController {
 		contactToSave.setTxtEmail(contact.getTxtEmail());
 
 		// repository.save(entity)
-		// id°¡ ÀÖÀ¸¸é UPDATE, ¾øÀ¸¸é INSERT
+		// idê°€ ìˆìœ¼ë©´ UPDATE, ì—†ìœ¼ë©´ INSERT
 		// UPDATE
 		// SET txtName=?, descript=?,......
 		// WHERE id = ?

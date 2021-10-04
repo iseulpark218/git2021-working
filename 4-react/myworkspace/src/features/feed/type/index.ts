@@ -2,8 +2,8 @@ interface FeedState {
   id: number;
   content?: string | undefined;
   dataUrl?: string | undefined;
-  fileType?: string | undefined;
-  createTime: number;
+  fileType?: string;
+  createdTime: number;
   modifyTime?: number;
   isEdit?: boolean;
   username?: string | undefined;

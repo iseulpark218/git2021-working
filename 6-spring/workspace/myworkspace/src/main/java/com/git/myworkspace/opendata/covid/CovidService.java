@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 
-// ¼­ºñ½º ÄÄÆ÷³ÍÆ®
-// 1. ¿ÜºÎ ½Ã½ºÅÛ Åë½Å
-// 2. µ¥ÀÌÅÍ Æ®·£Àè¼Ç Ã³¸®
+// ì„œë¹„ìŠ¤ ì»´í¬ë„ŒíŠ¸
+// 1. ì™¸ë¶€ ì‹œìŠ¤í…œ í†µì‹ 
+// 2. ë°ì´í„° íŠ¸ëœì­ì…˜ ì²˜ë¦¬
 @Service
 public class CovidService {
 
@@ -33,7 +33,7 @@ public class CovidService {
 	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
 	// 1000 * 60 * 60 * 1
 	public void requestCovid() throws IOException {
-		String[] gubunNames = { "¼­¿ï" };
+		String[] gubunNames = { "ì„œìš¸" };
 		for (String gubunName : gubunNames) {
 			requestCovidHour(gubunName);
 		}
@@ -43,60 +43,60 @@ public class CovidService {
 	public void requestCovidHour(String gubun) throws IOException {
 		System.out.println(new Date().toLocaleString());
 
-		/* ---------------------- µ¥ÀÌÅÍ ¿äÃ»ÇÏ°í XML ¹Ş¾Æ¿À±â ½ÃÀÛ ----------------- */
+		/* ---------------------- ë°ì´í„° ìš”ì²­í•˜ê³  XML ë°›ì•„ì˜¤ê¸° ì‹œì‘ ----------------- */
 
-		// ÀÌ·¸°Ô ³ª¿Í¾ß ÇÔ
+		// ì´ë ‡ê²Œ ë‚˜ì™€ì•¼ í•¨
 // http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?pageNo=1&numOfRows=10&endCreateDt=20200410&serviceKey=IfcuH7lGQKchQgb97KnrXaH73w3PuD6Rwg295YWGvEmkvYlEfw7xdCtU%2FFnPZ0ju0BamQKp2YjoxiIzV96MXSw%3D%3D
+// ê°„ë‹¨
 // http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=IfcuH7lGQKchQgb97KnrXaH73w3PuD6Rwg295YWGvEmkvYlEfw7xdCtU%2FFnPZ0ju0BamQKp2YjoxiIzV96MXSw%3D%3D
-		// &pageNo=1&numOfRows=10&startCreateDt=20200410&endCreateDt=20200410
-		// serviceKey=ÀÎÁõÅ°(URL Encode)
-		// &pageNo=1&numOfRows=10&startCreateDt=20200410&endCreateDt=20200410
-		// StringBuilder ¹®ÀÚ¿­À» ºô´õ¹æ½ÄÀ¸·Î »ı¼ºÇÏ´Â Å¬·¡½º
-		// 1. ¿äÃ» URL ¸¸µé±â
+// Console
+// http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=IfcuH7lGQKchQgb97KnrXaH73w3PuD6Rwg295YWGvEmkvYlEfw7xdCtU%2FFnPZ0ju0BamQKp2YjoxiIzV96MXSw%3D%3D
+
+		// 1. ìš”ì²­ URL ë§Œë“¤ê¸°
 		StringBuilder builder = new StringBuilder();
 		builder.append("http://openapi.data.go.kr/openapi");
 		builder.append("/service");
 		builder.append("/rest");
 		builder.append("/Covid19");
 		builder.append("/getCovid19SidoInfStateJson");
-		builder.append("?pageNo=1&numOfRows=10");
-		builder.append("&startCreateDt=20200410");
-		builder.append("&endCreateDt=20200410");
-		builder.append("&serviceKey=" + SERVICE_KEY); // ¼­ºñ½ºÅ°
+//		builder.append("?pageNo=1&numOfRows=10");
+//		builder.append("&startCreateDt=20200410");
+//		builder.append("&endCreateDt=20200410");
+		builder.append("?serviceKey=" + SERVICE_KEY); // ì„œë¹„ìŠ¤í‚¤
 
 		System.out.println(builder.toString());
 
-		// 2. URL °´Ã¼ »ı¼º
+		// 2. URL ê°ì²´ ìƒì„±
 		URL url = new URL(builder.toString());
 
-		// 3. Http Á¢¼Ó »ı¼º
+		// 3. Http ì ‘ì† ìƒì„±
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-		// 4. byte[]¹è¿­·Î µ¥ÀÌÅÍ¸¦ ÀĞ¾î¿È
+		// 4. byte[]ë°°ì—´ë¡œ ë°ì´í„°ë¥¼ ì½ì–´ì˜´
 		byte[] result = con.getInputStream().readAllBytes();
 
-		// 5. byte[] -> ¹®ÀÚ¿­(XML) º¯È¯
+		// 5. byte[] -> ë¬¸ìì—´(XML) ë³€í™˜
 		String data = new String(result, "UTF-8");
-//		System.out.println(data);
-		/* ---------------------- µ¥ÀÌÅÍ ¿äÃ»ÇÏ°í XML ¹Ş¾Æ¿À±â ³¡ ----------------- */
+		System.out.println(data);
+		/* ---------------------- ë°ì´í„° ìš”ì²­í•˜ê³  XML ë°›ì•„ì˜¤ê¸° ë ----------------- */
 
-		/* ---------------------- XML -> JSON -> Object(Java) ½ÃÀÛ ----------------- */
-		// XML(¹®ÀÚ¿­) -> JSON(°´Ã¼)
+		/* ---------------------- XML -> JSON -> Object(Java) ì‹œì‘ ----------------- */
+		// XML(ë¬¸ìì—´) -> JSON(ê°ì²´)
 		JSONObject jsonObj = XML.toJSONObject(data);
-		// JSON(°´Ã¼) -> JSON(¹®ÀÚ¿­)
+		// JSON(ê°ì²´) -> JSON(ë¬¸ìì—´)
 		String json = jsonObj.toString(2);
 //		System.out.println(json);
 
-		// JSON(¹®ÀÚ¿­) -> Java(object)
+		// JSON(ë¬¸ìì—´) -> Java(object)
 		CovidHourResponse response = new Gson().fromJson(json, CovidHourResponse.class);
 		System.out.println(response);
 
-//		// °­µ¿±¸ µ¥ÀÌÅÍ
+//		// ê°•ë™êµ¬ ë°ì´í„°
 //		CovidHourResponse.Item item = response.getResponse().getBody().getItems().getItem().get(1);
 //		System.out.println(item);
-		/* ---------------------- XML -> JSON -> Object(Java) ³¡ ----------------- */
+		/* ---------------------- XML -> JSON -> Object(Java) ë ----------------- */
 
-		/* ---------------------- ÀÀ´ä °´Ã¼ -> ¿£Æ¼Æ¼ ½ÃÀÛ ----------------- */
+		/* ---------------------- ì‘ë‹µ ê°ì²´ -> ì—”í‹°í‹° ì‹œì‘ ----------------- */
 		List<CovidHour> list = new ArrayList<CovidHour>();
 		for (CovidHourResponse.Item item : response.getResponse().getBody().getItems().getItem()) {
 			CovidHour record = CovidHour.builder().stdDay(item.getStdDay()).gubun(item.getGubun())
@@ -106,10 +106,10 @@ public class CovidService {
 
 			list.add(record);
 		}
-		/* ---------------------- ÀÀ´ä °´Ã¼ -> ¿£Æ¼Æ¼ ³¡ ----------------- */
+		/* ---------------------- ì‘ë‹µ ê°ì²´ -> ì—”í‹°í‹° ë ----------------- */
 
-		/* ---------------------- ¿£Æ¼Æ¼°´Ã¼ -> ¸®Æ÷ÁöÅÍ¸®·Î ÀúÀå ½ÃÀÛ ----------------- */
+		/* ---------------------- ì—”í‹°í‹°ê°ì²´ -> ë¦¬í¬ì§€í„°ë¦¬ë¡œ ì €ì¥ ì‹œì‘ ----------------- */
 		repo.saveAll(list);
-		/* ---------------------- ¿£Æ¼Æ¼°´Ã¼ -> ¸®Æ÷ÁöÅÍ¸®·Î ÀúÀå ³¡ ----------------- */
+		/* ---------------------- ì—”í‹°í‹°ê°ì²´ -> ë¦¬í¬ì§€í„°ë¦¬ë¡œ ì €ì¥ ë ----------------- */
 	}
 }

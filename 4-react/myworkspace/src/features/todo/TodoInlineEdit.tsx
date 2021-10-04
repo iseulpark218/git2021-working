@@ -247,8 +247,10 @@ const Todo = () => {
   };
 
   return (
-    <div style={{ width: "40vw" }} className="mx-auto">
-      <h2 className="text-center my-5">할 일 관리</h2>
+    <div>
+        <div style={{ width: "40vw" }} className="mx-auto">
+      <h2 className="text-center my-5"><u>TODO LIST</u></h2>
+        </div>
       <form
         className="d-flex"
         ref={formRef}
@@ -293,10 +295,14 @@ const Todo = () => {
         {/* 로딩중 처리 표시 */}
         {isLoading && (
           <li className="list-group-item text-center">
+{/*
             <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
+*/}
+<span className="visually-hidden">Loading...</span>
+{/*
             </div>
-          </li>
+*/}
+</li>
         )}
         {/* 빈 데이터 표시 */}
         {!isLoading && todoList.length === 0 && (

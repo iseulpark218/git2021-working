@@ -73,7 +73,10 @@ const Photo = () => {
 
   return (
     <div>
-      <h2 className="text-center">Photos</h2>
+              <div style={{ width: "40vw" }} className="mx-auto">
+      <h2 className="text-center my-5"><u>Photos</u></h2>
+          </div>
+
       {/* 버튼 */}
       <div className="d-flex justify-content-end mb-2">
         <select

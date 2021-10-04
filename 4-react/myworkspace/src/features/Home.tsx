@@ -9,17 +9,10 @@ const Home = () => {
   };
 
   return (
-    <div>
-      This is Home Component
-     {/*
-      <Pagination
-        blockSize={10}
-        totalPages={25}
-        currentPage={currentPage}
-//        onPageChanged={handlePageChanged}
-      />
-      */}
-    </div>
+        <div style={{ width: "40vw" }} className="mx-auto">
+      <h2 className="text-center my-5"><u>HOME</u></h2>
+          </div>
+
   );
 };
 

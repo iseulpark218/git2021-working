@@ -1,13 +1,19 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import Pagination from "../../components/PaginationFeed";
+import { AppDispatch, RootState } from "../../store";
+import { requestFetchFeeds, requestFetchPagingFeeds } from "./feedSaga";
+
 import { useRef, useState } from "react";
 import { isTemplateExpression } from "typescript";
 import produce from "immer";
 
 import { FeedState } from "./type";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
 
 import FeedEditModal from "./FeedEditModal";
 import style from "./Feed.module.scss";
+
 
 const getTimeString = (unixtime : number) => {
    const dateTime = new Date(unixtime);
@@ -15,7 +21,7 @@ const getTimeString = (unixtime : number) => {
 }
 
 const Feed = () => {
-
+  const feed = useSelector((state: RootState) => state.feed );
   const profile = useSelector((state: RootState) => state.profile);
   const [feedList, setFeedList] = useState<FeedState[]>([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -24,6 +30,45 @@ const Feed = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    // console.log(dispatch);
+    // console.log(feed.isFetched);
+    // 데이터 fetch가 안되었으면 데이터를 받아옴
+    if (!feed.isFetched) {
+      // 서버에서 데이터를 받아오는 action을 디스패치함
+      // dispatch(requestFetchFeeds());
+      dispatch(
+        requestFetchPagingFeeds({
+          page: 0,
+          size: feed.pageSize,
+        })
+      );
+    }
+  }, [dispatch, feed.isFetched, feed.pageSize]);
+
+
+  const handlePageChanged = (page: number) => {
+    console.log("--page: " + page);
+    // setCurrentPage(page);
+    dispatch(
+      requestFetchPagingFeeds({
+        page,
+        size: feed.pageSize,
+      })
+    );
+  };
+  
+  const handlePageSizeChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.currentTarget.value);
+    dispatch(
+      requestFetchPagingFeeds({
+        page: feed.page,
+        size: +e.currentTarget.value,
+      })
+    );
+  };
 
   const add = (e: React.KeyboardEvent<HTMLInputElement> | null) => {
 
@@ -49,7 +94,7 @@ const Feed = () => {
     fileType: fileType,
     username: profile.username,
     image: profile.image,
-    createTime: new Date().getTime(),
+    createdTime: new Date().getTime(),
     };
 
     setFeedList([feed, ...feedList]);
@@ -67,7 +112,7 @@ const editItem = useRef<FeedState>({
   content: "", 
   username: profile.username,
   image: profile.image,
-  createTime: 0 });
+  createdTime: 0 });
 
 const edit = (item: FeedState) => {
     editItem.current = item;
@@ -89,9 +134,12 @@ const edit = (item: FeedState) => {
 
 
   return (
-    <div style={{width:"40vw"}} className="mx-auto">
-
-      <h1 className="text-center mt-4">Feed</h1>
+    <div>
+{/*------------------------------------------------*/}
+      <div style={{ width: "40vw" }} className="mx-auto">
+      <h2 className="text-center my-5"><u>Feed</u></h2>
+          </div>
+{/*------------------------------------------------*/}
        {isEdit && (
         <FeedEditModal
         item={editItem.current}
@@ -103,7 +151,7 @@ const edit = (item: FeedState) => {
           }}
         />
       )}
-    
+
     <form className="d-flex flex-column mt-5"
         ref={formRef}
         onSubmit={(e) => e.preventDefault()}>
@@ -133,10 +181,24 @@ const edit = (item: FeedState) => {
       </div>
 
     </form>
+      <div className="d-flex justify-content-end mt-2">
+        <select
+          className="form-select form-select-sm me-2"
+          style={{ width: "60px" }}
+          onChange={(e) => {
+            handlePageSizeChanged(e);
+          }}
+        >
+          {[3, 5].map((size) => (
+            <option value={size} selected={feed.pageSize === size}>
+              {size}
+            </option>
+          ))}
+        </select>
 
+              </div>
     <div id="content" className="mt-3" >
-    {feedList.map((item) => (
-      
+    {feedList.map((item) => ( 
       <div className="card my-3" key={item.id}>
       <div className="d-flex card-header p-1">
         <img
@@ -160,7 +222,7 @@ const edit = (item: FeedState) => {
       <span className="me-1">{item.content}</span><br></br><br></br>
       <span
       className="fs-6 text-decoration-underline text-muted">
-        {getTimeString(item.createTime)}
+        {getTimeString(item.createdTime)}
       </span>
     
       <a href="#!"
@@ -173,17 +235,21 @@ const edit = (item: FeedState) => {
       onClick={() => {
                   edit(item);
                 }}>수정</a>
-
 </p>
-
     </div>
     </div>
-    
+   
     ))}
-
+    <div className="d-flex justify-content-center mt-4">
+          <Pagination
+          blockSize={3} // 고정값
+          totalPages={feed.totalPages}
+          currentPage={feed.page}
+          onPageChanged={handlePageChanged}
+         />
+         </div>
     </div>
     </div>
-  
   )
 };
 

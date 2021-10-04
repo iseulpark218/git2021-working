@@ -125,9 +125,10 @@ setContactTable(
 
 
   return (
-        <div style={{width:"70vw"}} className="mx-auto">
-     <h2 className="text-center mx-5 my-4">연락처 관리😋</h2>
-     
+        <div>
+           <div style={{ width: "40vw" }} className="mx-auto">
+      <h2 className="text-center my-5"><u>ContactIn-lineEdit</u></h2>
+          </div>
      <form
 //      id="form-input"
       className="form-control d-flex border border-0 mx-auto"
