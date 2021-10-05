@@ -64,13 +64,10 @@ public class FeedController {
 			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
-
-		// 파일URL이 빈값
-		if (TextProcesser.isEmpyText(feed.getDataUrl())) {
-			res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			return null;
-		}
-
+		/*
+		 * // 파일URL이 빈값 if (TextProcesser.isEmpyText(feed.getDataUrl())) {
+		 * res.setStatus(HttpServletResponse.SC_BAD_REQUEST); return null; }
+		 */
 		// 객체 생성
 		Feed feedItem = Feed.builder().content(feed.getContent()).dataUrl(feed.getDataUrl())
 				.fileType(feed.getFileType()).fileName(feed.getFileType()).createdTime(new Date().getTime()).build();

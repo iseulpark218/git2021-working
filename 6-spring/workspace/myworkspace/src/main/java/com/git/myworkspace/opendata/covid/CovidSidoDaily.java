@@ -16,9 +16,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(indexes = @Index(name = "idx_covid_hour_1", columnList = "stdDay , gubun"))
-@IdClass(CovidHourId.class)
-public class CovidHour {
+@Table(indexes = @Index(name = "idx_covid_sidodaily_1", columnList = "stdDay , gubun"))
+@IdClass(CovidSidoDailyId.class)
+public class CovidSidoDaily {
 
 	// 기준일시/ 시도명에만 유일한 값으로 중복처리 안되게.
 	@Id
@@ -31,6 +31,6 @@ public class CovidHour {
 	private int isolClearCnt; // 격리 해제 수
 	private int overFlowCnt; // 해외유입 수
 	private int deathCnt; // 사망자 수
-//	private int localOccCnt; //지역발생 수
+	private int localOccCnt; // 지역발생 수
 
 }

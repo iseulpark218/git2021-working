@@ -70,7 +70,7 @@ function App() {
                 <Link to="/todo">TODO LIST</Link>
               </li>
               <li>
-                <Link to="/photos">PHOTOS</Link>
+                <Link to="/photos">PHOTO</Link>
               </li>
               <li>
                 <Link to="/feeds">FEED</Link>

@@ -264,7 +264,7 @@ const Todo = () => {
         <input
           type="text"
           className="form-control me-2"
-          placeholder="할 일 ..."
+          placeholder="What needs to be done?"
           ref={inputRef}
           onKeyPress={(e) => {
             add(e);
@@ -306,11 +306,11 @@ const Todo = () => {
         )}
         {/* 빈 데이터 표시 */}
         {!isLoading && todoList.length === 0 && (
-          <li className="list-group-item">데이터가 없습니다.</li>
-        )}
+        <li className="list-group-item">데이터가 없습니다.</li>
+         )}
         {/* 데이터와 UI요소 바인딩 */}
         {todoList.map((item, index) => (
-          <li className="list-group-item d-flex" key={item.id}>
+           <li className="list-group-item d-flex border-bottom border-danger-2" key={item.id}>
             <div className="w-100">
               {/* 보기모드일 때 보이는 내용 */}
               {!item.isEdit && <span className="me-1">{item.memo}</span>}
@@ -372,6 +372,11 @@ const Todo = () => {
           </li>
         ))}
       </ul>
+{/*마지막줄 total
+    <div className="mt-2">
+      <h6>items left</h6>
+    </div>
+*/}
     </div>
   );
 };

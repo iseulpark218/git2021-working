@@ -1,5 +1,6 @@
 package com.git.myworkspace.feed;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,12 +33,13 @@ public class Feed {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	@Column(columnDefinition = "VARCHAR(1000)")
 	private String content;
 	// BLOB: binary large object
 //	@Column(columnDefinition = "VARCHAR(1000)")
 
 	// BLOB: binary large object
-//	@Column(columnDefinition = "TEXT")
+	@Column(columnDefinition = "TEXT")
 	private String dataUrl;
 	private String fileType;
 	private String fileName;

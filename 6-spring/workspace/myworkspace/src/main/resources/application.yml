@@ -8,4 +8,9 @@ spring:
   jpa:
     show-sql: true
     generate-ddl: true
-#    open-in-view : true
+ #   open-in-view : true
+cache:
+  type: redis
+redis:
+  host: 127.0.0.1
+  post: 6379

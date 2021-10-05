@@ -23,10 +23,10 @@ public class CovidService {
 
 	private final String SERVICE_KEY = "IfcuH7lGQKchQgb97KnrXaH73w3PuD6Rwg295YWGvEmkvYlEfw7xdCtU%2FFnPZ0ju0BamQKp2YjoxiIzV96MXSw%3D%3D";
 
-	private CovidHourRepository repo;
+	private CovidSidoDailyRepository repo;
 
 	@Autowired
-	public CovidService(CovidHourRepository repo) {
+	public CovidService(CovidSidoDailyRepository repo) {
 		this.repo = repo;
 	}
 
@@ -35,12 +35,12 @@ public class CovidService {
 	public void requestCovid() throws IOException {
 		String[] gubunNames = { "서울" };
 		for (String gubunName : gubunNames) {
-			requestCovidHour(gubunName);
+			requestCovidSidoDaily(gubunName);
 		}
 	}
 
 	@SuppressWarnings("deprecation")
-	public void requestCovidHour(String gubun) throws IOException {
+	public void requestCovidSidoDaily(String gubun) throws IOException {
 		System.out.println(new Date().toLocaleString());
 
 		/* ---------------------- 데이터 요청하고 XML 받아오기 시작 ----------------- */
@@ -88,22 +88,21 @@ public class CovidService {
 //		System.out.println(json);
 
 		// JSON(문자열) -> Java(object)
-		CovidHourResponse response = new Gson().fromJson(json, CovidHourResponse.class);
+		CovidSidoDailyResponse response = new Gson().fromJson(json, CovidSidoDailyResponse.class);
 		System.out.println(response);
 
 //		// 강동구 데이터
-//		CovidHourResponse.Item item = response.getResponse().getBody().getItems().getItem().get(1);
+//		CovidSidoDailyResponse.Item item = response.getResponse().getBody().getItems().getItem().get(1);
 //		System.out.println(item);
 		/* ---------------------- XML -> JSON -> Object(Java) 끝 ----------------- */
 
 		/* ---------------------- 응답 객체 -> 엔티티 시작 ----------------- */
-		List<CovidHour> list = new ArrayList<CovidHour>();
-		for (CovidHourResponse.Item item : response.getResponse().getBody().getItems().getItem()) {
-			CovidHour record = CovidHour.builder().stdDay(item.getStdDay()).gubun(item.getGubun())
+		List<CovidSidoDaily> list = new ArrayList<CovidSidoDaily>();
+		for (CovidSidoDailyResponse.Item item : response.getResponse().getBody().getItems().getItem()) {
+			CovidSidoDaily record = CovidSidoDaily.builder().stdDay(item.getStdDay()).gubun(item.getGubun())
 					.defCnt(item.getDefCnt()).incDec(item.getIncDec()).isolIngCnt(item.getIsolIngCnt())
 					.isolClearCnt(item.getIsolClearCnt()).overFlowCnt(item.getOverFlowCnt())
-					.deathCnt(item.getDeathCnt()).build();
-
+					.deathCnt(item.getDeathCnt()).localOccCnt(item.getLocalOccCnt()).build();
 			list.add(record);
 		}
 		/* ---------------------- 응답 객체 -> 엔티티 끝 ----------------- */
