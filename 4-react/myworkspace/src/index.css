@@ -14,6 +14,8 @@ body {
 a {
   color: white;
   text-decoration: underline;
+  font-family: Georgia, "Malgun Gothic", serif;
+  text-decoration: none;
 }
 
 code {

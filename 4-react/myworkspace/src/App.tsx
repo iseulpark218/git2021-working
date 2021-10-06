@@ -9,7 +9,7 @@ import { Suspense, lazy } from "react";
 import { Provider } from "react-redux"; // react 앱에 redux store를 제공해줌
 import { store } from "./store"; // redux store
 
-import Home from "./features/Home";
+import Home from "./features/home/Home";
 import Profile from "./features/profile/Profile";
 import Progress from "./components/progress/Progress";
 import AlertStack from "./components/alert/AlertStack";
@@ -23,8 +23,12 @@ import { isWhiteSpaceLike } from "typescript";
 
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
+const Chart1 = lazy(() => import("./features/chart1/Chart"));
+const Chart2 = lazy(() => import("./features/chart2/Chart"));
+
 const Todo = lazy(() => import("./features/todo/TodoInlineEdit"));
 const Feed = lazy(() => import("./features/feed/Feed"));
+
 const Photo = lazy(() => import("./features/photo/Photo"));
 const PhotoCreate = lazy(() => import("./features/photo/PhotoCreate"));
 const PhotoDetail = lazy(() => import("./features/photo/PhotoDetail"));
@@ -67,6 +71,12 @@ function App() {
                 <Link to="/">HOME</Link>
               </li>
               <li>
+                <Link to="/chart1">CHART 1 - covid</Link>
+              </li>
+               <li>
+                <Link to="/chart2">CHART 2 - air</Link>
+              </li>
+              <li>
                 <Link to="/todo">TODO LIST</Link>
               </li>
               <li>
@@ -102,6 +112,9 @@ function App() {
                 {/* exact: 속성은 true/false, 경로가 정확히 일치할때만 */}
                 <Route path="/" component={Home} exact />
                 <Route path="/todo" component={Todo} />
+                <Route path="/chart1" component={Chart1} />
+                <Route path="/chart2" component={Chart2} />
+                
                 <Route path="/photos" component={Photo} exact />
                 <Route path="/photos/create" component={PhotoCreate} />
                 <Route path="/photos/detail/:id" component={PhotoDetail} />

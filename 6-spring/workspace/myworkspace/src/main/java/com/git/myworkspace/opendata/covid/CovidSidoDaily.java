@@ -29,8 +29,7 @@ public class CovidSidoDaily {
 	private int incDec; // 전일대비 증감수
 	private int isolIngCnt; // 격리중 환자수
 	private int isolClearCnt; // 격리 해제 수
-	private int overFlowCnt; // 해외유입 수
 	private int deathCnt; // 사망자 수
-	private int localOccCnt; // 지역발생 수
-
+	private Integer overFlowCnt; // 해외유입 수
+	private Integer localOccCnt; // 지역발생 수
 }

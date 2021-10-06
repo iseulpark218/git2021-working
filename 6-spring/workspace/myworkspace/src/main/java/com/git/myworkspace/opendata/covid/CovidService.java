@@ -10,6 +10,7 @@ import java.util.List;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,8 @@ public class CovidService {
 
 	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
 	// 1000 * 60 * 60 * 1
+
+	@CacheEvict(value = "air-current", allEntries = true)
 	public void requestCovid() throws IOException {
 		String[] gubunNames = { "서울" };
 		for (String gubunName : gubunNames) {
@@ -99,12 +102,17 @@ public class CovidService {
 		/* ---------------------- 응답 객체 -> 엔티티 시작 ----------------- */
 		List<CovidSidoDaily> list = new ArrayList<CovidSidoDaily>();
 		for (CovidSidoDailyResponse.Item item : response.getResponse().getBody().getItems().getItem()) {
+
 			CovidSidoDaily record = CovidSidoDaily.builder().stdDay(item.getStdDay()).gubun(item.getGubun())
 					.defCnt(item.getDefCnt()).incDec(item.getIncDec()).isolIngCnt(item.getIsolIngCnt())
-					.isolClearCnt(item.getIsolClearCnt()).overFlowCnt(item.getOverFlowCnt())
-					.deathCnt(item.getDeathCnt()).localOccCnt(item.getLocalOccCnt()).build();
+					.isolClearCnt(item.getIsolClearCnt()).deathCnt(item.getDeathCnt())
+					.overFlowCnt(item.getOverFlowCnt()).localOccCnt(item.getLocalOccCnt())
+//					.overFlowCnt(item.getOverFlowCnt().isEmpty() ? null : Integer.valueOf(item.getOverFlowCnt()))
+//					.localOccCnt(item.getLocalOccCnt().isEmpty() ? null : Integer.valueOf(item.getLocalOccCnt()))
+					.build();
 			list.add(record);
 		}
+
 		/* ---------------------- 응답 객체 -> 엔티티 끝 ----------------- */
 
 		/* ---------------------- 엔티티객체 -> 리포지터리로 저장 시작 ----------------- */

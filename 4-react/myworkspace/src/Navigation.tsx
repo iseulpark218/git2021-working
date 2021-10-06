@@ -6,7 +6,12 @@ const Navigation = () => {
       <li>
         <Link to="/">Home</Link>
       </li>
-
+      <li>
+        <Link to="/chart1">Chart 1</Link>
+      </li>
+      <li>
+        <Link to="/chart2">Chart 2</Link>
+      </li>
       <li>
         <Link to="/todo">Todo</Link>
       </li>

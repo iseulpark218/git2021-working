@@ -29,6 +29,6 @@ public class AirSigunguHour {
 	@Id
 	private String cityName;
 	// 값
-	private String pm10Value;
-	private String pm25Value;
+	private Integer pm10Value;
+	private Integer pm25Value;
 }

@@ -33,16 +33,6 @@ public class CovidSidoDailyResponse {
 	@Data
 	public class Item {
 
-//		private String stdDay;
-//		private String gubun;
-//		private int defCnt;
-//		private int incDec;
-//		private int isolIngCnt;
-//		private int isolClearCnt;
-//		private int overFlowCnt;
-//		private int deathCnt;
-//		private int localOccCnt; // 지역발생 수
-
 		private String stdDay; // 수정일시분초
 		private String gubun; // 시도명(한글)
 		private int defCnt; // 확진자 수
@@ -52,15 +42,6 @@ public class CovidSidoDailyResponse {
 		private int overFlowCnt; // 해외유입 수
 		private int deathCnt; // 사망자 수
 		private int localOccCnt; // 지역발생 수
-
-//		.stdDay(item.getStdDay())
-//		.gubun(item.getGubun())
-//		.defCnt(item.getDefCnt())
-//		.incDec(item.getIncDec())
-//		.isolIngCnt(item.getIsolIngCnt())
-//		.isolClearCnt(item.getIsolClearCnt())
-//		.overFlowCnt(item.getOverFlowCnt())
-//		.deathCnt(item.getDeathCnt())
 
 	}
 

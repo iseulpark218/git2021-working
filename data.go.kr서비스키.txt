@@ -8,6 +8,18 @@ serviceKey=IfcuH7lGQKchQgb97KnrXaH73w3PuD6Rwg295YWGvEmkvYlEfw7xdCtU%2FFnPZ0ju0Ba
 AirSiGunGuHour
 CovidHour
 
+create table covid_hour (
+	std_day varchar(255) not null,
+	gubun varchar(255) not null,
+	over_flow_cnt int4,
+	local_occ_cnt int4,
+	inc_dec int4,
+	isol_ing_cnt int4,
+	isol_clear_cnt int4,
+	death_cnt int4,
+	def_cnt int4,
+	primary key (gubun, std_day)
+
 ==== stdDay
 	private String updateDt; // 수정일시분초 
 	private String gubun; // 시도명(한글)
