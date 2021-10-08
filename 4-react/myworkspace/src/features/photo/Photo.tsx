@@ -86,7 +86,7 @@ const Photo = () => {
             handlePageSizeChanged(e);
           }}
         >
-          {[2, 3, 6].map((size) => (
+          {[2, 4, 8].map((size) => (
             <option value={size} selected={photo.pageSize === size}>
               {size}
             </option>

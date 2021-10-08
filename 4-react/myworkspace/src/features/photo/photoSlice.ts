@@ -43,7 +43,7 @@ const initialState: PhotoState = {
   data: [],
   isFetched: false,
   page: 0,
-  pageSize: 2,
+  pageSize: 4,
   totalPages: 0,
 };
 

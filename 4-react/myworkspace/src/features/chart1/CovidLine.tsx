@@ -81,7 +81,9 @@ const CovidLine = () => {
               {barData
                 .map((item) => item.gubun)
                 .map((city) => (
-                  <option value={city}>{city}</option>
+                  <option key={`sel-${city}`} value={city}>
+                    {city}
+                  </option>
                 ))}
             </select>
           </div>

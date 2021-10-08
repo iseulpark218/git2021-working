@@ -14,6 +14,7 @@ import Profile from "./features/profile/Profile";
 import Progress from "./components/progress/Progress";
 import AlertStack from "./components/alert/AlertStack";
 import { isWhiteSpaceLike } from "typescript";
+import EventMessage from "./components/EventMessage";
 
 // SPA(Single Page Application)
 // : 페이지 파일이 1개, index.html
@@ -137,6 +138,7 @@ function App() {
             </Suspense>
             <Progress />
             <AlertStack />
+            <EventMessage />
           </main>
         </div>
       </Router>

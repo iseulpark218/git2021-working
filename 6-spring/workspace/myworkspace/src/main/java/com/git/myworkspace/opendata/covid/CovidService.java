@@ -31,10 +31,11 @@ public class CovidService {
 		this.repo = repo;
 	}
 
-	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
+	@Scheduled(cron = "0 30 * * * *")
+//	@Scheduled(fixedRate = 1000 * 60 * 60 * 1)
 	// 1000 * 60 * 60 * 1
 
-	@CacheEvict(value = "air-current", allEntries = true)
+	@CacheEvict(value = "covid-current", allEntries = true)
 	public void requestCovid() throws IOException {
 		String[] gubunNames = { "서울" };
 		for (String gubunName : gubunNames) {

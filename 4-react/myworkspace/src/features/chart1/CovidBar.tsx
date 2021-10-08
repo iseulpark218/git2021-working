@@ -55,8 +55,8 @@ const CovidBar = () => {
           ({ value, seriesIndex }: { value: number; seriesIndex: number }) => {
             // seriesIndex: 0, 해외유입
             // seriesIndex: 1, 국내발생
-            console.log(value);
-            console.log(seriesIndex);
+            // console.log(value);
+            // console.log(seriesIndex);
 
             let color = "";
 

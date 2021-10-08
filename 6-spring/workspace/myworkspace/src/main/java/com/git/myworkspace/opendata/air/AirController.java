@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// Controller : 클라이언트 요청에 따라 어떤 처리를 할 지 
 @Component("airController")
 @RestController
 @RequestMapping(value = "/opendata/air")
