@@ -63,7 +63,7 @@ public class CovidService {
 		builder.append("/rest");
 		builder.append("/Covid19");
 		builder.append("/getCovid19SidoInfStateJson");
-//		builder.append("?pageNo=1&numOfRows=10");
+		builder.append("?pageNo=1&numOfRows=10");
 //		builder.append("&startCreateDt=20200410");
 //		builder.append("&endCreateDt=20200410");
 		builder.append("?serviceKey=" + SERVICE_KEY); // 서비스키

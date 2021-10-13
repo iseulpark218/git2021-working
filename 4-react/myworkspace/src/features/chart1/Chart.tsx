@@ -1,6 +1,6 @@
 import CovidBar from "./CovidBar";
 import CovidLine from "./CovidLine";
-import CovidStackedBar from "./CovidStackedBar";
+//import CovidStackedBar from "./CovidStackedBar";
 
 
 const Chart = () => {
@@ -8,7 +8,7 @@ const Chart = () => {
     <div>
       <CovidBar />
       <CovidLine />
-      <CovidStackedBar />
+{/*      <CovidStackedBar /> */}
     </div>
   );
 };

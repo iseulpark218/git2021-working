@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 import Pagination from "../../components/PaginationFeed";
 import { AppDispatch, RootState } from "../../store";
-import { requestFetchFeeds, requestFetchPagingFeeds } from "./feedSaga";
+import { requestFetchPagingFeeds } from "./feedSaga";
 
 import { useRef, useState } from "react";
-import { isTemplateExpression } from "typescript";
+//import { isTemplateExpression } from "typescript";
 import produce from "immer";
 
 import { FeedState } from "./type";
@@ -25,7 +25,7 @@ const Feed = () => {
   const profile = useSelector((state: RootState) => state.profile);
   const [feedList, setFeedList] = useState<FeedState[]>([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [isError, setIsError] = useState(false);
+//  const [isError, setIsError] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -204,6 +204,7 @@ const edit = (item: FeedState) => {
         <img
           src={item.image}
           className={`${style.thumb} m-2`}
+          alt={item.content}
           ></img>
         <span className="mt-2">{item.username}</span>
       </div>
@@ -240,15 +241,16 @@ const edit = (item: FeedState) => {
     </div>
    
     ))}
-    <div className="d-flex justify-content-center mt-4">
+
+    </div>
+        <div className="d-flex justify-content-center mt-4">
           <Pagination
-          blockSize={3} // 고정값
+          blockSize={1} // 고정값
           totalPages={feed.totalPages}
           currentPage={feed.page}
           onPageChanged={handlePageChanged}
          />
          </div>
-    </div>
     </div>
   )
 };

@@ -2,8 +2,8 @@ package com.git.helloclient;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,19 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @Service
 public class HelloClientService {
 
-	private Map<String, SseEmitter> emitters = new HashMap<String, SseEmitter>();
+	private Map<String, SseEmitter> emitters = new ConcurrentHashMap<String, SseEmitter>();
 
 	public void putEmitter(String clientId, SseEmitter emitter) {
 		this.emitters.put(clientId, emitter);
+		System.out.println(emitters.size());
+	}
+
+	public SseEmitter getEmitter(String clientId) {
+		return this.emitters.get(clientId);
+	}
+
+	public void removeEmitter(String clientId) {
+		this.emitters.remove(clientId);
 	}
 
 	// 1번 -- 수신쪽은 본인 번호

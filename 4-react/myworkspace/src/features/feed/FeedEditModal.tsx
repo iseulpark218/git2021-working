@@ -1,5 +1,5 @@
 import { FeedState } from "./type";
-import produce from "immer";
+//import produce from "immer";
 
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,10 +30,10 @@ const FeedEditModal = ({ item, onClose, onSave }: ModalProp) => {
   const inputSaveRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-    const [feedList, setFeedList] = useState<FeedState[]>([]);
+//    const [feedList, setFeedList] = useState<FeedState[]>([]);
     const [newImageUrl, setNewImageUrl] = useState<string | undefined>(feedItem?.dataUrl);
-    const [imgBase64, setImgBase64] = useState(""); // 파일 base64
-    const [imgFile, setImgFile] = useState(null);	//파일	
+//    const [imgBase64, setImgBase64] = useState(""); // 파일 base64
+//    const [imgFile, setImgFile] = useState(null);	//파일	
 
   useEffect(() => {
     isModifyCompleted && history.push("/feeds");

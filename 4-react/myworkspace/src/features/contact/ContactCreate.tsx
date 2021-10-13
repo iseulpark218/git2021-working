@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppDispatch, RootState } from "../../store";
 import { ContactItem } from "./contactSlice";
-import { addContact } from "./contactSlice";
+//import { addContact } from "./contactSlice";
 
 import { requestAddContact } from "./contactSaga";
 
 const ContactCreate = () => {
     const selectRef = useRef<HTMLSelectElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+//    const inputRef = useRef<HTMLInputElement>(null);
     const inputRef1 = useRef<HTMLInputElement>(null);
     const inputRef2 = useRef<HTMLInputElement>(null);
     const inputRef3 = useRef<HTMLInputElement>(null);

@@ -17,8 +17,8 @@ import api, {
 } from "./photoApi";
 import { AxiosResponse } from "axios";
 import {
-  endProgress,
-  startProgress,
+//  endProgress,
+//  startProgress,
 } from "../../components/progress/progressSlice";
 import { addAlert } from "../../components/alert/alertSlice";
 
