@@ -24,8 +24,8 @@ import EventMessage from "./components/EventMessage";
 
 // Lazy-Loading 처리
 // 컴포넌트를 방문하는 시점에 로딩함
-const Chart1 = lazy(() => import("./features/chart1/Chart"));
-const Chart2 = lazy(() => import("./features/chart2/Chart"));
+//const Chart1 = lazy(() => import("./features/chart1/Chart"));
+//const Chart2 = lazy(() => import("./features/chart2/Chart"));
 
 const Todo = lazy(() => import("./features/todo/TodoInlineEdit"));
 const Feed = lazy(() => import("./features/feed/Feed"));
@@ -35,16 +35,18 @@ const PhotoCreate = lazy(() => import("./features/photo/PhotoCreate"));
 const PhotoDetail = lazy(() => import("./features/photo/PhotoDetail"));
 const PhotoEdit = lazy(() => import("./features/photo/PhotoEdit"));
 
-
 const Contact = lazy(() => import("./features/contact/Contact"));
 const ContactCreate = lazy(() => import("./features/contact/ContactCreate"));
 const ContactDetail = lazy(() => import("./features/contact/ContactDetail"));
 const ContactEdit = lazy(() => import("./features/contact/ContactEdit"));
 
 //나보려고 추가
-const ContactInlineEdit = lazy(() => import("./features/contact/ContactInlineEdit"));
+const ContactInlineEdit = lazy(
+  () => import("./features/contact/ContactInlineEdit")
+);
 //const TodoInlineEdit = lazy(() => import("./features/todo/TodoInlineEdit"));
-
+const Calendar = lazy(() => import("./features/calendar/Calendar"));
+const Mypage = lazy(() => import("./features/mypage/Mypage"));
 
 // React == 컴포넌트 개발 라이브러리
 function App() {
@@ -57,50 +59,60 @@ function App() {
             <Profile />
           </header>
           <nav className="drawer-menu position-fixed shadow-sm">
-            <h4 className="ms-2 my-2 mt-3 text-light"><b>PARKISEUL</b></h4>
-          <div
-            style={{
-              margin:" 100px 0px 0px 0px"
-              //width: "calc((100% - 3rem) / 4)",
-              //marginLeft: index % 4 === 0 ? "0" : "1rem",
-              //marginTop: index > 3 ? "1rem" : "0",
-            }}>
-            <ul
-            className="ul-list text-light fw-bold"
+            <h4 className="ms-2 my-2 mt-3 text-light">
+              <b>PARKISEUL</b>
+            </h4>
+            <div
+              style={{
+                margin: " 30px 0px 0px 0px",
+                //width: "calc((100% - 3rem) / 4)",
+                //marginLeft: index % 4 === 0 ? "0" : "1rem",
+                //marginTop: index > 3 ? "1rem" : "0",
+              }}
             >
-              <li>
-                <Link to="/">HOME</Link>
-              </li>
-              <li>
-                <Link to="/chart1">CHART 1 - covid</Link>
-              </li>
-               <li>
-                <Link to="/chart2">CHART 2 - air</Link>
-              </li>
-              <li>
-                <Link to="/todo">TODO LIST</Link>
-              </li>
-              <li>
-                <Link to="/photos">PHOTO</Link>
-              </li>
-              <li>
-                <Link to="/feeds">FEED</Link>
-              </li>
-              {/*//나보려고 추가*/}
-            <li>
-              <Link to="/contactinline">(수정중)</Link> {/*(contactinline)*/}
-            </li>
-
-            <li>
-              <Link to="/contacts">CONTACT</Link>
-            </li>
-            {/*
+              <ul className="ul-list text-light fw-bold">
+                <li>
+                  <Link to="/">HOME</Link>
+                </li>
+                {/*
+                <li>
+                  <Link to="/chart1">CHART 1 - covid</Link>
+                </li>
+                <li>
+                  <Link to="/chart2">CHART 2 - air</Link>
+                </li>
+                */}
+                <li>
+                  <Link to="/todo">TODO LIST</Link>
+                </li>
+                <li>
+                  <Link to="/photos">PHOTO</Link>
+                </li>
+                <li>
+                  <Link to="/feeds">FEED</Link>
+                </li>
+                {/*//나보려고 추가*/}
+                <li>
+                  <Link to="/contactinline">(수정중)</Link>{" "}
+                  {/*(contactinline)*/}
+                </li>
+                <li>
+                  <Link to="/contacts">CONTACT</Link>
+                </li>
+                <li>
+                  <Link to="/calendars">CALENDAR</Link>
+                </li>
+                {/*
               <li>
               <Link to="/todoInlineEdit">TodoInlineEdit(todos)</Link>
             </li>
             */}
-            </ul>
-</div>
+                --------
+                <li>
+                  <Link to="/mypages">MYPAGE</Link>
+                </li>
+              </ul>
+            </div>
           </nav>
           <main className="content-container">
             {/* Suspense 컴포넌트로 로딩중에 보여줄 화면을 처리하는 것 */}
@@ -113,27 +125,30 @@ function App() {
                 {/* exact: 속성은 true/false, 경로가 정확히 일치할때만 */}
                 <Route path="/" component={Home} exact />
                 <Route path="/todo" component={Todo} />
+                {/*
                 <Route path="/chart1" component={Chart1} />
                 <Route path="/chart2" component={Chart2} />
-                
+                */}
                 <Route path="/photos" component={Photo} exact />
                 <Route path="/photos/create" component={PhotoCreate} />
                 <Route path="/photos/detail/:id" component={PhotoDetail} />
                 <Route path="/photos/edit/:id" component={PhotoEdit} />
                 <Route path="/feeds" component={Feed} />
 
-
-              <Route path="/contacts" component={Contact} exact/>
-              <Route path="/contacts/create" component={ContactCreate} />
-              <Route path="/contacts/detail/:id" component={ContactDetail}/>
-              <Route path="/contacts/edit/:id" component={ContactEdit} />
+                <Route path="/contacts" component={Contact} exact />
+                <Route path="/contacts/create" component={ContactCreate} />
+                <Route path="/contacts/detail/:id" component={ContactDetail} />
+                <Route path="/contacts/edit/:id" component={ContactEdit} />
 
                 {/*나보려고추가*/}
-              <Route path="/contactinline" component={ContactInlineEdit} />
-   {/*
+                <Route path="/contactinline" component={ContactInlineEdit} />
+                <Route path="/calendars" component={Calendar} />
+                <Route path="/mypages" component={Mypage} />
+
+                {/*
                 {* id라는 매개변수를 url 경로에 넘김, path parameter *}
               <Route path="/todoInlineEdit" component={TodoInlineEdit} />
-      */}        
+      */}
               </Switch>
             </Suspense>
             <Progress />

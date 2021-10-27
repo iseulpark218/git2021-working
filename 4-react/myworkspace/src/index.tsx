@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+//import "./styles.css";
 
 // 모듈: 부분 코드
 // App.tsx 모듈을 가져오고 App이름으로 선언함

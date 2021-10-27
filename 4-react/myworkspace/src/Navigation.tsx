@@ -30,6 +30,12 @@ const Navigation = () => {
       <li>
         <Link to="/contactinline">ContactInlineEdit</Link>
       </li>
+      <li>
+        <Link to="/contacts">Calendar</Link>
+      </li>
+      <li>
+        <Link to="/mypages">Mypage</Link>
+      </li>
     </ul>
   );
 };

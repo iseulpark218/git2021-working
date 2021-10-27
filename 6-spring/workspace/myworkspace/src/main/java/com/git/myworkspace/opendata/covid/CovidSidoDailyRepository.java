@@ -11,10 +11,10 @@ public interface CovidSidoDailyRepository extends JpaRepository<CovidSidoDaily, 
 
 	// https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
 
-	// findByí•„ë“œëª…
-	// í•„ë“œëª…ì€ Pacal-Caseë¡œ ëŒ€ì†Œë¬¸ìž ìž˜ ë§žì¶”ì–´ì•¼í•¨
+	// findByÇÊµå¸í
+	// ÇÊµå¸íÀº Pacal-Case·Î ´ë¼Ò¹®ÀÚ Àß ¸ÂÃß¾î¾ßÇÔ
 
-	// ì˜ˆ) í•„ë“œëª… gubunName
+	// ¿¹) ÇÊµå¸í gubunName
 	// findByGubun
 	// -> WHERE gubun_name = :gubun ORDER BY ... LIMIT ...
 	List<CovidSidoDaily> findByGubun(Pageable page, String gubun);

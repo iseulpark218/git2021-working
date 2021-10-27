@@ -30,6 +30,7 @@ export const store = configureStore({
     contact: contactReducer,
     progress: progressReducer,
     alert: alertReducer,
+    mypage: contactReducer,
   },
   // redux store(dispatcher)에 미들웨어 적용
   // middleware는 여러개 사용할 수 있음, [defaultMiddlware, sagaMiddleware, thunkMiddlware]

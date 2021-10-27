@@ -20,16 +20,16 @@ import lombok.NoArgsConstructor;
 @IdClass(CovidSidoDailyId.class)
 public class CovidSidoDaily {
 
-	// ê¸°ì¤€ì¼ì‹œ/ ì‹œë„ëª…ì—ë§Œ ìœ ì¼í•œ ê°’ìœ¼ë¡œ ì¤‘ë³µì²˜ë¦¬ ì•ˆë˜ê²Œ.
+	// ±âÁØÀÏ½Ã/ ½Ãµµ¸í¿¡¸¸ À¯ÀÏÇÑ °ªÀ¸·Î Áßº¹Ã³¸® ¾ÈµÇ°Ô.
 	@Id
-	private String stdDay; // ìˆ˜ì •ì¼ì‹œë¶„ì´ˆ
+	private String stdDay; // ¼öÁ¤ÀÏ½ÃºĞÃÊ
 	@Id
-	private String gubun; // ì‹œë„ëª…(í•œê¸€)
-	private int defCnt; // í™•ì§„ì ìˆ˜
-	private int incDec; // ì „ì¼ëŒ€ë¹„ ì¦ê°ìˆ˜
-	private int isolIngCnt; // ê²©ë¦¬ì¤‘ í™˜ììˆ˜
-	private int isolClearCnt; // ê²©ë¦¬ í•´ì œ ìˆ˜
-	private int deathCnt; // ì‚¬ë§ì ìˆ˜
-	private Integer overFlowCnt; // í•´ì™¸ìœ ì… ìˆ˜
-	private Integer localOccCnt; // ì§€ì—­ë°œìƒ ìˆ˜
+	private String gubun; // ½Ãµµ¸í(ÇÑ±Û)
+	private int defCnt; // È®ÁøÀÚ ¼ö
+	private int incDec; // ÀüÀÏ´ëºñ Áõ°¨¼ö
+	private int isolIngCnt; // °İ¸®Áß È¯ÀÚ¼ö
+	private int isolClearCnt; // °İ¸® ÇØÁ¦ ¼ö
+	private int deathCnt; // »ç¸ÁÀÚ ¼ö
+	private Integer overFlowCnt; // ÇØ¿ÜÀ¯ÀÔ ¼ö
+	private Integer localOccCnt; // Áö¿ª¹ß»ı ¼ö
 }

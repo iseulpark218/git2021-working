@@ -22,22 +22,22 @@ public class HelloClientController {
 		this.service = service;
 	}
 
-	// Server Sent Event í”„ë¡œí† ì½œë¡œ ì²˜ë¦¬í•  ë•ŒëŠ” ë°˜í™˜ íƒ€ì…ì´ SseEmitter
+	// Server Sent Event ÇÁ·ÎÅäÄİ·Î Ã³¸®ÇÒ ¶§´Â ¹İÈ¯ Å¸ÀÔÀÌ SseEmitter
 	@GetMapping("/event/{clientId}")
 	public SseEmitter connectEvent(@PathVariable String clientId) {
 
-		// Eventë¥¼ ë°œìƒì‹œí‚¤ëŠ” ê°ì²´ë¥¼ ìƒì„±
+		// Event¸¦ ¹ß»ı½ÃÅ°´Â °´Ã¼¸¦ »ı¼º
 
-		// ê¸°ì¡´ì— í•´ë‹¹ clientId emitter ìˆìœ¼ë©´ ì‚­ì œ
+		// ±âÁ¸¿¡ ÇØ´ç clientId emitter ÀÖÀ¸¸é »èÁ¦
 		SseEmitter emitter = service.getEmitter(clientId);
 		if (emitter != null) {
 			service.removeEmitter(clientId);
 		}
 
-		// timeout ì‹œê°„ì„ ë¬´í•œìœ¼ë¡œ ì²˜ë¦¬, í´ë¼ì´ì–¸íŠ¸ì—ì„œ ë‹¤ì‹œ ìš”ì²­ì„ ë³´ë‚´ì§€ ì•ŠìŒ
+		// timeout ½Ã°£À» ¹«ÇÑÀ¸·Î Ã³¸®, Å¬¶óÀÌ¾ğÆ®¿¡¼­ ´Ù½Ã ¿äÃ»À» º¸³»Áö ¾ÊÀ½
 		emitter = new SseEmitter(-1L);
 
-		// ì„œë¹„ìŠ¤ ê°ì²´ì— emitter ê°ì²´ë¥¼ ë„˜ê²¨ì¤Œ
+		// ¼­ºñ½º °´Ã¼¿¡ emitter °´Ã¼¸¦ ³Ñ°ÜÁÜ
 		service.putEmitter(clientId, emitter);
 
 		try {

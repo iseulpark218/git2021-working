@@ -3,6 +3,9 @@ server:
 
 spring:
   rabbitmq:
-    host: ec2-3-35-229-119.ap-northeast-2.compute.amazonaws.com
+#    host: ec2-3-35-229-119.ap-northeast-2.compute.amazonaws.com
+#    username: rabbitmq
+#    password: password123!
+    addresses: amqps://b-66065f16-c9ca-4cfc-8348-dedb8cd92ffa.mq.ap-northeast-2.amazonaws.com:5671
     username: rabbitmq
-    password: password123
+    password: password123!

@@ -24,12 +24,12 @@ public class CovidController {
 	public CovidController(CovidSidoDailyRepository repo) {
 		this.repo = repo;
 	}
-	// 1. ì „êµ­ ë°ì´í„° ì¡°íšŒ
-	// page size(limit)ë¥¼ 19ê°œ, ì •ë ¬ì€ stdDay desc
+	// 1. Àü±¹ µ¥ÀÌÅÍ Á¶È¸
+	// page size(limit)¸¦ 19°³, Á¤·ÄÀº stdDay desc
 
-	// 2. íŠ¹ì • ì‹œë„ì˜ ìµœê·¼ 7ì¼ê°„ ë°ì´í„° ì¡°íšŒ
-	// ê²€ìƒ‰ì¡°ê±´ì— gubun, page size(limit)ë¥¼ 7, ì •ë ¬ì€ stdDay desc
-	// ì˜ˆ) WHERE gubun='ì„œìš¸' ORDER BY std_day DESC LIMIT 7;
+	// 2. Æ¯Á¤ ½ÃµµÀÇ ÃÖ±Ù 7ÀÏ°£ µ¥ÀÌÅÍ Á¶È¸
+	// °Ë»öÁ¶°Ç¿¡ gubun, page size(limit)¸¦ 7, Á¤·ÄÀº stdDay desc
+	// ¿¹) WHERE gubun='¼­¿ï' ORDER BY std_day DESC LIMIT 7;
 
 	@Cacheable(value = cachName, key = "'all'")
 	@GetMapping(value = "/gubun/current")

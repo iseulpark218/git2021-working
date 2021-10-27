@@ -12,17 +12,16 @@ body {
 }
 
 a {
-  color: white;
+  color: orange;
   text-decoration: underline;
+  font-family: "Open Sans Condensed", sans-serif;
+  /* font-family: "Fira Sans Extra Condensed", sans-serif; */
+  /* font-family: "Julius Sans One", sans-serif; */
   /* font-family: Georgia, "Malgun Gothic", serif; */
   /* font-family: "Julius Sans One", sans-serif; */
   /* font-family: "Noto Sans Display", sans-serif; */
   /* font-family: "Open Sans Condensed", sans-serif; */
   /* font-family: "PT Sans Narrow", sans-serif; */
-  font-family: "Open Sans Condensed", sans-serif;
-  /* font-family: "Fira Sans Extra Condensed", sans-serif; */
-  /* font-family: "Julius Sans One", sans-serif; */
-
   text-decoration: none;
 }
 

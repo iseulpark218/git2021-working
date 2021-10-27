@@ -27,7 +27,7 @@ public class HelloClientService {
 		this.emitters.remove(clientId);
 	}
 
-	// 1ë²ˆ -- ìˆ˜ì‹ ìª½ì€ ë³¸ì¸ ë²ˆí˜¸
+	// 1¹ø -- ¼ö½ÅÂÊÀº º»ÀÎ ¹øÈ£
 	@RabbitListener(queues = "test.hello.1")
 	public void receiveMessage(String message) throws UnsupportedEncodingException {
 

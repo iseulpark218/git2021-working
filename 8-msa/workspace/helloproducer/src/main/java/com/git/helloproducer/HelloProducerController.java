@@ -1,23 +1,27 @@
 package com.git.helloproducer;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloproducerController {
+public class HelloProducerController {
 
-	// service를 여기에 의존주입 한다.
-	private HelloproducerService service;
+	private HelloProducerService service;
 
 	@Autowired
-	public HelloproducerController(HelloproducerService service) {
+	public HelloProducerController(HelloProducerService service) {
 		this.service = service;
 	}
 
 	@PostMapping(value = "/send-message")
-	public boolean sendMessage(@RequestBody String message) {
+	public boolean sendMessage(@RequestBody String message, HttpServletRequest req) {
+
+		System.out.println(req.getHeader("content-type"));
+
 		System.out.println(message);
 		service.sendMessage(message.getBytes());
 		return true;
