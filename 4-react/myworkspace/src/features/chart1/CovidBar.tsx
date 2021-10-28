@@ -15,7 +15,6 @@ import Chart from "react-apexcharts";
   private int defCnt; // 확진자 수
 */
 
-
 const CovidBar = () => {
   const [chartData, setChartData] = useState<{
     options: ApexOptions;
@@ -28,10 +27,10 @@ const CovidBar = () => {
   const getData = async () => {
     const result = await axios.get<
       {
-      stdDay : string; // 수정일시분초
-      gubun : string; // 시도명(한글)
-      overFlowCnt : number; // 해외유입 수
-      localOccCnt : number; // 지역발생 수
+        stdDay: string; // 수정일시분초
+        gubun: string; // 시도명(한글)
+        overFlowCnt: number; // 해외유입 수
+        localOccCnt: number; // 지역발생 수
       }[]
     >(`http://localhost:8080/opendata/covid/gubun/current`);
 
@@ -60,7 +59,7 @@ const CovidBar = () => {
 
             let color = "";
 
-/*
+            /*
 Blue : rgb(0, 122, 255)
 Green : rgb(76, 217, 100)
 Yellow : rgb(255, 204, 0)

@@ -128,7 +128,7 @@ dispatch(addMypage(item));
         <button
           className="btn btn-light border border-2 btn-sm p-2 float-start"
           onClick={() => {
-            history.push("/mypages");
+            history.push("/Mypages");
           }}
         >
           <i className="bi bi-list me-1"></i>
