@@ -1,0 +1,49 @@
+server:
+  port: 8080
+spring:
+  rabbitmq:
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 3s
+          max-interval: 10s
+          max-attempts: 5
+          multiplier: 2
+    addresses: amqps://b-f96775a8-8bcb-4e8f-a88d-f5e27cb54f03.mq.ap-northeast-2.amazonaws.com:5671
+    username: rabbitmq
+    password: password123!
+  datasource:
+    driver-class-name: org.postgresql.Driver   #postgresql
+#    driver-class-name: com.mysql.cj.jdbc.Driver #mysql
+    url: jdbc:postgresql://database-1.cgp5lxuznsxk.ap-northeast-2.rds.amazonaws.com:5432/postgres?currentSchema=myworkspace
+    username: postgres
+    password: password123!
+  jpa:
+    show-sql: true
+    generate-ddl: true
+  cache:
+    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://ec2-3-38-153-49.ap-northeast-2.compute.amazonaws.com:8761/eureka/
+  instance:
+    hostname: ec2-3-34-241-52.ap-northeast-2.compute.amazonaws.com

@@ -1,0 +1,25 @@
+server:
+  port: 5050
+
+spring:
+  rabbitmq:
+#    host: ec2-3-35-229-119.ap-northeast-2.compute.amazonaws.com
+#    username: rabbitmq
+#    password: password123
+    addresses: amqps://b-f96775a8-8bcb-4e8f-a88d-f5e27cb54f03.mq.ap-northeast-2.amazonaws.com:5671
+    username: rabbitmq
+    password: password123!
+  datasource:
+    driver-class-name: org.postgresql.Driver  #postgresql
+
+    url: jdbc:postgresql://database-1.cgp5lxuznsxk.ap-northeast-2.rds.amazonaws.com:5432/postgres?currentSchema=sales
+    username: postgres #postgresql
+    password: password123!
+  jpa:
+    show-sql: true
+    generate-ddl: true  # create SQL 명령어를 자동으로 수행함, auto-migration
+    cache:
+  type: redis
+redis:
+  host: 127.0.0.1
+  post: 6379
