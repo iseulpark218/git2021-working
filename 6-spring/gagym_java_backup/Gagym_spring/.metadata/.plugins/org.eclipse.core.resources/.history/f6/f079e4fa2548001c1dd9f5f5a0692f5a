@@ -1,0 +1,26 @@
+package com.example.gagym.gym.trainer;
+
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class TrainerDetailController {
+
+	TrainerDetailRepository repo;
+
+	public TrainerDetailController(TrainerDetailRepository repo) {
+		this.repo = repo;
+	}
+
+//	@Cacheable(value = "gym")
+//	@GetMapping(value = {"/gagym/gym-list","/gagym/detail/{id}"})
+//	@GetMapping(value = "/gagym/detail/{id}")
+	@GetMapping(value = "/gagym/detail")
+	public List<TrainerDetail> getTrainerDetail() throws InterruptedException {
+		return repo.findAll(Sort.by("id").descending());
+	}
+
+}

@@ -1,0 +1,63 @@
+package com.example.gagym.gym.trainer;
+
+
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TrainerDetailService {
+
+	TrainerDetailRepository repo;
+
+	public TrainerDetailService(TrainerDetailRepository repo) {
+		this.repo = repo;
+	}
+
+	@RabbitListener(queues = "service.trainer.create1")
+
+	public void getTrainerDetail(TrainerDetail TrainerDetail) {
+		System.out.println(TrainerDetail);
+		saveTrainerDetail(TrainerDetail);
+	}
+
+	public TrainerDetail saveTrainerDetail(TrainerDetail TrainerDetail) {
+		TrainerDetail saveTrainerDetail = TrainerDetail
+				.builder()
+				.gymName(TrainerDetail.getGymName())
+				.gymCoNum(TrainerDetail.getGymCoNum())
+				.gymLocateSi(TrainerDetail.getGymLocateSi())
+				.gymLocateGunGu(TrainerDetail.getGymLocateGunGu())
+				.gymAddress(TrainerDetail.getGymAddress())
+				.gymPhoneNum(TrainerDetail.getGymPhoneNum())
+				.gymTime(TrainerDetail.getGymTime())
+				.gymService(TrainerDetail.getGymService())
+				.gymPhoto(TrainerDetail.getGymPhoto())
+				.fileName(TrainerDetail.getFileName())
+				.fileType(TrainerDetail.getFileType())
+				.gym1DayPrice(TrainerDetail.getGym1DayPrice())
+				.gym3DayPrice(TrainerDetail.getGym3DayPrice())
+				.gym7DayPrice(TrainerDetail.getGym7DayPrice())
+				.gym3MonthPrice(TrainerDetail.getGymMonthPrice())
+				.gym3MonthPrice(TrainerDetail.getGym3MonthPrice())
+				.gym6MonthPrice(TrainerDetail.getGym6MonthPrice())
+				.gymYearPrice(TrainerDetail.getGymYearPrice())
+				//1117추가
+				.gymCode(TrainerDetail.getGymCode())
+				.trainerName(TrainerDetail.getTrainerName())
+				.trainerIntro(TrainerDetail.getTrainerIntro())
+				.trainerPhotoUrl(TrainerDetail.getTrainerPhotoUrl())
+				.pt1TimePrice(TrainerDetail.getPt1TimePrice())
+				.pt10TimePrice(TrainerDetail.getPt10TimePrice())
+				.pt30TimePrice(TrainerDetail.getPt30TimePrice())
+				.yoga1TimePrice(TrainerDetail.getYoga1TimePrice())
+				.yoga10TimePrice(TrainerDetail.getYoga10TimePrice())
+				.yoga30TimePrice(TrainerDetail.getYoga30TimePrice())
+				.pilates1TimePrice(TrainerDetail.getPilates1TimePrice())
+				.pilates10TimePrice(TrainerDetail.getPilates10TimePrice())
+				.pilates30TimePrice(TrainerDetail.getPilates30TimePrice())
+				.build();	
+		repo.save(saveTrainerDetail);
+
+		return saveTrainerDetail;
+	}
+}

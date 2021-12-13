@@ -1,0 +1,26 @@
+package com.example.gagym.mydiary.configuration;
+
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfiguration implements WebMvcConfigurer {
+
+	// CORS(cross origin resource sharing) �젙梨낆쓣 �꽕�젙
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry
+				// 怨듭쑀�젙梨낆쓣 �쟻�슜�븷 由ъ냼�뒪
+				.addMapping("/**") // �쟾泥대━�냼�뒪瑜� �뿀�슜(/todos, /contacts....)
+				// 怨듭쑀�젙梨낆쓣 �뿀�슜�븷 �삤由ъ쭊(origin) 紐⑸줉
+				// origin(�썝泥�): html臾몄꽌瑜� 諛고룷�븳 �꽌踰꾩쓽 二쇱냼
+				// html臾몄꽌�뿉�뒗 �뼱�뵒�꽌 臾몄꽌瑜� 諛쏆븘�솕�뒗吏�瑜� 湲곕줉�븯怨� �엳�쓬
+				// �떎�젣 �넻�떊�� 釉뚮씪�슦�� -> �꽌踰�
+				.allowedOrigins("http://localhost:3000", "http://127.0.0.1:5500/",
+						"http://ec2-3-34-241-52.ap-northeast-2.compute.amazonaws.com")
+				// 怨듭쑀�젙梨낆쑝濡� �뿀�슜�븷 HTTP硫붿꽌�뱶
+				.allowedMethods("*"); // �쟾泥대찓�꽌�뱶瑜� �뿀�슜(GET, POST, PUT....)
+	}
+}

@@ -1,0 +1,16 @@
+1637139439044	Rename resource 'application.properties'
+1637139570320	Rename resource 'application.properties'
+1637140263440	Rename package 'com.example.gagym.gym.configuration.gymdetail'
+1637140282371	Rename package 'com.example.gagym.gym.gymdetail'
+1637140311697	Rename package 'com.example.gagym.gym.configuration'
+1637140811200	Move compilation units
+1637140817087	Delete element
+1637140833190	Delete element
+1637140843282	Delete element
+1637140848498	Delete element
+1637156500185	Rename type 'Diary'
+1637156507588	Rename type 'DiaryController'
+1637156518023	Rename type 'DiaryCreateRequest'
+1637156528686	Rename type 'DiaryCreateResponse'
+1637156538446	Rename type 'DiaryService'
+1637204321388	Delete element
