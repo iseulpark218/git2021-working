@@ -1,0 +1,179 @@
+-------------------- 화면구현
+
+-- 개발환경 준비
+1. node.js 설치
+https://nodejs.org/ko/
+
+2. typescript 개발환경 설치
+npm install -g typescript
+npm install -g ts-node
+npm install -g @types/node
+
+3. code runner extension 설치
+
+
+-- Typescript
+1. Function 매개변수 타입
+  -> sum, capitalize
+2. Variable 매개변수 타입
+  -> number, string, boolean
+3. 타입 추론
+  -> 초깃값 대입
+  -> 함수 반환값
+4. interface
+  -> 구조화된 타입의 선언
+  -> ?, optional
+5. generic
+6. any
+
+
+-- Typescript로 React 컴포넌트 다루기
+
+1. create-react-app typescript 템플릿으로 앱 생성
+https://create-react-app.dev/docs/adding-typescript/
+
+npx create-react-app myworkspace --template typescript
+cd myworkspace
+npm start
+
+
+0. 프로젝트 구조
+
+1. JSX, Function Component
+
+2. props
+  -> Header 컴포넌트
+  -> (실습) Button 컴포넌트
+
+3. state
+  -> 숫자데이터 Counter 컴포넌트
+  -> (실습) Calculator, prompt 입력값 2개 및 연산자
+  -> 배열데이터 Generator 컴포넌트
+  -> (실습) AccountManager, 출금/입금 버튼 클릭 -> prompt로 값입력
+          ul>li로 입출금 목록표시 합계 금액을 우측에 표시
+
+4. ref, useRef
+  -> Hello 컴포넌트
+  -> (실습) CalculatorRef, ref로 입력값 2개 및 연산자 받고 연산
+  -> (실습) AccountManager, ref로 변경
+
+
+-- Bootstrap 사용
+1. 설치
+npm install bootstrap @popperjs/core
+npm install node-sass
+
+2. 테마변경
+App.scss
+@import "~bootstrap/scss/bootstrap";
+...
+
+3. 컴포넌트 사용
+ - Button, Card
+
+4. Sass
+- 변수
+
+
+
+-- React Router 기초
+npm install react-router-dom
+npm install @types/react-router-dom
+
+1. react-router-dom, switch, route
+-> todo, contact, feed 페이지 나누기
+
+2. SPA 개념, lazy-loading
+-> component
+    - Todo
+    - Contact
+    - Feed
+
+
+
+-- 실전 컴포넌트 제작
+1. todo application
+(옵션) 2. 실습 contact
+3. 실습 feed
+
+
+
+-------------------- 응용SW기초기술활용
+
+-- Feed 수정 모드
+1. Modal Popup 이용
+  - props - down, event - up
+
+
+-- SASS, CSS, CSS Module
+
+
+-- Profile 컴포넌트 제작
+1. 헤더에 이름, 섬네일 보여주기
+  - select profile
+2. 클릭 시에 팝업으로 Edit 모드 들어가기
+  - select profile, dipatch save
+
+-- Redux 기초
+-- Redux 환경구성 및 초기 셋업 ---------------------------------
+1. redux 및 redux-tookit 라이브러리 설치
+npm install @reduxjs/toolkit react-redux
+2. configureStore로 store 생성
+3. Provider를 컨테이너 컴포넌로 감싸주고 store을 넣어줌
+
+-- 각 slice 마다 처리(profile, todo, feed) ---------------------------------
+4. slice를 생성
+  -> state type 선언, initial state 선언, reducer 선언
+5. state type, action creator 및 reducer를 export 함
+6. store에 reducer를 넣어줌
+
+-- 각 component 마다 처리(Profile, Todo, Feed) -------------------------------
+7. useSelector로 필요한 state 가져오기
+8. useDispatch로 state 변경 실행하기
+
+-- Todo, Feed 프로필 처리
+1. Todo에 추가할 때 프로필 이름 표시하기
+ - select profile
+2. (실습) Feed에 추가할 때 헤더 부분에 프로필 이름, 이미지 표시하기
+ - select profile
+
+-- React Router 심화 및 Redux
+1. Router 매개변수, Photos(이미지, 그리드)
+   -> 작성컴포넌트, 목록컴포넌트, 수정 컴포넌트
+2. (실습) Contacts(연락처(이름, 전화번호, 이메일, 메모), 테이블)
+
+
+
+------------------ 인터페이스 구현
+1. useEffect, Fetch, Promise, async-await, Axios
+  - Todo, (실습)Contact
+
+2. Redux Saga, Generator
+  - Photo, (실습)Contact
+
+  // 기본 셋업
+  npm install redux-saga
+  - createMiddleware, store.middleware:[sagaMiddleware]
+  - rootSaga, sagaMiddleware.run(rootSaga);
+
+  // features별 saga 생성
+  - saga 생성 -> rootSaga > yield fork(saga);
+
+  // saga에서 처리할 actions 생성 및 처리할 함수 맵핑
+  - saga에 saga용 actionCreator 생성
+  - 처리할 함수(제너레이터) 생성
+   - API호출: call 
+   - 결과 데이터를 reducer에서 처리하도록함: put
+  - saga에서 take처리 take...(sagaActionCreater, 처리할함수)
+
+  // saga action을 dispatch
+  - 컴포넌트에서 dispatch(sagaActionCreator);
+  
+
+
+------------------ SQL활용
+1. Chart
+
+
+------------------ 통합구현
+1. Authentication/Authorization

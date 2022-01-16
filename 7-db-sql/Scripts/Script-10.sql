@@ -1,4 +1,4 @@
-delete from gym_detail where id between 11 and 11;
+delete from gym_detail where id between 53 and 58;
 
 select * from gym_detail order by id desc;
 truncate table gym_detail restart identity cascade;
